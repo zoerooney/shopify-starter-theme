@@ -1,0 +1,44 @@
+<div id="collection" class="{{ collection.handle }} clearfix">
+  
+
+  {% paginate collection.products by 12 %}
+
+  <div class="page-title clearfix">
+  	 <h2>
+      {% if current_tags %}
+      	{{ current_tags.first }}
+      {% else %}
+    	{{ collection.title }}
+      {% endif %}
+    </h2>
+  </div>
+  <div class="wrapper">
+	  <div class="collection-sidebar">
+	   {% include 'sidebar' %}
+	  </div>
+	  <div class="collection-main">
+	  	  {% if collection.all_products_count  == 0 %}
+	  	  No products found.
+	  	  {% else %}
+		  <h4>Showing {{ collection.all_products_count }} {{ collection.all_products_count | pluralize: 'Product', 'Products' }}</h4>
+		  <div class="content-table clearfix">
+		    {% for product in collection.products %}
+		    {% include 'product-loop' with collection.handle %}
+		    {% endfor %}
+		    
+		    {% if paginate.next %}
+		     <div class="more" style="padding: 34px 0 60px;text-align: center;"><a href="{{ paginate.next.url }}" class="btn gray">&darr; MORE PRODUCTS</a></div>        
+		    {% endif %}
+		   </div>
+		           
+		    
+		   <div id="product-list-foot"></div>
+		  {% endif %}
+	  </div>
+	  <div class="top"><a href="#">Back to Top</a></div>
+  </div>
+  
+  {% endpaginate %}
+
+  
+</div> <!-- /#collection -->

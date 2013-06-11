@@ -1,0 +1,15 @@
+<div id="product-slide-{{ product.handle }}" class="product">
+  <div class="image">
+    <a href="{{ product.url | within: collection }}">
+      <img src="{{ product.featured_image.src | product_img_url: 'large' }}" alt="{{ product.title | escape  }}" title="{{ product.featured_image.alt | escape  }}" />
+    </a>
+  </div>
+  <div class="caption">
+    <a href="{{ product.url | within: collection }}">
+      <h3>{{ product.title }}</h3>
+        <span class="price{% if product.compare_at_price > product.price %} sale{% endif %}{% unless product.available %} soldout{% endunless %}">{% if product.available %}{% if product.compare_at_price > product.price %} <del>{{ product.compare_at_price | money }}</del>{% endif %}  
+        {{ product.price | money }}{% else %}SOLD OUT {% endif %}        
+          </span>
+    </a>
+  </div>
+</div>

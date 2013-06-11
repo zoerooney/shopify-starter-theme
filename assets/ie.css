@@ -1,0 +1,15 @@
+#product .images a, #product .images img {display:inline !important;}
+.scroll {position:relative;}
+
+#cart-updated {position:fixed !important; left:50% !important; margin-left:310px !important; top:74px !important; width:170px !important;}
+
+img { -ms-interpolation-mode: bicubic; }
+
+#content-slide .product .details {right:15%;}
+
+
+/***Fading in does not work in IE8-9, so forcing it to show right off the bat ***/
+
+
+#content-table .product .image, #content-table .product .image img{display:block !important; opacity:1 !important;}
+.image img, .cy, #content-scroll, .slider, #product .content, #slider{display:block !important; opacity:1 !important;}

@@ -1,0 +1,110 @@
+body {padding-top:0; color:{{ settings.text_color }};}
+
+a {color:{{ settings.link_color }}; text-decoration:none; outline:none;}
+a:hover {text-decoration:none; color:{{ settings.link_hover_color }}; }
+
+#container.slim #footer, #container.slim #header, #container.slim #main, #main, #header, #header h1, #footer, #buttons, #overview, #email, #addresses, .group, #content {background:{{ settings.shop_bg_color }}; border:none; padding:0; margin:0;}
+#container {font-size:100%; margin:0 auto;}
+
+#header {width:776px;}
+
+/* helvetica / arial headers */
+.group h3, .pgroup h3, #thumbs h3, #email label {font-style:normal; font-size:12px; font-weight:400; color:#222; text-transform:uppercase; margin-bottom:10px; font-family:Helvetica, Arial, sans-serif;}
+/* georgia subtext */
+#info-bar, #overview h2, label, #tagline .subtitle, #thumbs span, #footer, #shipping-same, #cancel-purchase, #steps, #tax_span, #thumbs h3 span {font-size:12px; font-weight:400; font-family:"Georgia", serif; text-transform:lowercase; font-style:italic; color:#999;}
+
+.field-with-errors {background-color:#fcfcfc; border:1px dotted #ccc;}
+.field-with-errors .error-message {font-size:12px;}
+
+.group {padding:16px 0;}
+.group p {color:#666; font-size:13px;}
+
+body {color:{{ settings.text_color }}; font-size:100%; line-height:24px; font-family:{{ settings.regular_font }}; }
+
+{% if settings.use_custom_bg_image %}
+body {background:{{ settings.shop_bg_color }} url('{{ 'custom_bg.png' | asset_url }}') repeat fixed; }
+{% else %}
+body {background:{{ settings.shop_bg_color }} none repeat fixed; background-image:none; }
+{% endif %}
+
+#info-bar {background:#fff; background:transparent; position:absolute; top:3px; width:388px; left:50%; text-align:right; border:none; height:24px; line-height:24px;}
+#info-bar img, #thumbs br {display:none;}
+
+#tagline .title {display:block; padding:20px 0;}
+#tagline .subtitle {display:block; font-size:14px; line-height:36px; margin:0 0 20px 0;}
+
+{% if settings.use_logo %}
+#tagline .title {display:none;}
+{% if settings.logo_height != "" %}
+#logo {display:block; padding:20px 0; background:url('{{ 'logo.png' | asset_url }}') no-repeat 0px 50%; height:{{ settings.logo_height }}px;}
+{% else %}
+#tagline .subtitle {margin-top:20px; border-top:none !important;}
+#tagline .subtitle:before {display:block; padding-bottom:20px; border-bottom:1px dotted #d8d8d8; content: url('{{ 'logo.png' | asset_url }}');}
+{% endif %}
+{% endif %}
+
+#overview {padding-bottom:32px;}
+#overview h2 {font-size:13px; display:none;}
+
+#cost {color:#333; font-size:42px;}
+#cost, #order-num {text-shadow:none !important;}
+#steps {font-size:13px;}
+
+#products {width:460px; padding-right:20px; border-right:none;}
+
+#wallet {background-color:{{ settings.shop_bg_color }} !important;} /* disable wallet highlight */
+#overview .hint, #tax_span {color:#666; font-size:13px;}
+
+#buttons input {cursor:pointer; font-weight:400; border:none; outline:none; padding:10px 25px; color:#fff; background:{{ settings.btn_color }}; font-size:12px; font-style:italic; text-transform:lowercase; font-family:"Georgia", serif;}
+
+#thumbs div {padding:3px; width:auto; margin-right:10px;}
+#thumbs h3 {margin-bottom:0px; margin-right:10px; border-bottom:none; font-weight:700; text-transform:none; color:#666;}
+#thumbs .plist-variant-title {margin-right:6px;}
+
+.slim #overview {padding-bottom:0;}
+.slim #thumbs td {width:100%; display:block; clear:both; padding-top:10px;}
+.slim #thumbs img {display:block; float:left; padding:3px;}
+.slim #thumbs h3 {display:block; float:left; padding-top:10px; margin-left:10px;}
+
+#addresses {padding:32px 0;}
+
+#container.slim #content .group p:first-child {padding:10px 0;}
+
+.gleft {width:380px;}
+.gright {margin-left:380px; width:370px; padding-left:16px;}
+
+.form {padding:5px;}
+.form tr td {display:block; padding:3px 0;}
+.form tr td.lbl {padding-left:4px; width:auto;}
+.form td input[type=text] {width:320px !important;}
+
+#shipping-same {background:#fcfcfc; padding:20px;}
+
+#footer {font-size:11px; padding:40px 0 120px 0;}
+
+
+/* css borders - in one spot to change easily */
+{% if settings.current_preset == "light" %}
+#tagline .subtitle, .group h3, .pgroup h3, #thumbs h3, #email label, #container.slim #content .group p:first-child {border-bottom:1px dotted #d8d8d8;}
+#tagline .subtitle, #container.slim #content .group p:first-child {border-top:1px dotted #d8d8d8;}
+#shipping-same, #thumbs div, .slim #thumbs img {border:1px dotted #d8d8d8;}
+#wallet {border-left:1px dotted #d8d8d8;}
+{% else %}
+.group h3, .pgroup h3, #thumbs h3, #email label {color:#dedede;}
+#shipping-same {background:#080808; border:1px;}
+
+#cost {color:#ccc;}
+
+#buttons input {color:#000;}
+#tagline .subtitle, .group h3, .pgroup h3, #thumbs h3, #email label, #container.slim #content .group p:first-child {border-bottom:1px dotted #262626;}
+#tagline .subtitle, #container.slim #content .group p:first-child {border-top:1px dotted #262626;}
+#shipping-same, #thumbs div, .slim #thumbs img {border:1px dotted #262626;}
+#wallet {border-left:1px dotted #262626;}
+
+{% if settings.use_logo %}
+{% if settings.logo_height == "" %}
+#tagline .subtitle:before {border-bottom:1px dotted #262626;}
+{% endif %}
+{% endif %}
+
+{% endif %}

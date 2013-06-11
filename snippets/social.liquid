@@ -1,0 +1,16 @@
+<!-- AddThis Follow BEGIN -->
+<span class="addthis_toolbox addthis_default_style addthis_default_style">
+{% if settings.facebook != '' %}<a class="addthis_button_facebook_follow" addthis:userid="{{ settings.facebook }}"></a>{% endif %}
+{% if settings.twitter != '' %}<a class="addthis_button_twitter_follow" addthis:userid="{{ settings.twitter }}"></a>{% endif %}
+{% if settings.linkedin != '' %}<a class="addthis_button_linkedin_follow" addthis:userid="{{ settings.linkedin }}" addthis:usertype="company"></a>{% endif %}
+{% if settings.google_plus != '' %}<a class="addthis_button_google_follow" addthis:userid="{{ settings.google_plus }}"></a>{% endif %}
+{% if settings.youtube != '' %}<a class="addthis_button_youtube_follow" addthis:userid="{{ settings.youtube }}"></a>{% endif %}
+{% if settings.flickr != '' %}<a class="addthis_button_flickr_follow" addthis:userid="{{ settings.flickr }}"></a>{% endif %}
+{% if settings.vimeo != '' %}<a class="addthis_button_vimeo_follow" addthis:userid="{{ settings.vimeo }}"></a>{% endif %}
+{% if settings.pinterest != '' %}<a class="addthis_button_pinterest_follow" addthis:userid="{{ settings.pinterest }}"></a>{% endif %}
+{% if settings.instagram != '' %}<a class="addthis_button_instagram_follow" addthis:userid="{{ settings.instagram }}"></a>{% endif %}
+{% if settings.tumblr != '' %}<a class="addthis_button_tumblr_follow" addthis:userid="{{ settings.tumblr }}"></a>{% endif %}
+{% if settings.atom != '' %}<a class="addthis_button_rss_follow" addthis:userid="/blogs/{{ settings.atom }}.atom"></a>{% endif %}
+</span>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+<!-- AddThis Follow END -->

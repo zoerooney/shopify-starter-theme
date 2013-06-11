@@ -1,0 +1,48 @@
+{% capture collection_handle %}{{ product-loop | handleize }}{% endcapture %}
+{% if collection_handle == "" %}
+<div id="product-{{ forloop.index | plus:paginate.current_offset }}" class="product{% cycle 'featured': '', '', ' last' %}">
+  <div class="image">
+    <a href="{{ product.url }}"><img src="{{ product.featured_image.src | product_img_url: 'large' }}" alt="{{ product.featured_image.alt | escape  }}" /></a>
+  </div>
+  
+  <div class="caption clearfix">
+    <a href="{{ product.url }}">
+      <h3>{{ product.title }}</h3>
+        <span class="price{% if product.compare_at_price > product.price %} sale{% endif %}{% unless product.available %} soldout{% endunless %}">{% if product.available %}{% if product.compare_at_price > product.price %} <del>{{ product.compare_at_price | money }}</del>{% endif %}  
+        {{ product.price | money }}{% else %}SOLD OUT {% endif %}        
+          </span><br>
+          <ul class="clearfix">
+          	{% for collection in product.collections %}
+          		{% if collection.image %}
+          	<li>{{ collection.image.src | collection_img_url: 'pico' | img_tag: collection.title  }}</li>
+          		{% endif %}
+          	{% endfor %}
+          </ul>
+    </a>
+  </div>
+  
+</div>
+{% else %}
+<div id="product-{{ forloop.index | plus:paginate.current_offset }}" class="product{% cycle 'featured': '', '', ' last' %}">
+  <div class="image">
+    <a href="/collections/{{ product-loop }}{{ product.url }}"><img src="{{ product.featured_image.src | product_img_url: 'large' }}" alt="{{ product.featured_image.alt | escape  }}" /></a>
+  </div>
+  <div class="caption clearfix">
+    <a href="/collections/{{ product-loop }}{{ product.url }}">
+      <h3>{{ product.title }}</h3>
+        <span class="price{% if product.compare_at_price > product.price %} sale{% endif %}{% unless product.available %} soldout{% endunless %}">{% if product.available %}{% if product.compare_at_price > product.price %} <del>{{ product.compare_at_price | money }}</del>{% endif %}  
+        {{ product.price | money }}{% else %}SOLD OUT {% endif %}        
+          </span><br>
+        <ul class="clearfix">
+        	{% for collection in product.collections %}
+        		{% if collection.image %}
+        	<li>{{ collection.image.src | collection_img_url: 'pico' | img_tag: collection.title  }}</li>
+				{% endif %}
+        	{% endfor %}
+        </ul>
+    </a>
+  </div>
+  
+</div>
+{% endif %}
+{% cycle 'clear-table': '', '', '<div style="clear:both;"></div>' %}

@@ -1,0 +1,31 @@
+<div class="sidebar-categories">
+	<h3>Shop by Category</h3>
+	
+	  <ul class="clearfix">
+	    {% for link in linklists[settings.main_linklist].links %}
+	    {% if linklists[link.handle] == empty %}
+	    <li><a href="{{ link.url }}"{% if link.active %} class="current"{% endif %}><span>{{ link.title }}</span></a></li>
+	    {% else %}
+	    <li class="drop-down"><a href="{{ link.url }}"{% if link.active %} class="current"{% endif %}><span>{{ link.title }}</span></a>
+	      <ul class="drop-down">
+	        {% for link in linklists[link.handle].links %}
+	        <li><a href="{{ link.url }}"{% if link.active %} class="current"{% endif %}>{{ link.title }}</a></li>
+	        {% endfor %}
+	      </ul>
+	    </li>
+	    {% endif %}
+	    {% endfor %}
+	  </ul>
+  
+</div>
+
+<div class="feature-categories">
+	<h3>Shop by Feature</h3>
+	<ul class="clearfix">
+		{% for link in linklists.features.links %}
+		<li><a href="{{ link.object.url }}"{% if link.active %} class="current"{% endif %}>{% if link.object.image %}
+		{{ link.object.image.src | collection_img_url: 'pico' | img_tag: link.object.title  }}
+		{% endif %}<span>{{ link.object.title }}</span></a></li>
+		{% endfor %}
+	</ul>
+</div>

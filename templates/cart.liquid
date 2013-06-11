@@ -1,0 +1,75 @@
+<script type="text/javascript">
+function remove_item(id) {
+  document.getElementById('updates_'+id).value = 0;
+  document.getElementById('cartform').submit();
+}
+</script>
+<div class="page-title">
+	 <h2>Shopping Bag</h2>
+</div>
+<div id="cart" class="wrapper cart clearfix">
+  {% if cart.item_count == 0 %}
+  <div class="c" style="padding:100px 0;">
+    <h2 class="title" style="text-align:center;">Your Cart is Empty</h2>
+  </div>
+  {% else %}
+  
+  <form action="/cart" method="post" id="cartform">
+    <table>
+      <tbody>
+        {% for item in cart.items %}
+        <tr>
+          <td class="r">
+            <div class="product_image">
+              <a href="{{ item.product.url }}">
+                <img src="{{ item.product.featured_image.src | product_img_url: 'thumb' }}"  alt="{{ item.product.featured_image.url }}" />
+              </a>
+            </div>
+          </td>
+          <td><a href="{{item.product.url }}">{{ item.title }}</a><br>{% for p in item.properties %}
+            {% unless p.last == blank %}
+              {{ p.first }}:
+              {% if p.last contains '/uploads/' %}
+              <a class="lightbox" href="{{ p.last }}">{{ p.last | split: '/' | last }}</a>
+              {% else %}
+              {{ p.last }}
+              {% endif %}
+              <br />
+            {% endunless %}
+          {% endfor %}</td>
+          <td class="c">
+            <input type="text" size="4" name="updates[]" id="updates_{{item.id}}" value="{{ item.quantity }}" onfocus="this.select();" class="item-quantity" />
+          </td>
+          <td class="c">{{ item.line_price | money }}</td>
+          <td class="c"><a href="/cart/change?line={{ forloop.index }}&quantity=0" title="remove">Remove</a></td>
+        </tr>
+        {% endfor %}
+        <tr class="summary">
+          <td colspan="2"><label for="note" style="display:block;"><a href="#" onClick="jQuery('#note').toggle(); return false;">Add special instructions for your order&hellip;</a></label></td>
+          <td class="c"><input type="submit" id="update-cart" name="update" value="Update" /></td>
+          <td class="c"><span class="total"><strong>{{ cart.total_price | money }}</strong></span></td>
+          <td class="c">
+            <input type="submit" id="checkout" name="checkout" value="Check Out" />
+          </td>
+        </tr>
+        {% if additional_checkout_buttons %}
+        <tr>
+          <td colspan="4"></td>
+          <td class="c">
+            <div class="additional-checkout-buttons">
+              <p>- or -</p>
+              {{ content_for_additional_checkout_buttons }}
+            </div>
+          </td>
+        </tr>
+        {% endif %}
+      </tbody>
+    </table>
+
+    <textarea id="note" name="note" rows="10" cols="50" style="display:none;">{{ cart.note }}</textarea>
+
+  </form>
+  {% endif %}
+
+</div> <!-- /#cart -->
+{% include 'featured-products' %}
