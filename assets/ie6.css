@@ -1,0 +1,10 @@
+#cart-updated {display:none !important;}
+#content-slide .product .details {display:none !important;}
+
+#article textarea {width:260px !important;}
+
+{% if settings.current_preset == "light" %}
+#cart-updated, nav li ul, #content-slide .product .details, #content-table .product .details {background:url('details-bg.gif') no-repeat 50% 0;}
+{% else %}
+nav li ul, #cart-updated {background:url('white-details-bg.gif') no-repeat 50% 0;}
+{% endif %}

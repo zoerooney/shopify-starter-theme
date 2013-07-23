@@ -1,0 +1,86 @@
+<div id="index" class="clearfix">
+<div class="wrapper">
+  <div class="features">
+  	<div class="feature-box">
+  		{% if settings.tb_image_link != '' %}
+  			<a href="{{ settings.tb_image_link }}">
+  			<img src="{{ 'tb_image.jpg' | asset_url }}" />
+  			<div class="box-caption">
+  			 	<h3>{{ settings.tb_header }}</h3>
+  			</div>
+  			</a>
+  			
+  		{% else %}
+  			<img src="{{ 'tb_image.jpg' | asset_url }}" />
+  			<div class="box-caption">
+  			 	<h3>{{ settings.tb_header }}</h3>
+  			</div>
+  		{% endif %}
+  	</div>
+  	<div class="feature-box middle">
+  		{% if settings.mb_image_link != '' %}
+  			<a href="{{ settings.mb_image_link }}">
+  			<img src="{{ 'mb_image.jpg' | asset_url }}" />
+  			<hr>
+  			<div class="box-caption">
+  			 	<h3>{{ settings.mb_header }}</h3>
+  			</div>
+  			</a>
+  			
+  		{% else %}
+  			<img src="{{ 'mb_image.jpg' | asset_url }}" />
+  			<hr>
+  			<div class="box-caption">
+  			 	<h3>{{ settings.mb_header }}</h3>
+  			</div>
+  		{% endif %}
+  		
+  	</div>
+  	<div class="feature-box">
+  		{% if settings.bb_image_link != '' %}
+  			<a href="{{ settings.bb_image_link }}">
+  			<img src="{{ 'bb_image.jpg' | asset_url }}" />
+  			<div class="box-caption">
+  			 	<h3>{{ settings.bb_header }}</h3>
+  			</div>
+  			</a>
+  			
+  		{% else %}
+  			<img src="{{ 'bb_image.jpg' | asset_url }}" />
+  			<div class="box-caption">
+  			 	<h3>{{ settings.bb_header }}</h3>
+  			</div>
+  		{% endif %}
+  		
+  	</div>
+  </div>
+  <div class="slider-container">
+    
+    {% assign number_of_slides = 7 %}
+    <ul id="slider">
+      {% for i in (1..number_of_slides) %}
+      {% capture slide_enabled %}slideshow_{{ i }}_active{% endcapture %}
+      {% capture slide_image %}slideshow_{{ i }}.jpg{% endcapture %}
+      {% capture slide_image_alt %}slideshow_{{ i }}_alt{% endcapture %}
+      {% capture slide_link %}image_{{ i }}_link{% endcapture %}
+      {% if settings[slide_enabled] %}
+      <li class="slide"><img src="{{ slide_image | asset_url }}" data-url="{{ settings[slide_link] }}" alt="{{ settings[slide_image_alt] }}" class="slide-img" /></li>
+      {% endif %}
+      {% endfor %}
+    </ul>
+    <div id="slider-empty" style="display:none; padding:120px 0; text-align:center;">
+      <h4>Slider is empty</h4>
+      If you are the shop owner, <a href="/admin/themes/current/settings">click here</a> to upload images to this slideshow.
+    </div>
+  </div>
+
+</div>
+  <div class="announcements">
+  	<div class="wrapper">
+  		<form>
+  		<label for="EMAIL">{{ settings.mc_label }}</label><input type="email" value="" name="EMAIL" placeholder="EMAIL ADDRESS..." /><input type="submit" value="SUBMIT!" />
+  		</form>
+  	</label>
+  </div>
+
+</div> <!-- /#index -->

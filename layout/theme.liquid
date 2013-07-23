@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]> <html lang="en" class="no-js ie6"> <![endif]-->
+<!--[if IE 7 ]>    <html lang="en" class="no-js ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html lang="en" class="no-js ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html lang="en" class="no-js ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <link rel="canonical" href="{{ canonical_url }}" /> 
+  {% if template == 'index' %}
+  <title>{{ shop.name }}</title>
+  {% elsif template == '404' %}
+  <title>Page Not Found | {{ shop.name }}</title>
+  {% else %}
+  <title>{{ page_title }} | {{ shop.name }}</title>
+  {% endif %}
+
+  {{ content_for_header }}
+
+  {% if page_description %}
+  <meta name="description" content="{{ page_description }}" />
+  {% endif %}
+  <link rel="shortcut icon" type="image/x-icon" href=" {{ 'favicon.ico' | asset_url }}">
+  {{ 'reset.css' | asset_url | stylesheet_tag }}
+  {{ 'shop.css' | asset_url | stylesheet_tag }}
+  {{ 'jquery.fancybox.css' | asset_url | stylesheet_tag }}
+
+  <!--[if IE]>
+  {{ 'ie.css' | asset_url | stylesheet_tag }}
+  <![endif]-->
+  <!--[if lt IE 7 ]>
+  {{ 'ie6.css' | asset_url | stylesheet_tag }}
+  <![endif]-->
+
+  {{ 'modernizr.js' | asset_url | script_tag }}
+   
+  {{ '//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js' | script_tag }}
+  
+  {{ 'option_selection.js' | shopify_asset_url | script_tag }}
+  {{ 'api.jquery.js' | shopify_asset_url | script_tag }}
+  {{ 'ajaxify-shop.js' | asset_url | script_tag }}
+  {{ 'jquery-ui-1.8.6.js' | asset_url | script_tag }}
+  {{ 'jquery.cookie.js' | asset_url | script_tag }}
+  {{ 'jquery.slider.js' | asset_url | script_tag }}
+  {{ 'jquery.selectbox-0.2.min.js' | asset_url | script_tag }}
+  {{ 'jquery.fancybox.pack.js' | asset_url | script_tag }}
+  {{ 'shop.js' | asset_url | script_tag }}
+  
+  
+  {% if template contains 'customers' %}
+      {{ "shopify_common.js" | shopify_asset_url | script_tag }}
+      {{ "customer_area.js"  | shopify_asset_url | script_tag }}
+  {% endif %}
+
+  <script type="text/javascript">
+  Shopify.money_format = "{{ shop.money_format }}";
+  Shopify.currency = "{{ shop.currency }}";
+  </script>
+  
+  {% include 'open-graph' %}
+
+</head>
+
+<body id="{{page.handle }}">
+ 
+     <header class="clearfix">
+      <div class="top-menu clearfix">
+       <div class="wrapper">
+      	  <nav class="page-menu">
+      	    <ul class="">
+      	      {% for link in linklists.top-left-menu.links %}
+      	      <li><a href="{{ link.url }}"{% if link.active %} class="current"{% endif %}><span>{{ link.title }}</span></a></li>
+      	      {% endfor %}
+      	    </ul>
+      	  </nav>
+	      <nav class="account-links">
+	      <ul class="customer">
+		      {% for link in linklists.top-right-menu.links %}
+		      <li><a href="{{ link.url }}"{% if link.active %} class="current"{% endif %}>{{ link.title }}</a></li>
+		      {% endfor %}
+		      {% if shop.customer_accounts_enabled %}
+	        {% if customer %}
+	        <li><a href="/account">My Account</a></li>
+	        <li>{{ 'Logout' | customer_logout_link }}</li>
+	        {% else %}
+	        {% if shop.customer_accounts_optional %}
+	        <li>{{ 'Register' | customer_register_link }}</li>
+	        {% endif %}
+	        <li>{{ 'Login' | customer_login_link }}</li>
+	        {% endif %}
+	      
+	      {% endif %}
+	      </ul>
+	      </nav>
+	   </div><!-- end wrapper-->
+      </div>
+      
+      <div class="wrapper clearfix">
+      <form id="search_form" class="searchform" name="search" action="/search">
+        {% if template == "search" and search.performed and search.terms != "" %}
+        <input type="text" name="q" class="replace" value="{{ search.terms }}" />
+        {% else %}
+        <input type="text" class="replace" name="q" value="SEARCH BY PRODUCT OR DESIGNER" />
+        {% endif %}
+        <input type="submit" class="searchsubmit"/>
+      </form>
+      <div class="logo">
+       
+        <a href="/" class="shop_logo"><img src="{{ 'rare-device.png' | asset_url }}" alt="{{ shop.name }}" class="png_bg" /></a>
+       
+      </div> <!-- /.logo -->
+      
+      <div class="cart-summary">
+      	<span class="favorites">
+      		<a href="/pages/favorites">Favorites</a>
+      	</span>
+        <span class="cart"><a href="/cart">Shopping Bag: <span class="cart-total-items"><span class="count">{{ cart.item_count }}</span></a></span>
+        <div id="cart-updated"><a href="/cart">Added to cart</a></div>
+      </div> <!-- /.cart-summary -->
+      </div> <!-- end wrapper -->
+    </header>
+	<div class="main-menu clearfix">
+	<div class="wrapper">
+    <nav class="main">
+      <ul class="clearfix">
+        {% for link in linklists[settings.main_linklist].links %}
+        {% if linklists[link.handle] == empty %}
+        <li><a href="{{ link.url }}"{% if link.active %} class="current"{% endif %}><span>{{ link.title }}</span></a></li>
+        {% else %}
+        <li class="dropdown"><a href="{{ link.url }}"{% if link.active %} class="current"{% endif %}><span>{{ link.title }}</span></a>
+          <ul class="dropdown">
+            {% for link in linklists[link.handle].links %}
+            <li><a href="{{ link.url }}"{% if link.active %} class="current"{% endif %}>{{ link.title }}</a></li>
+            {% endfor %}
+          </ul>
+        </li>
+        {% endif %}
+        {% endfor %}
+      </ul>
+      
+    </nav>
+	</div><!-- end wrapper -->
+	</div><!-- end main-menu -->
+    <section id="body" class="clearfix">
+      {{ content_for_layout }}
+    </section> <!-- /#body -->
+    
+    <footer class="clearfix">
+	  <div class="wrapper">
+      	  
+      	  <div class="footer-block first">
+      	  	<h4>{{ settings.lb_header }}</h4>
+      	  	{{ settings.lb_content }}
+      	  </div>
+      	  
+      	  <div class="footer-block second">
+      	  	<h4>{{ settings.cb_header }}</h4>
+      	  	{{ settings.cb_content }}
+      	  </div>
+      	  
+	      <div class="footer-block">
+	      <nav>
+	        <h4>{{ settings.rb_header }}</h4>
+	        <ul>
+	          {% for link in linklists.footer.links %}
+	          <li><a href="{{ link.url }}"{% if link.active %} class="current"{% endif %}>{{ link.title }}</a></li>
+	          {% endfor %}
+	        </ul>
+	      </nav>
+	      </div>
+        
+    
+	    <div class="additional-info">
+	    	<div class="social-links">
+	    		<a href="https://www.facebook.com/{{ settings.facebook }}" target="_blank"><img src="{{ 'sm-facebook.png' | asset_url }}" alt="Facebook" /></a>
+	    		<a href="https://twitter.com/{{ settings.twitter }}" target="_blank"><img src="{{ 'sm-twitter.png' | asset_url }}" alt="Twitter" /></a>
+	    		<a href="http://pinterest.com/{{ settings.pinterest }}" target="_blank"><img src="{{ 'sm-pinterest.png' | asset_url }}" alt="Pinterest" /></a>
+	    		<a href="http://instagram.com/{{ settings.instagram }}" target="_blank"><img src="{{ 'sm-instagram.png' | asset_url }}" alt="Instagram" /></a>
+	    	</div>
+	      &copy; {{ 'now' | date: "%Y" }} {{ shop.name }}<br>
+	      <img src="{{ 'star.png' | asset_url }}" width="15" height="17" alt="*" style="vertical-align:middle" class="aeolidia" /> <a href="http://www.aeolidia.com/" onclick="window.open(this.href,'_blank');return false;" class="aeolidia">site by Aeolidia</a> <img src="{{ 'star2.png' | asset_url }}" width="9" height="9" alt="*" style="vertical-align:top"  class="aeolidia"/>
+	     	
+	    </div>
+    </div><!-- end wrapper -->
+    </footer>
+
+</body>
+</html>

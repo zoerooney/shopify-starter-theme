@@ -1,0 +1,74 @@
+{% include 'product-header' %}
+
+  <h1>{{ product.title }}</h1>
+  {% if product.price_min < product.compare_at_price_min %}
+  <p class="price" id="price-preview">{{ product.price_min | money }} <span>was {{ product.compare_at_price_min | money }}</span></p>
+  {% else %}
+  <p class="price" id="price-preview">{{ product.price_min | money }}</p>
+  {% endif %}
+  <div>
+  	{% for collection in product.collections %}
+  		{% if collection.image %}
+  	<a href="{{ collection.url }}">{{ collection.image.src | collection_img_url: 'pico' | img_tag: collection.title  }}</a>
+  		{% endif %}
+  	{% endfor %}
+  </div>
+  <div class="description">
+    {{ product.description }}
+  </div>
+        
+  <form id="add-item-form" action="/cart/add" method="post" class="variants clearfix gift-card-form">
+    {% if product.options.size > 1 %}
+    <div class="select clearfix">
+      <select id="product-select" name='id'>
+        {% for variant in product.variants %}
+        <option value="{{ variant.id }}">{{ variant.title }} - {{ variant.price | money }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    {% elsif product.options.size == 1 and product.variants.size > 1 %}
+    <div class="select clearfix">
+      <label>{{ product.options[0] }}</label>
+      <select id="product-select" name='id'>
+        {% for variant in product.variants %}
+        <option value="{{ variant.id }}">{{ variant.title }} - {{ variant.price | money }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    {% else %}
+    <input type="hidden" name="id" value="{{ product.variants.first.id }}" />
+    {% endif %}
+    
+    
+    {% if product.available %}
+    <p>
+      <label class="add-to-cart-label" for="input-quantity">Qty</label> 
+      <input class="add-to-cart-input" min="1" type="number" name="quantity" value="1" />
+    </p>
+
+    <p>
+      <label class="add-to-cart-label" for="input-recipient-name">Recipient Name</label>
+      <input class="add-to-cart-input gift-card-input" id="input-recipient-name" type="text" required placeholder="Name" />
+    </p>
+    <p>
+      <label class="add-to-cart-label" for="input-recipient-email">Recipient Email</label>
+      <input class="add-to-cart-input gift-card-input" id="input-recipient-email" type="email" required placeholder="Email" />
+    </p>
+    <p>
+      <label class="add-to-cart-label" for="input-gift-message">Gift Message</label>
+      <textarea cols="10" class="add-to-cart-input gift-card-input" id="input-gift-message" type="text" placeholder="Message"></textarea>
+    </p>
+          
+    <div class="purchase clearfix">
+      <span><input type="submit" name="add" id="add-to-cart" value="ADD TO BAG" class="cart cufon" /></span>
+    </div>
+
+    {% else %}
+    <div class="purchase clearfix">
+      <span><input type="submit" name="add" id="add-to-cart" value="Sold Out" class="cart cufon disabled" disabled="disabled" /></span>
+    </div>
+    {% endif %}
+   
+  </form>
+
+{% include 'product-footer' %}

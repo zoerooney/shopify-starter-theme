@@ -1,0 +1,37 @@
+
+	<form id="search_form" class="searchform" name="search" action="/search">
+	  <input type="hidden" name="type" value="article" />
+	  {% if template == "search" and search.performed and search.terms != "" %}
+	  <input type="text" name="q" class="replace" value="{{ search.terms }}" />
+	  {% else %}
+	  <input type="text" class="replace" name="q" value="SEARCH THE BLOG" />
+	  {% endif %}
+	  <input type="submit" class="searchsubmit"/>
+	</form>
+<div class="sidebar-widget" style="text-align:center;">
+	<h3>{{ settings.top_title }}</h3>
+	<img src="{{ 'top_image.jpg' | asset_url }}" alt="{{ settings.top_title }}" />
+	<p>{{ settings.top_content }}</p> 
+    <a href="{{ settings.top_button_link }}" class="btn" style="display:block;width:110px;padding: 10px 30px;margin-top: 10px;">{{ settings.top_button_text }}</a>
+</div>
+<div class="sidebar-widget">
+	<h3>Shop by Category</h3>
+	  <ul class="clearfix">
+	    {% for link in linklists[settings.main_linklist].links %}
+	    <li><a href="{{ link.url }}"{% if link.active %} class="current"{% endif %}><span>{{ link.title }}</span></a></li>
+	    {% endfor %}
+	  </ul>
+</div>
+<div class="sidebar-widget social">
+	<h3>Follow us</h3>
+	<a href="https://www.facebook.com/{{ settings.facebook }}" target="_blank"><img src="{{ 'sb-facebook.png' | asset_url }}" alt="Facebook" /></a>
+	<a href="https://twitter.com/{{ settings.twitter }}" target="_blank"><img src="{{ 'sb-twitter.png' | asset_url }}" alt="Twitter" /></a>
+	<a href="http://pinterest.com/{{ settings.pinterest }}" target="_blank"><img src="{{ 'sb-pinterest.png' | asset_url }}" alt="Pinterest" /></a>
+	<a href="http://instagram.com/{{ settings.instagram }}" target="_blank"><img src="{{ 'sb-instagram.png' | asset_url }}" alt="Instagram" /></a>
+</div>
+<div class="sidebar-widget opt-in">
+	<h3>Join the Mailing List!</h3>
+	<form>
+		<input type="email" value="" placeholder="EMAIL ADDRESS" name="EMAIL" /><input type="submit" value="GO!" />
+	</form>
+</div>

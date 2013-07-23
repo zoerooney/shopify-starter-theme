@@ -1,0 +1,5 @@
+<div class="meta">
+  {% if article.tags.size > 0 %}
+  <strong>POSTED IN:</strong> {% for tag in article.tags %}<a href="{{ blog.url }}/tagged/{{ tag | handle }}">{{ tag }}</a>{% unless forloop.last %}, {% endunless %}{% endfor %}{% endif %}<br>
+  {% include 'like-article' %}
+</div><!-- .meta -->

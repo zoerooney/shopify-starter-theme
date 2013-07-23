@@ -1,0 +1,16 @@
+{% unless settings.featured_products == '' %}
+{% if collections[settings.featured_products].products.size > 0 %}
+<div id="featured-products">
+  <div class="more-info">
+    <span class="upper">Featured</span>
+    <span class="lower">4 Items</span>
+  </div>
+
+  <div id="content-table" class="clearfix">
+    {% for product in collections[settings.featured_products].products limit:4 %}
+    {% include 'product-loop' with settings.featured_products %}
+    {% endfor %}
+  </div>
+</div>
+{% endif %}
+{% endunless %}

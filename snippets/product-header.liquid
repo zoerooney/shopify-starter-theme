@@ -1,0 +1,23 @@
+<div id="product" class="{{ product.handle }}{% if product.images.size == 1 %} one_image{% endif %} clearfix">
+  
+  <div class="product_body clearfix wrapper">
+    <div class="images">
+      <div class="featured">
+        <div class="image">
+          <a href="{{ product.featured_image.src | product_img_url: 'original' }}" class="cloud-zoom" rel="position: 'inside', showTitle: 'false'" id="placeholder"><img src="{{ product.featured_image.src | product_img_url: 'grande' }}" alt="{{ product.featured_image.alt | escape }}" /></a>
+        </div>
+      </div> <!-- /.featured -->
+      {% if product.images.size > 1 %}
+      <div class="thumbs clearfix">
+        {% for image in product.images %}
+        <div class="image{% cycle 'position': '', '', '', ' last' %}">
+          <a href="{{ image.src | product_img_url: 'original' }}" class="cloud-zoom-gallery" rel="useZoom: 'placeholder', smallImage: '{{ image.src | product_img_url: 'grande' }}', tint: '#ffffff'">
+            <img src="{{ image.src | product_img_url: 'compact' }}" alt="{{ image.alt | escape }}" />
+          </a>
+        </div>
+        {% endfor %}
+      </div><!-- /.thumbs -->
+      {% endif %}
+    </div> <!-- /.images -->
+    
+    <div class="content">

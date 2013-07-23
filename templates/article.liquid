@@ -1,0 +1,30 @@
+<div id="article" class="clearfix">
+
+ <div class="page-title">
+ 	 <h2>{{ blog.title | link_to : blog.url }}</h2>
+ </div>
+
+  <div class="wrapper">
+    <div class="blog-main clearfix">
+    
+      <div class="post-info">
+        <div class="date">{{ article.created_at | date: "%m.%d" }}</div>
+        <div class="comment-count"><a href="#comments">{% if article.comments.size > 0 %}{{ article.comments_count }}{% else %}&nbsp;{% endif %}</a></div>
+      </div>
+      <div class="article-body clearfix">
+        <h2 class="post-title">{{ article.title }}</h2>
+        <div class="content clearfix">{{ article.content }}</div>
+        {% include 'article-meta' %}
+      </div> <!-- /.article-body -->
+      {% include 'article-comments' %}
+    </div> <!-- /.blog-main -->
+   
+    <div class="blog-sidebar">
+      {% include 'sidebar-blog' %}
+    </div>
+
+  </div><!-- /.wrapper -->
+
+</div> <!-- /#article -->
+
+{% include 'featured-products' %}
