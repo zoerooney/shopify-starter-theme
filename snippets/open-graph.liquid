@@ -1,12 +1,15 @@
 {% comment %}
-This is for widgets that share content on Facebook.
+This is for widgets that share content on Facebook and Pinterest
 See the Facebook Linter: http://developers.facebook.com/tools/debug
 {% endcomment %}
-
+<meta property="og:site_name" content="{{ shop.name }}" />
 {% if template contains 'product' %}
   <meta property="og:url" content="{{ shop.url }}{{ product.url }}" />
   <meta property="og:title" content="{{ product.title }}" />
   <meta property="og:description" content="{{ product.description | strip_html | truncatewords: 100, '' | escape  }}" />
+  <meta property="og:price:amount" content="{{ product.price_min | money_without_currency }}" />
+  <meta property="og:price:currency" content="USD" />
+  <meta property="og:availability" content="{% if product.available %}in stock{% else %}out of stock{% endif %}" />
   <meta property="og:image" content="{{ product.featured_image | product_img_url: 'medium' }}" />
 {% elsif template contains 'article' %}
   <meta property="og:url" content="{{ shop.url }}{{ article.url }}" />
