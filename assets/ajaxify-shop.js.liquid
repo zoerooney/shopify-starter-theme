@@ -101,6 +101,23 @@ Shopify.onItemAdded = function(line_item, form) {
     Shopify.getCart();
 };
 
+Shopify.onError = function(XMLHttpRequest, textStatus) {
+  var data = eval('(' + XMLHttpRequest.responseText + ')');
+  if (!!data.message) {
+    //alert(data.message + '(' + data.status  + '): ' + data.description);
+  } else {
+    //alert('Error : ' + Shopify.fullMessagesFromErrors(data).join('; ') + '.');
+  }
+  
+  /* product is sold out */
+  jQ("#cart-updated").html("<a href='#'>Unfortunately, <span class='error-message-text'>"+ data.description  +"</span> Please try a lower quantity.</a>").fadeIn(200).delay(4000).fadeOut(800);;
+  window.setTimeout(function() {
+  jQ("#add-to-cart").val("ADD TO CART").animate({
+      }, 400);
+  }, 2200);
+};
+
+
 /**
  * This updates the N item/items left in your cart
  * 
@@ -112,9 +129,9 @@ Shopify.onItemAdded = function(line_item, form) {
  * @param HTMLElement form. If included, we know its an Update of the CART FORM, which will trigger additional behaviour. 
  */
 Shopify.onCartUpdate = function(cart, form) {
-    
+	
     // Total Items Update
-    var message = '<span class="count">'+cart.item_count+'</span>';
+    var message = '<span class="count">'+cart.item_count+'</span>)';
         
     jQ(selectors.TOTAL_ITEMS).html(message);
     
@@ -123,16 +140,13 @@ Shopify.onCartUpdate = function(cart, form) {
     
     
     window.setTimeout(function() {
-      jQ("#add-to-cart").val("Add to Bag").animate({
-        color: '#ee613a'
+      jQ("#add-to-cart").val("ADD TO CART").animate({
+        color: '#fff'
       }, 400);
     }, 2200);
     
     //jQ("#add-to-cart").delay(2000).val("Add to Cart");
-    jQ("#cart-updated").html("<a href='/cart'>ADDED TO BAG</a>");
-    var tempwidth = jQ(".cart-summary").outerWidth();
-    jQ('#cart-updated').css({'left': '100%', 'margin-left':'-'+ tempwidth +'px', 'width': tempwidth+'px'})
-    jQ('#cart-updated').fadeIn(200).delay(2000).fadeOut(400);
+    jQ('#cart-updated').html("<h4><a href='/cart'>added to cart</a></h4>").fadeIn(200).delay(2000).fadeOut(800);
     
     // Price update - any element matching the selector will have their contents updated with the cart price.
     if ((typeof Currency === 'object') && (typeof Currency.convertAll === 'function')) {

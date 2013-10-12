@@ -1,0 +1,22 @@
+  <a href="/" class="homepage-link" title="Back to the frontpage">Home</a>
+  {% if template contains "product" %}
+    {% if collection %}            
+      <span class="separator">></span> 
+      {% if collection.handle %}
+         {% capture url %}/collections/{{ collection.handle }}{% endcapture %}
+         {{ collection.title | link_to: url }}
+      {% elsif collection.all_products_count > 0 and collection.products.first.type == collection.title %}
+         {{ collection.title | link_to_type }}
+      {% elsif collection.all_products_count > 0 and collection.products.first.vendor == collection.title %}
+         {{ collection.title | link_to_vendor }}
+      {% endif %}
+      {% else %}
+      <span class="separator">></span> 
+      {{ product.type | link_to_type }}
+    {% endif %}
+  {% elsif template == "article" %}
+      <span class="separator">></span> 
+      {{ blog.title | link_to: blog.url }}
+  {% endif %}
+  <span class="separator">></span>
+  <span class="this-page">{{ page_title }}</span>

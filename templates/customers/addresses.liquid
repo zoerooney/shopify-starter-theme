@@ -1,8 +1,8 @@
 {% layout settings.customer_layout %}
-<div class="page-title">
-	 <h2>Manage Account Address</h2>
+<div id="template" class="wrapper centered">
+  <div class="page-title subtitle">
+	 <h1>Update Your Address</h1>
 </div>
-<div id="template" class="wrapper">
 <div id="admin_header">
   <div class="action_link action_return note" id='return_to_account'><a href="/account">Return to Account page</a></div>
   <div class="action_top">
@@ -45,7 +45,7 @@
         </td>
       </tr>
       <tr id="address_province_container_new" style="display:none">
-        <td class="label"><label for="address_province_new">Province</label></td>
+        <td class="label"><label for="address_province_new">State/Province</label></td>
         <td class="value">
           <select id="address_province_new" class="address_form" name="address[province]" data-default="{{form.province}}"></select>
         </td>
@@ -127,7 +127,7 @@
             </td>
           </tr>
           <tr id="address_province_container_{{form.id}}" style="display:none">
-            <td class="label"><label for="address_province_{{form.id}}">Province</label></td>
+            <td class="label"><label for="address_province_{{form.id}}">State/Province</label></td>
             <td class="value"><select id="address_province_{{form.id}}" class="address_form" name="address[province]" data-default="{{form.province}}"></select></td>
           </tr>
           <tr>

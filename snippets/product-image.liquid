@@ -1,0 +1,42 @@
+<div class="featured">
+  <div class="image">
+  	{% if product.images.size == 1 %}
+  		<a href="{{ product.featured_image.src | product_img_url: 'original' }}" class="fancybox"><img src="{{ product.featured_image.src | product_img_url: 'grande' }}" alt="{{ product.featured_image.alt | escape }}" /><img src="{{ 'zoom.png' | asset_url }}" class="zoom" /></a>
+  	{% else %}
+    	<a href="{{ product.featured_image.src | product_img_url: 'original' }}" id="placeholder"><img src="{{ product.featured_image.src | product_img_url: 'grande' }}" alt="{{ product.featured_image.alt | escape }}" /><img src="{{ 'zoom.png' | asset_url }}" class="zoom" /></a>
+    {% endif %}
+  </div>
+</div> <!-- /.featured -->
+
+{% if product.images.size > 1 %}
+<div class="thumbs clearfix">
+  <div class="thumbs-header">additional views</div>
+  {% for image in product.images %}
+  <div class="image{% cycle 'position': '', '', '', ' last' %}">
+    <a href="{{ image.src | product_img_url: 'original' }}" class="fancybox" rel="gallery">
+      <img src="{{ image.src | product_img_url: 'compact' }}" alt="{{ image.alt | escape }}" />
+    </a>
+  </div>
+  {% endfor %}
+</div><!-- /.thumbs -->
+{% endif %}
+<script>
+jQuery(document).ready(function($) {
+	$('#placeholder').click(function(){
+		$('.fancybox').filter(':first').click();
+		return false;
+	});
+	$(".fancybox").fancybox({
+		padding: 0,
+		margin: 40,
+		helpers : {
+		        overlay : {
+		            css : {
+		                'background' : 'rgba(0, 0, 0, 0.8)'
+		            }
+		        }
+		    }
+	});
+	
+});
+</script>

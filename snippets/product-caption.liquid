@@ -1,0 +1,11 @@
+<h3>{{ product.vendor }}</h3>
+<h4>{{ product.title }}</h4>
+<span class="price{% if product.compare_at_price > product.price %} sale{% endif %}{% unless product.available %} soldout{% endunless %}">
+	{% if product.available %}
+		{% if product.compare_at_price > product.price %} <del>{{ product.compare_at_price | money }}</del><br>
+		{% endif %}  
+		{{ product.price | money }}{% if product.price_varies %} - {{product.price_max | money }}{% endif %}
+		{% else %}
+		SOLD OUT 
+		{% endif %}        
+</span>

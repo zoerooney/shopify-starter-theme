@@ -1,8 +1,9 @@
 {% layout settings.customer_layout %}
-<div class="page-title">
-	 <h2>Create Account</h2>
-</div>
+
 <div id="template" class="wrapper centered">
+  <div class="page-title subtitle">
+  	 <h1>Create Your Account</h1>
+  </div>
   <div id="customer">
   	{% unless customer %}
 	  <!-- Create Customer -->
@@ -32,7 +33,7 @@
 
 	      <div class="action_bottom">
 	        <input class="btn" type="submit" value="Create" />
-	        <span class="note">or <a href="{{ shop.url }}">Return to Store</a></span>
+	        <span class="note">or {{ "Log In" | customer_login_link }}</span>
 	      </div>
 	    {% endform %}
 	  </div><!-- /#create-customer -->

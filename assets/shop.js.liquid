@@ -89,7 +89,7 @@ jQuery(document).ready(function($){
 jQuery.noConflict();    
 jQuery(window).load(function($){
   
-  jQuery('#carousel, .slider, #slider, .related').fadeIn("slow");
+  jQuery('.slider, #slider, .related').fadeIn("slow");
   jQuery('div.loading').remove();
   
   if (jQuery("#slider li").size() == 0) {
@@ -102,13 +102,13 @@ jQuery(window).load(function($){
         infiniteLoop: true,
         speed: 500,
         auto: true,
-        controls: true,
-        pager: false,
+        controls: false,
+        pager: true,
         autoDelay: 1000,
-        mode: 'vertical',
+        mode: 'fade',
         pause: {{ settings.slideshow_speed }}
       });
-    }
+    }    
     jQuery('#slider').fadeIn('slow');
   }
   
@@ -116,24 +116,6 @@ jQuery(window).load(function($){
     var url = jQuery(this).attr('data-url');
     if (url.length > 0) {window.location.href = url;}
   });
-  
-  if (jQuery("#carousel div").size() == 0) {
-    jQuery(".related").remove();
-  } 
-  else {
-    if (jQuery("#carousel div").size() > 1) {
-      jQuery('#carousel').bxSlider({
-        slideWidth: 250,
-        minSlides: 3,
-        maxSlides: 3,
-        slideMargin: 10,
-        mode: 'horizontal',
-        auto: false,
-        pager: false,
-      });
-    }
-    jQuery('#carousel, #carousel div').fadeIn('slow');
-  }
   
   var IE6 = false /*@cc_on || @_jscript_version < 5.7 @*/;
   if(IE6){
@@ -145,9 +127,10 @@ jQuery(window).load(function($){
   var pw = jQuery("#placeholder img").width() + 8;
   jQuery("#placeholder img").parents('div.featured').css('maxWidth', pw+'px'); // force IE to play nice
   
-  var pw = 960 - (jQuery("#product .images").outerWidth() + 40);
+  var pw = 1000 - (jQuery("#product .images").outerWidth() + 40);
   jQuery("#product .content").css('width', pw+'px');
   jQuery("#product .content").fadeIn('slow');
+  jQuery('#product .social, #product .zoom').fadeIn(600);
   
   var totalWidth = 0;
   jQuery("#content-slide .product").each(function(){
@@ -169,10 +152,6 @@ jQuery(window).load(function($){
     jQuery(this).css('paddingTop', ph - h);
     jQuery(this).fadeIn('slow');
   });
-  
-  if(jQuery("#content-slide").width() < 952){
-    jQuery(".slider").hide();
-  }
   
 });
 jQuery.noConflict();
@@ -308,31 +287,3 @@ if ((typeof Shopify) === 'undefined') {
 }
 
 Shopify.money_format = '${{amount}}';
-jQuery.noConflict();
-Shopify.onProduct = function(product) {
-  $("#recently-viewed").css('display', 'block');
-  $("#recently-viewed .products").append('<div class="product"><div class="image"><a href="' + product.url + '"><img src="' + Shopify.resizeImage(product.featured_image, 'large') + '" alt="' + product.title + '" /></a></div><div class="details clearfix"><a href="' + product.url + '"><span class="title">' + product.title + '</span></a></div></div>');
-  $("#recently-viewed .products .product:nth-child(4)").addClass("last");
-  $("#content-slide .product .details, #content-table .product .details").css({opacity:0.0});
-};
-jQuery.noConflict();
-Shopify.onError = function(XMLHttpRequest, textStatus) {
-  var data = eval('(' + XMLHttpRequest.responseText + ')');
-  if (!!data.message) {
-    //alert(data.message + '(' + data.status  + '): ' + data.description);
-  } else {
-    //alert('Error : ' + Shopify.fullMessagesFromErrors(data).join('; ') + '.');
-  }
-  
-  /* product is sold out */
-  $("#cart-updated").html("<a href='#'>Product is sold out!</a>");
-  var tempwidth = jQuery(".cart-summary").outerWidth();
-  $('#cart-updated').css({'left': '100%', 'margin-left':'-'+ tempwidth +'px', 'width': tempwidth+'px'})
-  $('#cart-updated').fadeIn(200).delay(2000).fadeOut(400);
-
-  window.setTimeout(function() {
-  $("#add-to-cart").val("Add to Bag").animate({
-     
-      }, 400);
-  }, 2200);
-};

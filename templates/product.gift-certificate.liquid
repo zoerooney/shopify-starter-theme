@@ -52,10 +52,18 @@
         	<input min="1" type="number" id="quantity" name="quantity" value="1" />  
        		<label for="quantity">QUANTITY</label> 
         </div>
-        <div class="customized">    
-          <input type="text" id="customization" name="properties[Text]" />
-          <label for="customization">Text</label>
-        </div>  
+        <div class="customized gift-cert">   
+          <label for="recipient-name">Recipient Name</label> 
+          <input type="text" id="recipient-name" name="properties[Name]" />
+        </div>
+        <div class="customized gift-cert">    
+          <label for="recipient-email">Recipient Email</label>
+          <input type="text" id="recipient-email" name="properties[Email]" />
+        </div>
+        <div class="customized gift-cert">    
+          <label for="gift-message">Gift Message (optional)</label>
+          <textarea id="gift-message" name="properties[Message]"></textarea>
+        </div>     
         <div id="cart-updated"></div> 
         <div class="purchase clearfix">
           <input type="submit" name="add" id="add-to-cart" value="ADD TO CART" class="cart cufon" />

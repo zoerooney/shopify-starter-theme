@@ -1,80 +1,76 @@
 <div id="search" class="clearfix">
-  <div class="page-title">
-  	 <h2>Search Results</h2>
-  </div>
+  
   <div class="wrapper">
-  {% if search.performed %}
+ 
   <div class="collection-sidebar">
   	{% include "sidebar" %}
   </div>
-  <div class="main">
-    {% paginate search.results by settings.pagination_limit %}  
-    <div class="more-info clearfix">
-      <div class="fl">
-        
-        <span class="lower">{{ search.results_count }} {{ search.results_count | pluralize: 'Match', 'Matches' }} </span>
-      </div>
-      <div class="fr">
-        <span class="upper">&nbsp;</span>
-        <span class="lower">{% include 'pagination' %}</span>
-      </div>
-    </div>
-    {% if search.terms == "" %}
-    <p>Your search query was empty.</p>
-    {% else %}
-    {% if search.results == empty %}  
-    <div class="empty">
-      Your search for "{{search.terms | escape}}" did not yield any results
-    </div>              
-    {% else %}  
-
-    <div class="results">
-      {% for item in search.results %}
-      <div class="item clearfix">
-        {% if item.featured_image.src %}
-        <div class="thumbnail">
-          <a href="{{ item.url }}">{{ item.featured_image.src | product_img_url: 'thumb' | img_tag: item.featured_image.alt }}</a>
-          
-        </div>
-        <div class="content">
-        {% else %}
-        <div class="content indented">
-        {% endif %}
-          {% if item.url contains 'shows' %}
-          	<h4><a href="/pages/past-shows">{{ item.title }}</a></h4>
-          {% else %}
-          <h4>{{ item.title | link_to: item.url }}</h4>
-          {% endif %}
-          {{ item.content | strip_html | truncatewords: 40 | highlight: search.terms }}
-        </div>
-      </div> <!-- /.item -->
-      {% endfor %}
-    </div> <!-- /.results -->
-
-    {% endif %}
-    {% endif %}
+  
+  <div class="collection-main">
+  	{% if search.performed %}
+  	{% paginate search.results by 16 %} 	
+  	<div class="page-title">
+  		 <h1>SEARCH RESULTS</h1><span>{{ search.results_count }} {{ search.results_count | pluralize: 'match', 'matches' }}</span>
+  	</div>
+     
+	    {% if search.terms == "" %}
+	    	Your search query was empty.
+	    {% else %}
+	    
+		    {% if search.results == empty %}  
+		
+		     Your search for "{{search.terms | escape}}" did not yield any results
+		           
+		    {% else %}  
+	     
+		     <div class="content-table clearfix">
+		      {% for item in search.results %}
+		      	<div id="product-{{ forloop.index | plus:paginate.current_offset }}" class="product{% cycle 'featured': '', '', '', ' last' %}">
+		      	  <div class="image">
+		      	    <a href="{{ item.url }}"><img src="{{ item.featured_image.src | product_img_url: 'large' }}" alt="{{ item.featured_image.alt | escape  }}" /></a>
+		      	  </div>
+		      	  
+		      	  <div class="caption clearfix">
+		      	    <a href="{{ item.url }}">
+		      	      <h3>{{ item.vendor }}</h3>
+		      	      <h4>{{ item.title }}</h4>
+		      	      <span class="price{% if item.compare_at_price > item.price %} sale{% endif %}{% unless item.available %} soldout{% endunless %}">
+		      	      	{% if item.available %}
+		      	      		{% if item.compare_at_price > item.price %} <del>{{ item.compare_at_price | money }}</del><br>
+		      	      		{% endif %}  
+		      	      		{{ item.price | money }}{% if item.price_varies %} - {{ item.price_max | money }}{% endif %}
+		      	      		{% else %}
+		      	      		SOLD OUT 
+		      	      		{% endif %}        
+		      	      </span>
+		      	    </a>
+		      	  </div>
+		      	  
+		      	</div>
+		      {% endfor %}
+		    </div> <!-- /.results -->
+			
+		    {% endif %}
     
-    <div class="more-info clearfix">
-      <div class="fr">
-        <span class="upper">&nbsp;</span>
-        <span class="lower">{% include 'pagination' %}</span>
-      </div>
-    </div>
-
+    	{% endif %}
+	    {% if paginate.pages > 1 %}
+	    <div class="pagination">
+	      {{ paginate | default_pagination | replace: '&laquo; Previous', '<' | replace: 'Next &raquo;', '>' }}
+	    </div>
+	    {% endif %}
     {% endpaginate %}
+    
   </div> <!-- /.main -->
   
 
   {% else %}
-
+<div class="page-title">
+	 <h1>Uh Oh!</h1>
+</div>	
   <div id="not_found">
-    <h2>Search the Entire Site</h2>
-    <form id="search_form" class="searchform" name="search" action="/search">
-      <input type="text" class="replace" name="q" value="Search..." />
-    </form>
+    Your search query was empty or no results were found. Please try again.
   </div> <!-- /#not_found -->
 
   {% endif %}
   </div>
 </div> <!-- /#search -->
-{% include 'featured-products' %}

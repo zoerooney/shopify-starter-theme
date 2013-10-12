@@ -1,40 +1,25 @@
-<div id="product" class="{{ product.handle }}{% if product.images.size == 1 %} one_image{% endif %} clearfix">
-  
-  <div class="product_body clearfix wrapper">
+<div id="product" class="wrapper {{ product.handle }}{% if product.images.size == 1 %} one_image{% endif %} clearfix">
+  <div class="collection-sidebar">
+   {% include 'sidebar' %}
+  </div>
+  <div class="collection-main">
+  <div class="product_body clearfix">
+  	<div class="breadcrumbs">
+  		{% include 'breadcrumbs' %}
+  	</div>
     <div class="images">
-      <div class="featured">
-        <div class="image">
-          <a href="{{ product.featured_image.src | product_img_url: 'original' }}" class="cloud-zoom" rel="position: 'inside', showTitle: 'false'" id="placeholder"><img src="{{ product.featured_image.src | product_img_url: 'grande' }}" alt="{{ product.featured_image.alt | escape }}" /></a>
-        </div>
-      </div> <!-- /.featured -->
-      {% if product.images.size > 1 %}
-      <div class="thumbs clearfix">
-        {% for image in product.images %}
-        <div class="image{% cycle 'position': '', '', '', ' last' %}">
-          <a href="{{ image.src | product_img_url: 'original' }}" class="cloud-zoom-gallery" rel="useZoom: 'placeholder', smallImage: '{{ image.src | product_img_url: 'grande' }}', tint: '#ffffff'">
-            <img src="{{ image.src | product_img_url: 'compact' }}" alt="{{ image.alt | escape }}" />
-          </a>
-        </div>
-        {% endfor %}
-      </div><!-- /.thumbs -->
-      {% endif %}
+      {% include 'product-image' %}
     </div> <!-- /.images -->
 
     <div class="content">
            
-      <h1>{{ product.title }}</h1>
+      <h3>{{ product.vendor }}</h3>
+      <h4>{{ product.title }}</h4>
       {% if product.price_min < product.compare_at_price_min %}
-      <p class="price" id="price-preview">{{ product.price_min | money }} <span>was {{ product.compare_at_price_min | money }}</span></p>
+      <p class="price sale" id="price-preview"><del>{{ product.compare_at_price_min | money }}</del> {{ product.price_min | money }}</p>
       {% else %}
-      <p class="price" id="price-preview">{{ product.price_min | money }}</p>
+      <p class="price" id="price-preview">{{ product.price_min | money }}{% if product.price_varies %} - {{ product.price_max | money }}{% endif %}</p>
       {% endif %}
-      <div>
-      	{% for collection in product.collections %}
-      		{% if collection.image %}
-      	<a href="{{ collection.url }}">{{ collection.image.src | collection_img_url: 'pico' | img_tag: collection.title  }}</a>
-      		{% endif %}
-      	{% endfor %}
-      </div>
       <div class="description">
         {{ product.description }}
       </div>
@@ -63,82 +48,36 @@
         
         
         {% if product.available %}
-        <label for="quantity">Qty</label> 
-        <input min="1" type="number" id="quantity" name="quantity" value="1" />  
-              
+        <div>
+        	<input min="1" type="number" id="quantity" name="quantity" value="1" />  
+       		<label for="quantity">QUANTITY</label> 
+        </div>
+        <div id="cart-updated"></div> 
         <div class="purchase clearfix">
-          <span><input type="submit" name="add" id="add-to-cart" value="ADD TO BAG" class="cart cufon" /></span>
+          <input type="submit" name="add" id="add-to-cart" value="ADD TO CART" class="cart cufon" />
+          <div id="cart-updated"></div>
         </div>
         {% else %}
         <div class="purchase clearfix">
           <span><input type="submit" name="add" id="add-to-cart" value="Sold Out" class="cart cufon disabled" disabled="disabled" /></span>
+          
         </div>
         {% endif %}
-       
+       	
       </form>
        <div class="add-favorite">
-              	{% if customer %} 
-              		{% assign value = product.id %}
-              		{% capture product_id %}{{ product.id }}{% endcapture %}
-              		{% for tag in customer.tags %}
-              			{% capture tag_id %}{{ tag }}{% endcapture %}
-              			{% if tag_id contains product_id %}
-              				{% capture value %}x{{ tag_id }}{% endcapture %}
-              			{% endif %}
-              			{% assign size = value | size %}
-              			{% if size == 0 %}{% assign value = product_id %}{% endif %}
-              		{% endfor %}
-              	
-              		{% unless size == 0 %}
-              			{% assign product_id_size = product_id | size %}
-              			{% assign value_size = value | size %}
-              	
-              			{% assign difference_one = value_size | minus: product_id_size %}
-              			{% assign difference = difference_one | money_without_currency | times: 100 %}
-              			{% capture difference_check %}{{ difference | divided_by: 2 }}{% endcapture %}
-              			{% assign check = difference_check | split: '.' %}
-              	
-              			{% if check[1] contains "5" %}{% assign display = "false" %}{% else %}{% assign display = "true" %}{% endif %}
-              		{% endunless %}
-      
-              		{% if display == "false" %}
-              			<a href="#" class="favorites-link added">add to favorites</a><span class="notice">added!</span>
-              		{% else %}
-              			{% form 'customer' %}
-              				<input type="hidden" id="contact_email" name="contact[email]" value="{{ customer.email }}"/>
-              				<input type="hidden" name="contact[tags]" id="contact_tags" value="{{ value }}" />
-              				<input type='submit' value="add to favorites" class="favorites-link" />
-              				<div class="tooltip">
-              					add to favorites
-              				</div>
-              			{% endform %}
-              		{% endif %}
-              	{% else %}
-              		<a href="#" onclick="return false;" class="favorites-link off">add to favorites</a>
-              		<div class="tip"><a href="/account/login">Sign in</a> or <a href="/account/register">create an account</a> to save favorites</div>
-              	{% endif %}
-              </div>
+       		{% include 'add-favorite' %}
+       </div>
+       {% include 'social' %}
     </div>
+    
   </div> <!-- /.product_body -->
   
-  {% if collection and collection.products.size > 1 %}
+  {% include 'related' %}
   
-	  <div id="content-table" class="related">
-	    <div class="wrapper">
-		    <h2>OTHER PRODUCTS YOU'LL LOVE</h2>
-			<div id="carousel">
-				{% assign thisproduct = product.handle %}
-		        {% for product in collection.products %}
-		        {% unless product.handle == thisproduct %}
-		        {% include 'product-slide-small' %}
-		        {% endunless %}
-		        {% endfor %}
-			</div><!-- carousel -->
-		   
-	  	</div><!-- wrapper -->
-	  </div>
-	  	{% endif %}
- </div> <!-- /#product -->
+  
+ </div><!-- /right column -->
+</div> <!-- /#product -->
 
 
 <script type="text/javascript">
@@ -148,11 +87,11 @@ var selectCallback = function(variant, selector) {
   if (variant && variant.available == true) {
     // selected a valid variant
     jQuery('#add-to-cart').removeClass('disabled').removeAttr('disabled').val('ADD TO BAG'); // remove unavailable class from add-to-cart button, and re-enable button
-    if(variant.price < variant.compare_at_price){
-      jQuery('#price-preview').html(Shopify.formatMoney(variant.price, "{{shop.money_format}}") + " <span>was " + Shopify.formatMoney(variant.compare_at_price, "{{shop.money_format}}") + "</span>");
-    } else {
-      jQuery('#price-preview').html(Shopify.formatMoney(variant.price, "{{shop.money_format}}"));
-    }
+//    if(variant.price < variant.compare_at_price){
+//      jQuery('#price-preview').html(Shopify.formatMoney(variant.price, "{{shop.money_format}}") + " <span>was " + Shopify.formatMoney(variant.compare_at_price, "{{shop.money_format}}") + "</span>");
+//    } else {
+//      jQuery('#price-preview').html(Shopify.formatMoney(variant.price, "{{shop.money_format}}"));
+//    }
 
   } else {
     // variant doesn't exist
@@ -182,30 +121,7 @@ jQuery(function() {
   jQuery('.favorites-link.off').click(function(){
   	jQuery('.tip').toggle();
   });
-  
-  if(jQuery.cookie("viewed-products") != null){ // if cookie exists...
-    var products = jQuery.cookie("viewed-products");
-    var productHandles = products.split(" ");
-    var matches = 0;
-    var limit = 4;
-    for(var i = (productHandles.length - 1); i >= 0; i--) {
-      if(productHandles[i] != "{{ product.handle }}" && productHandles[i] != "" && (matches < limit)){
-        Shopify.getProduct(productHandles[i]);
-        matches++;
-      }
-    }
-
-    if(products.indexOf("{{ product.handle }}") == -1){ // add current product to list if it isn't already there
-    products += " {{ product.handle }}";
-    jQuery.cookie("viewed-products", products, {path: "/"});
-    } else { // if it is already there, push it to the end of the string
-      var newstring = remove(products, '{{ product.handle }}');
-      newstring += " {{ product.handle }}";
-      jQuery.cookie("viewed-products", newstring.replace(/ /g,' '), {path: "/"});
-    }
-    } else { // create cookie if it doesn't already exist
-    jQuery.cookie("viewed-products", "{{ product.handle }}", {path: "/"});
-  }
+ 
   
   {% if product.variants.size > 1 or product.options.size > 1 %}
   new Shopify.OptionSelectors("product-select", { product: {{ product | json }}, onVariantSelected: selectCallback });

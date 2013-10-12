@@ -1,0 +1,122 @@
+<!-- DO NOT REMOVE THE FOLLOWING COMMENT -->
+<!-- (c) Copyright 2012 Caroline Hill. All Rights Reserved. Contact Mlle Caroline Schnapp at mllegeorgesand@gmail.com -->
+<!-- DO NOT REMOVE THE ABOVE COMMENT -->
+
+{% if linklists.gift-wrapping.links.size > 0 and linklists.gift-wrapping.links.first.type == 'product_link' %}
+
+  <div id="is-a-gift" style="clear: left; margin: 5px 0 -30px" class="clearfix rte">
+    <p>
+      <input type="hidden" name="attributes[gift-wrapping]" value="" />
+      <input id="gift-wrapping" type="checkbox" name="attributes[gift-wrapping]" value="yes" {% if cart.attributes.gift-wrapping %} checked="checked"{% endif %} style="float: none;position:relative;bottom:3px;" />
+      <label for="gift-wrapping" style="display:inline-block; padding-left: 5px; float: none;">
+      Please gift wrap my order ({{ linklists.gift-wrapping.links.first.object.price | money }})
+      </label>
+    </p>
+	<!--<p>
+      <label style="display:block" for="gift-note">Gift message (free and optional):</label>
+      <textarea name="attributes[gift-note]" id="gift-note" rows="4" cols="80" style="min-width: 350px" class="styled-input">{{ cart.attributes.gift-note }}</textarea>
+    </p>-->
+  </div>
+  
+  {% assign id = linklists.gift-wrapping.links.first.object.variants.first.id %}
+
+  <script>
+
+  {% if cart.item_count == 1 and cart.items.first.id == id %}
+
+    // Only item in the cart is gift-wrapping, so let's remove it.
+    jQuery(function() {
+      jQuery('[name="attributes\[gift-wrapping\]"]').removeAttr('checked');
+      jQuery('#updates_{{ id }}').val(0);
+      jQuery('form[action="/cart"]').get(0).submit();
+    });
+
+  {% elsif cart.item_count > 0 %}
+
+    {% assign gift_wrap_in_cart = false %}
+    {% for item in cart.items %}
+      {% if gift_wrap_in_cart == false and item.id == id %}
+        {% assign gift_wrap_in_cart = true %}
+        jQuery(function() {
+          {% assign needs_correction = false %}
+          // Sanity check to see if we don't have many gift-wrap items in the cart.
+          {% if item.quantity > 1 %}
+          {% assign needs_correction = true %}
+          jQuery('#updates_{{ id }}').val(1);
+          {% endif %}
+          // Sanity check to see if the checkbox has been checked.
+          {% unless cart.attributes.gift-wrapping %}
+          jQuery('[name="attributes\[gift-wrapping\]"]').attr('checked','checked');
+          {% assign needs_correction = true %}
+          {% endunless %}
+          {% if needs_correction %}
+            jQuery('form[action="/cart"]').get(0).submit();
+          {% endif %}
+        });  
+      {% endif %}
+    {% endfor %}
+
+    {% if cart.attributes.gift-wrapping and gift_wrap_in_cart == false %}
+      var params = {
+        type: 'POST',
+        url: '/cart/update.js',
+        data: 'attributes[gift-wrapping]=',
+        dataType: 'json',
+        success: function() { 
+          window.location.href = '/cart'
+        }
+      };
+      jQuery.ajax(params);
+    {% endif %}
+
+    function setGiftWrappingAttribute() {
+      var params = {
+        type: 'POST',
+        url: '/cart/update.js',
+        data: 'attributes[gift-wrapping]=1',
+        dataType: 'json',
+        success: function() {
+          window.location.href = '/cart'
+        }
+      };
+      jQuery.ajax(params);
+    }
+
+    jQuery(function() {
+      jQuery('[name="attributes\[gift-wrapping\]"]').change(function() {
+        if (jQuery(this).is(':checked') && !{{ gift_wrap_in_cart }}) {
+          var params = {
+            type: 'POST',
+            url: '/cart/add.js',
+            data: 'quantity=1&id={{ id }}',
+            dataType: 'json',
+            success: setGiftWrappingAttribute
+          };
+          jQuery.ajax(params);
+        }
+        else {
+          jQuery('[name="attributes\[gift-wrapping\]"]').removeAttr('checked');
+          jQuery('#updates_{{ id }}').val(0);
+          jQuery('form[action="/cart"]').get(0).submit();
+        }
+     });
+    });
+
+  {% endif %}
+
+  // Hiding the gift-wrap quantity box and remove button.
+  jQuery(function() {      
+    jQuery('#updates_{{ id }}').hide().parents('li,tr').find('a:last').hide();  
+  })
+  
+  </script>
+
+{% else %}
+
+<p style="clear: left; margin: 30px 0 0" class="rte">
+  You attempted to add a gift-wrapping script to your shopping cart, but it won't work because you don't have 
+  a link list with handle <code>gift-wrapping</code> which, in turn, contains a link
+  to your gift-wrapping product. Please review the steps outlined <a href="http://wiki.shopify.com/Gift_wrapping">here</a>.
+</p>
+
+{% endif %}
