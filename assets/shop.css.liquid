@@ -1,12 +1,9 @@
-textarea, input[type=text],input[type=email],input[type=url],input[type=[password] {line-height:22px; color:#999;}
-input[type=text],input[type=email],input[type=url],input[type=[password] {height:22px;}
+@import url({{ 'fonts.css' | asset_url }});
 
-body,input,textarea {color:#444444; font-size:12px; line-height:22px; font-family: 'Exo', sans-serif;letter-spacing: 0.1em;font-weight: 500;
+body {background:#fff1ec; }
+
+body,input,textarea {color:#222; font-size:11px; line-height:18px; font-family: Georgia, serif;letter-spacing: 0.1em;font-weight: normal;
 }
-
-
-body {background:#fff; }
-
 
 h1,h2,h3,h4,h5,h6 { font-weight:600; font-family: 'Exo', sans-serif; color:#444444; margin:0 0 13px 0; text-transform:uppercase; }
 
@@ -42,24 +39,71 @@ table tr td:last-child {padding-right:0px;}
 input, a {outline:none !important;}
 input:hover, a:hover {outline:none !important;}
 input:active, a:active {outline:none !important;}
-input[type=submit], button, a.btn {border: 1px solid #444;
-padding: 15px 55px; outline:none; color:#fff; background:#f16031; text-transform: uppercase;
-font-size: 11px;
+
+input[type=text],
+input[type=email],
+input[type=url],
+input[type=tel],
+input[type=password],
+textarea {
+	font-style: italic;
+	font-size: 10px;
 }
-#update-cart {
-	background: #23aae2;
+#contactFormWrapper,
+.feedback {
+	width: 75%;
+	margin: 2em auto;
 }
-.btn.gray {
-	background: #999; color: #FFF !important;
+.feedback {
+	color: #b63a07;
+	font-style: italic;	
+	font-weight: bold;
 }
-input[type=submit]:hover, button:hover, a.btn:hover {background:#FFF; border: 1px solid #f16031; color: #444;
+#contactFormWrapper input[type=text],
+#contactFormWrapper input[type=email],
+#contactFormWrapper input[type=url],
+#contactFormWrapper input[type=tel],
+#contactFormWrapper input[type=password],
+#contactFormWrapper textarea {
+	border: 2px solid #d6d6d2;
+	padding: 3px 10px;
+	width: 85%;
 }
-#update-cart:hover {
-	background:#FFF; border: 1px solid #23aae2; color: #444;
+#contactFormWrapper textarea {
+	height: 100px;
+	resize: vertical;
 }
-.btn.gray:hover {
-	background:#FFF; border: 1px solid #999; color: #444 !important;
+input[type=submit], button, a.btn {
+	border: none;
+	padding: 7px 12px 5px 20px;
+	outline:none; 
+	color:#fff; 
+	background:#222 url({{ 'caret-left.png' | asset_url }}) no-repeat left;
+	font-family: 'Tungsten A', 'Tungsten B'; font-weight: 500; font-style: normal;
+	text-transform: uppercase;
+	font-size: 16px;
+	display: inline-block;
+	position: relative;
 }
+input[type=submit]:hover, button:hover, a.btn:hover {
+	color: #26AE98;
+}
+placeholder {
+	font-style: italic;
+	font-weight: bold;
+	color: #222;
+}
+::-webkit-input-placeholder {
+	color: #222;
+	font-weight: bold;
+	font-style: italic;
+}
+:-moz-placeholder {
+	color: #222;
+	font-weight: bold;
+	font-style: italic;
+}
+input.disabled {opacity:0.5;}
 .wishlist-share {
 	color:#fff !important;
 }
@@ -140,7 +184,7 @@ nav li a:hover {color:#8cc63e;}
 nav li {margin:0;}
 nav li a.current, nav li.active a {color:#8cc63e; }
 
-input[type=text],input[type=email],input[type=url],input[type=[password]{border:1px solid #444; padding:0px 10px;}
+input[type=text],input[type=email],input[type=url],input[type=password]{border:1px solid #444; padding:0px 10px;}
 .c input[type=text] {text-align:center;}
 #search_form input[type=text] {
 	border-top: none;
