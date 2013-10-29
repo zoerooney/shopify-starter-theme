@@ -1,28 +1,16 @@
 {% capture collection_handle %}{{ product-loop | handleize }}{% endcapture %}
-{% if collection_handle == "" %}
+
 <div id="product-{{ forloop.index | plus:paginate.current_offset }}" class="product{% cycle 'featured': '', '', '', ' last' %}">
   <div class="image">
-    <a href="{{ product.url }}"><img src="{{ product.featured_image.src | product_img_url: 'large' }}" alt="{{ product.featured_image.alt | escape  }}" /></a>
+    <a href="{% if collection_handle == "" %}{{ product.url }}{% else %}/collections/{{ product-loop }}{{ product.url }}{% endif %}"><img src="{{ product.featured_image.src | product_img_url: 'large' }}" alt="{{ product.featured_image.alt | escape  }}" /></a>
   </div>
   
   <div class="caption clearfix">
-    <a href="{{ product.url }}">
+    <a href="{% if collection_handle == "" %}{{ product.url }}{% else %}/collections/{{ product-loop }}{{ product.url }}{% endif %}">
       {% include 'product-caption' %}
     </a>
   </div>
   
 </div>
-{% else %}
-<div id="product-{{ forloop.index | plus:paginate.current_offset }}" class="product{% cycle 'featured': '', '', '', ' last' %}">
-  <div class="image">
-    <a href="/collections/{{ product-loop }}{{ product.url }}"><img src="{{ product.featured_image.src | product_img_url: 'large' }}" alt="{{ product.featured_image.alt | escape  }}" /></a>
-  </div>
-  <div class="caption clearfix">
-    <a href="/collections/{{ product-loop }}{{ product.url }}">
-       {% include 'product-caption' %}
-    </a>
-  </div>
-  
-</div>
-{% endif %}
-{% cycle 'clear-table': '', '', '', '<div style="clear:both;"></div>' %}
+
+{% cycle 'clear-table': '', '', '', '', '<div style="clear:both;"></div>' %}
