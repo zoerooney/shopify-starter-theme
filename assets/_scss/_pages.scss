@@ -1,0 +1,79 @@
+.features {
+	float: left;
+	width: 334px;
+	margin-top: 20px;
+}
+.feature-box {
+	position: relative;
+	width: 330px;
+	height: 192px;
+	overflow: hidden;
+	border: 1px solid #444;
+	margin-bottom: 20px;
+	text-align: center;
+}
+.box-caption {
+	padding: 10px 15px;
+	margin: 0 auto;
+	width: auto;
+	display: inline-block;
+	background: white;
+	bottom: 39px;
+	position: relative;
+	border: 1px solid #444;
+}
+.feature-box.middle .box-caption {
+	bottom: 99px;
+}
+.feature-box.middle hr {
+	position: absolute;
+	bottom: 70px;
+}
+.box-caption h3 {
+	margin: 0;
+}
+.slider-container {margin-top: 20px;
+	padding:0;border: 1px solid #444; margin-bottom:20px; position:relative; z-index:100 !important;width: 650px;height: 620px; overflow: hidden;
+	float: right;
+}
+.sider-container > div {
+	width: 650px;height: 620px; overflow: hidden;
+}
+#slider li, #slider img {display:block; margin:0; padding:0;}
+.bx-prev,
+.bx-next {
+	position: absolute;
+	right: 23px;
+	text-indent: -9999em;
+	width:44px;
+	height: 32px
+}
+.bx-prev.disabled,
+.bx-next.disabled {
+	opacity: 0.2;
+	cursor: default;
+}
+.bx-prev.disabled:hover,
+.bx-next.disabled:hover {
+	opacity: 0.2;
+	cursor: default;
+}
+.bx-prev {
+	top: 273px;
+	background: url('arrow-left.png') no-repeat;
+}
+.bx-next {
+	top: 315px;
+	background: url(arrow-right.png) no-repeat;
+}
+.bx-prev:hover,
+.bx-next:hover {
+	opacity: 0.7;
+}
+.loading {padding:200px 0; font-size:11px; text-align:center;}
+
+/* 404 */
+#not_found {padding:100px 0 160px 0; text-align:center;}
+#not_found h2 span {color:#aaa;}
+
+

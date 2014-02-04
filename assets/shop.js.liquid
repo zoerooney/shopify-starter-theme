@@ -1,104 +1,15 @@
-jQuery.noConflict();
-/*
- * jQuery doTimeout: Like setTimeout, but better! - v1.0 - 3/3/2010
- * http://benalman.com/projects/jquery-dotimeout-plugin/
- * 
- * Copyright (c) 2010 "Cowboy" Ben Alman
- * Dual licensed under the MIT and GPL licenses.
- * http://benalman.com/about/license/
- */
-(function($){var a={},c="doTimeout",d=Array.prototype.slice;$[c]=function(){return b.apply(window,[0].concat(d.call(arguments)))};$.fn[c]=function(){var f=d.call(arguments),e=b.apply(this,[c+f[0]].concat(f));return typeof f[0]==="number"||typeof f[1]==="number"?this:e};function b(l){var m=this,h,k={},g=l?$.fn:$,n=arguments,i=4,f=n[1],j=n[2],p=n[3];if(typeof f!=="string"){i--;f=l=0;j=n[1];p=n[2]}if(l){h=m.eq(0);h.data(l,k=h.data(l)||{})}else{if(f){k=a[f]||(a[f]={})}}k.id&&clearTimeout(k.id);delete k.id;function e(){if(l){h.removeData(l)}else{if(f){delete a[f]}}}function o(){k.id=setTimeout(function(){k.fn()},j)}if(p){k.fn=function(q){if(typeof p==="string"){p=g[p]}p.apply(m,d.call(n,i))===true&&!q?o():e()};o()}else{if(k.fn){j===undefined?e():k.fn(j===false);return true}else{e()}}}})(jQuery);
-
-jQuery.noConflict();     
-jQuery(document).ready(function ($) {
-     var pInfScrLoading = false;
-     var pInfScrDelay = 100;
-      
-     function pInfScrExecute() {
-       if($(document).height() - 800 < ($(document).scrollTop() + $(window).height())) {
-         var loadingImage;
-         pInfScrNode = $('.more').last();	
-         pInfScrURL = $('.more a').last().attr("href");
-         if(!pInfScrLoading && pInfScrNode.length > 0 && pInfScrNode.css('display') != 'none') {
-           $.ajax({
-             type: 'GET',
-             url: pInfScrURL,
-             beforeSend: function() {
-               pInfScrLoading = true;
-               loadingImage = pInfScrNode.clone().empty().append('<img src=\"http://cdn.shopify.com/s/files/1/0068/2162/assets/loading.gif?105791\" />');
-               loadingImage.insertAfter(pInfScrNode);
-               pInfScrNode.hide();
-             },
-             success: function(data) {
-               // remove loading feedback
-               pInfScrNode.next().remove();
-               var filteredData = $(data).find(".content-table");
-               filteredData.insertBefore( $("#product-list-foot") );
-               loadingImage.remove();					
-               pInfScrLoading = false;
-             },
-             dataType: "html"
-           });
-         }
-       }
-     }
-       $(window).scroll(function(){
-         $.doTimeout( 'scroll', pInfScrDelay, pInfScrExecute);
-         if( $(document).height() - 800 > $(document).scrollTop() + $(window).height() ) {
-           pInfScrDelay = 100;
-         }
-       });
-     });
-
-
-jQuery.noConflict();
-(function($){
-  $.fn.selectRange = function(start, end) {
-          return this.each(function() {
-                  if(this.setSelectionRange) {
-                          this.focus();
-                          this.setSelectionRange(start, end);
-                  } else if(this.createTextRange) {
-                          var range = this.createTextRange();
-                          range.collapse(true);
-                          //range.moveEnd('character', end);
-                          range.moveStart('character', start);
-                          range.select();
-                  }
-          });
-  };
-})(jQuery);
-jQuery.noConflict();
-jQuery(document).ready(function($){ 
- 
-    $(window).scroll(function(){
-        if ($(this).scrollTop() > 100) {
-            $('.top').fadeIn();
-        } else {
-            $('.top').fadeOut();
-        }
-    }); 
-
-    $('.top').click(function(){
-        $("html, body").animate({ scrollTop: 0 }, 600);
-        return false;
-    });
-
-});
-    
-jQuery.noConflict();    
 jQuery(window).load(function($){
   
-  jQuery('.slider, #slider, .related').fadeIn("slow");
-  jQuery('div.loading').remove();
+  $('.slider, #slider, .related').fadeIn("slow");
+  $('div.loading').remove();
   
-  if (jQuery("#slider li").size() == 0) {
-    jQuery("#slider").remove();
-    jQuery("#slider-empty").show(); 
+  if ($("#slider li").size() == 0) {
+    $("#slider").remove();
+    $("#slider-empty").show(); 
   } 
   else {
-    if (jQuery("#slider li").size() > 1) {
-      jQuery('#slider').bxSlider({
+    if ($("#slider li").size() > 1) {
+      $('#slider').bxSlider({
         infiniteLoop: true,
         speed: 500,
         auto: true,
@@ -109,96 +20,21 @@ jQuery(window).load(function($){
         pause: {{ settings.slideshow_speed }}
       });
     }    
-    jQuery('#slider').fadeIn('slow');
+    $('#slider').fadeIn('slow');
   }
-  
-  jQuery('#slider li img').click(function(){
-    var url = jQuery(this).attr('data-url');
-    if (url.length > 0) {window.location.href = url;}
-  });
-  
-  var IE6 = false /*@cc_on || @_jscript_version < 5.7 @*/;
-  if(IE6){
-    jQuery("#placeholder img").css('width', jQuery("#placeholder img").width()+'px'); // restrict to initial width of image
-  } else {
-    jQuery("#placeholder img").css('maxWidth', jQuery("#placeholder img").width()+'px'); // restrict to initial width of image
-  }
-  
-  var pw = jQuery("#placeholder img").width() + 8;
-  jQuery("#placeholder img").parents('div.featured').css('maxWidth', pw+'px'); // force IE to play nice
-  
-  var pw = 1000 - (jQuery("#product .images").outerWidth() + 40);
-  jQuery("#product .content").css('width', pw+'px');
-  jQuery("#product .content").fadeIn('slow');
-  jQuery('#product .social, #product .zoom').fadeIn(600);
-  
-  var totalWidth = 0;
-  jQuery("#content-slide .product").each(function(){
-    totalWidth += jQuery(this).outerWidth(true);
-  });
-  
-  var windowWidth = jQuery(window).width();
-  if(windowWidth < totalWidth){
-    jQuery(".slider").show();
-  }
-  
-  jQuery("#content-slide").width(totalWidth + "px");
-  
-  var imagesWidth = jQuery("#product .images").width();
-  
-  jQuery('.cy').each(function(){
-    var h = Math.round(jQuery(this).height() / 2);
-    var ph = Math.round(jQuery(this).parent().height() / 2);
-    jQuery(this).css('paddingTop', ph - h);
-    jQuery(this).fadeIn('slow');
-  });
-  
+ 
+	 $('#slider li img').error(function(){ // remove problematic images
+	   $(this).parents("li.slide").remove();
+	 });
+	 
+	 $('.slider-container').append('<div class="loading">Loading...</div>');
 });
-jQuery.noConflict();
+
 jQuery(document).ready(function($){
-  
-  $("#content-slide .product .details, #content-table .product .details").css({opacity:0.0});
-  
-  $('#slider li img').error(function(){ // remove problematic images
-    $(this).parents("li.slide").remove();
-  });
-  
-  $("#slider li img").each(function(){
-    var url = $(this).attr('data-url');
-    if(url != undefined){
-      if (url.length > 0) { $(this).css("cursor","pointer");}
-    }
-  });
-  
-  $('.product .details a').each(function(){
-    var h = Math.round(jQuery(this).height() / 2);
-    var ph = Math.round(jQuery(this).parent().height() / 2);
-    $(this).css('paddingTop', ph - h);
-  });
-  
-  
-  $('.image img, .cy, #content-scroll, .slider, #product .content, #slider').css('display', 'none');
-  //jQuery('.featured .image').append('<div class="loading" style="padding:280px 0; width:472px;">Loading...</div>');
-  $('.slider-container').append('<div class="loading">Loading...</div>');
-  
-  $('input[type="submit"], input.btn, button').click(function(){ // remove ugly outline on input button click
-    $(this).blur();
-  })
-  
-  $("li.dropdown").hover(function(){
-    $(this).children('ul.dropdown').show();
-    $(this).children('ul.dropdown').stop();
-    $(this).children('ul.dropdown').animate({
-      opacity: 1.0
-    }, 200);
-  }, function(){
-    $(this).children('ul.dropdown').stop();
-    $(this).children('ul.dropdown').animate({
-      opacity: 0.0
-    }, 400, function(){
-      $(this).hide();
-    });
-  });
+	
+	$("#product .content").fadeIn('slow');
+	$('#product .social, #product .zoom').fadeIn(600);
+
   
   $("#add-to-cart").click(function(){
     var width = $("#add-to-cart").outerWidth();
@@ -209,48 +45,6 @@ jQuery(document).ready(function($){
     }, 400);
   });
   
-  $('.product:not(.current)').on('mouseover mouseout', function(event) {
-    if (event.type == 'mouseover') {
-      $(this).children('div.details').stop();
-      $(this).children('div.details').animate({
-        opacity: 1.0
-      }, 200);
-    } else {
-      $(this).children('div.details').stop();
-      $(this).children('div.details').animate({
-        opacity: 0.0
-      }, 400);
-    }
-  });
-  
-  $('a[href*=#]').click(function() {
-    if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') 
-    && location.hostname == this.hostname) {
-      var $target = $(this.hash);
-      $target = $target.length && $target || $('[name=' + this.hash.slice(1) +']');
-      if ($target.length) {
-        var targetOffset = $target.offset().top;
-        $('html,body').animate({scrollTop: targetOffset}, 1000);
-        //return false;
-      }
-    }
-  });
-  
-  $("input.replace").each(function(i){ // input value replacement
-    var originalvalue = $(this).val();
-    $(this).focus( function(){ 
-      $(this).animate({color: '#ccc'}, 200);
-      $(this).selectRange(0,0);
-    });
-    $(this).blur( function(){ 
-      if( $.trim($(this).val()) == '' ){ $(this).val(originalvalue); } 
-      $(this).animate({color: '#666'}, 200);
-    });
-    $(this).keydown( function(){ 
-      $(this).css({color: '#666'})
-      if( $.trim($(this).val()) == originalvalue ){ $(this).val(''); } 
-    });
-  });
   
   $('.image img').each(function(){
     if (!this.complete) { // if image is NOT cached
@@ -263,27 +57,3 @@ jQuery(document).ready(function($){
   });
 
 });
-jQuery.noConflict();
-function setSelectionRange(input, selectionStart, selectionEnd) {
-  if (input.setSelectionRange) {
-    input.focus();
-    input.setSelectionRange(selectionStart, selectionEnd);
-  }
-  else if (input.createTextRange) {
-    var range = input.createTextRange();
-    range.collapse(true);
-    range.moveEnd('character', selectionEnd);
-    range.moveStart('character', selectionStart);
-    range.select();
-  }
-}
-jQuery.noConflict();
-function setCaretToPos (input, pos) {
-  setSelectionRange(input, pos, pos);
-}
-
-if ((typeof Shopify) === 'undefined') {
-  Shopify = {};
-}
-
-Shopify.money_format = '${{amount}}';

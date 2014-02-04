@@ -1,0 +1,26 @@
+#admin_header {
+	text-align: center;
+}
+.action_bottom { margin-top:20px; }
+#customer label, #recover-password label { display:block; }
+#customer input[type=email], #recover-password input[type=email], #customer input[type=password], #recover-password input[type=password], #customer input[type=text], #recover-password input[type=text] { display:block; padding:3px; width:300px; }
+#guest, #customer_sidebar, #order_address { margin:20px 0; float:left; width:260px; }
+#customer_orders, #order_details { margin:20px 0; float:right; width:600px; } 
+#order_payment, #order_shipping { margin-bottom:20px; }
+#address_tables td, #address_tables label, #address_tables input[type=text], #address_tables input[type=email] { display:block; margin:0; }
+.edit_address { margin-bottom:20px; }
+#address_tables tr, #address_tables tr td { padding:0px; border:none; }
+#address_tables {
+	text-align: center;
+}
+.address_table {
+	display: inline-block;
+	vertical-align: top;
+	margin: 15px;
+	text-align: left;
+}
+
+#add_address form {
+	width: 400px;
+	margin: 20px auto;
+	text-align: left;}

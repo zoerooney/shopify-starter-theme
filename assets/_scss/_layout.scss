@@ -1,0 +1,22 @@
+body {background:#fff1ec; }
+
+table th {text-align:left; font-size:12px; font-weight:400; text-transform:lowercase;}
+table tr td {padding:5px 10px; vertical-align:middle;}
+table tr td:first-child {padding-left:0px;}
+table tr td:last-child {padding-right:0px;}
+
+
+#content,
+#template,
+#cart {
+	padding: 34px 0;
+	min-height: 400px;
+}
+#template.centered {
+	text-align: center;
+}
+#template.centered form {
+	width: 300px;
+	margin: 0 auto;
+	text-align: left;
+}
