@@ -72,13 +72,24 @@ ul.unstyled {
 
 // clearfix
 // http://nicolasgallagher.com/micro-clearfix-hack/
-// http://css-tricks.com/snippets/css/clear-fix/
-@mixin clearfix {
-    content: "";
-    display: table;
+
+.clearfix:before,
+.clearfix:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+
+.clearfix:after {
     clear: both;
 }
 
+/**
+ * For IE 6/7 only
+ * Include this rule to trigger hasLayout and contain floats.
+ */
+.clearfix {
+    *zoom: 1;
+}
 /* 2 RESETS
 ================================================== */
 
