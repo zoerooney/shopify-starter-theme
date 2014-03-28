@@ -3,6 +3,7 @@
 }
 body {
 	background: $bg; 
+	min-width: $width-outer;
 }
 .wrapper {
 	width: $width;
