@@ -38,7 +38,8 @@
 	<!-- CSS files
 	================================================== -->
 	{{ 'style.css' | asset_url | stylesheet_tag }}
-	<!--{{ 'jquery.fancybox.css' | asset_url | stylesheet_tag }}-->
+	<link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,700italic|Parisienne' rel='stylesheet' type='text/css'>
+	{{ 'jquery.fancybox.css' | asset_url | stylesheet_tag }}
 	
 	
 	<!-- Header hook for plugins
@@ -70,132 +71,118 @@
 
 <body id="{{page.handle }}">
  
-     <header class="clearfix">
-      <div class="top-menu clearfix">
-       <div class="wrapper">
-      	  <nav class="page-menu">
-      	    <ul class="">
-      	      {% for link in linklists.top-left-menu.links %}
-      	      <li><a href="{{ link.url }}"{% if link.active %} class="current"{% endif %}><span>{{ link.title }}</span></a></li>
-      	      {% endfor %}
-      	    </ul>
-      	  </nav>
-	      <nav class="account-links">
-	      <ul class="customer">
-		      {% for link in linklists.top-right-menu.links %}
-		      <li><a href="{{ link.url }}"{% if link.active %} class="current"{% endif %}>{{ link.title }}</a></li>
-		      {% endfor %}
-		      {% if shop.customer_accounts_enabled %}
-	        {% if customer %}
-	        <li><a href="/account">My Account</a></li>
-	        <li>{{ 'Logout' | customer_logout_link }}</li>
-	        {% else %}
-	        {% if shop.customer_accounts_optional %}
-	        <li>{{ 'Register' | customer_register_link }}</li>
-	        {% endif %}
-	        <li>{{ 'Login' | customer_login_link }}</li>
-	        {% endif %}
-	      
-	      {% endif %}
-	      </ul>
-	      </nav>
-	   </div><!-- end wrapper-->
-      </div>
-      
-      <div class="wrapper clearfix">
-      <form id="search_form" class="searchform" name="search" action="/search">
-      {% if template == "search" and search.performed and search.terms != "" %}
-      <input type="text" name="q" class="replace" value="{{ search.terms }}" />
-      {% else %}
-      <input type="text" class="replace" name="q" value="SEARCH" />
-      {% endif %}
-      <input type="submit" class="searchsubmit" />
-      </form>
-      <div class="logo">
-       
-        <a href="/" class="shop_logo"><img src="{{ 'logo.png' | asset_url }}" alt="{{ shop.name }}" class="png_bg" /></a>
-       
-      </div> <!-- /.logo -->
-      
-      <div class="cart-summary">
-      	<a href="/cart">
-      		Cart (<span class="cart-total-items">{{ cart.item_count }}</span>)
-      	</a>
-      </div>
-      </div> <!-- end wrapper -->
-    </header>
-	<div class="main-menu clearfix">
-	<div class="wrapper">
-    <nav class="main">
-      <ul class="clearfix">
-        {% for link in linklists[settings.main_linklist].links %}
-        {% if linklists[link.handle] == empty %}
-        <li><a href="{{ link.url }}"{% if link.active %} class="current"{% endif %}><span>{{ link.title }}</span></a></li>
-        {% else %}
-        <li class="dropdown"><a href="{{ link.url }}"{% if link.active %} class="current"{% endif %}><span>{{ link.title }}</span></a>
-          <ul class="dropdown">
-            {% for link in linklists[link.handle].links %}
-            <li><a href="{{ link.url }}"{% if link.active %} class="current"{% endif %}>{{ link.title }}</a></li>
-            {% endfor %}
-          </ul>
-        </li>
-        {% endif %}
-        {% endfor %}
-      </ul>
-      
-    </nav>
-	</div><!-- end wrapper -->
-	</div><!-- end main-menu -->
-    <section id="body" class="clearfix">
-      {{ content_for_layout }}
-    </section> <!-- /#body -->
+	<header class="clearfix">
+	
+		<div class="wrapper">
+			<div class="top-bar clearfix">
+				<nav class="account-links">
+					<ul class="customer">
+					{% if shop.customer_accounts_enabled %}
+						{% if customer %}
+							<li>
+								<a href="/account">My Account</a>
+							</li>
+							<li>
+								{{ 'Logout' | customer_logout_link }}
+							</li>
+						{% else %}
+							{% if shop.customer_accounts_optional %}
+								<li>
+									{{ 'Register' | customer_register_link }}
+								</li>
+						{% endif %}
+						<li>
+							{{ 'Login' | customer_login_link }
+						</li>
+						{% endif %}
+					{% endif %}
+					</ul>
+				</nav>
+				<div class="cart-summary">
+					<a href="/cart">
+						Cart (<span class="cart-total-items">{{ cart.item_count }}</span>)
+					</a>
+				</div>
+				<form id="search_form" class="searchform" name="search" action="/search">
+					{% if template == "search" and search.performed and search.terms != "" %}
+					<input type="text" name="q" class="replace" value="{{ search.terms }}" />
+					{% else %}
+					<input type="text" class="replace" name="q" value="SEARCH" />
+					{% endif %}
+					<input type="submit" class="searchsubmit" />
+				</form>
+			</div><!-- /top-bar -->
+		
+			<div class="logo">
+				<a href="/" class="shop_logo">
+					<img src="{{ 'logo.png' | asset_url }}" alt="{{ shop.name }}" class="png_bg" />
+				</a>
+			</div> <!-- /.logo -->
+			
+			<nav class="page-menu">
+				<ul>
+					{% for link in linklists.main-menu.links %}
+						{% if linklists[link.handle] == empty %}
+							<li><a href="{{ link.url }}"{% if link.active %} class="current"{% endif %}><span>{{ link.title }}</span></a></li>
+						{% else %}
+							<li class="dropdown"><a href="{{ link.url }}"{% if link.active %} class="current"{% endif %}><span>{{ link.title }}</span></a>
+						  		<ul class="dropdown">
+						    		{% for link in linklists[link.handle].links %}
+						    			<li><a href="{{ link.url }}"{% if link.active %} class="current"{% endif %}>{{ link.title }}</a></li>
+						   			 {% endfor %}
+						  		</ul>
+							</li>
+						{% endif %}
+					{% endfor %}
+					<li class="social-link facebook">
+						<a href="https://www.facebook.com/{{ settings.facebook }}" target="_blank">Facebook</a>
+					</li>
+					<li class="social-link twitter">
+						<a href="https://twitter.com/{{ settings.twitter }}" target="_blank">Twitter</a>
+					</li>
+					<li class="social-link pinterst">
+						<a href="http://pinterest.com/{{ settings.pinterest }}" target="_blank">Pinterest</a>
+					</li>
+					<li class="social-link instagram">
+						<a href="http://instagram.com/{{ settings.instagram }}" target="_blank">Instagram</a>
+					</li>
+					<li class="social-link email">
+						<a href="mailto:{{ shop.email }}" target="_blank">{{ shop.email }}</a>
+					</li>
+				</ul>
+			</nav>
+		</div> <!-- end wrapper -->
+	</header>
+
+	<section id="body" class="clearfix">
+		{{ content_for_layout }}
+	</section> <!-- /#body -->
     
-    <footer class="clearfix">
-	  <div class="wrapper">
-      	  
-      	  <div class="footer-block first">
-      	  	<h4>{{ settings.lb_header }}</h4>
-      	  	{{ settings.lb_content }}
-      	  </div>
-      	  
-      	  <div class="footer-block second">
-      	  	<h4>{{ settings.cb_header }}</h4>
-      	  	{{ settings.cb_content }}
-      	  </div>
-      	  
-	      <div class="footer-block">
-	      <nav>
-	        <h4>{{ settings.rb_header }}</h4>
-	        <ul>
-	          {% for link in linklists.footer.links %}
-	          <li><a href="{{ link.url }}"{% if link.active %} class="current"{% endif %}>{{ link.title }}</a></li>
-	          {% endfor %}
-	        </ul>
-	      </nav>
-	      </div>
-        
-    
-	    <div id="copyright">
-	    	<div class="social-links">
-	    		<a href="https://www.facebook.com/{{ settings.facebook }}" target="_blank"><img src="{{ 'sm-facebook.png' | asset_url }}" alt="Facebook" /></a>
-	    		<a href="https://twitter.com/{{ settings.twitter }}" target="_blank"><img src="{{ 'sm-twitter.png' | asset_url }}" alt="Twitter" /></a>
-	    		<a href="http://pinterest.com/{{ settings.pinterest }}" target="_blank"><img src="{{ 'sm-pinterest.png' | asset_url }}" alt="Pinterest" /></a>
-	    		<a href="http://instagram.com/{{ settings.instagram }}" target="_blank"><img src="{{ 'sm-instagram.png' | asset_url }}" alt="Instagram" /></a>
-	    	</div>
-	      &copy; {{ 'now' | date: "%Y" }} {{ shop.name }}<br>
-	      Code by <a href="http://zoerooney.com" target="_blank" rel="nofollow">Zoe Rooney Web Development</a>	
-	     	
-	    </div>
-    </div><!-- end wrapper -->
-    </footer>
+	<footer class="clearfix">
+		<div class="wrapper">
+			<div id="copyright">
+				Copyright {{ 'now' | date: "%Y" }} {{ shop.name }}. All rights reserved. Site design by <a href="http://smallshopstudio.com" target="_blank" rel="nofollow">small shop</a> | Code by <a href="http://zoerooney.com" target="_blank" rel="nofollow">Zoe Rooney Web Development</a>	     	
+			</div>
+		
+			<div class="footer-nav">
+				<nav>
+					<ul>
+					{% for link in linklists.footer.links %}
+						<li><a href="{{ link.url }}"{% if link.active %} class="current"{% endif %}>{{ link.title }}</a></li>
+					{% endfor %}
+					</ul>
+				</nav>
+			</div>
+		</div><!-- end wrapper -->
+	</footer>
 
 	{% comment %}
 	  Theme dependent JavaScript.
 	{% endcomment %}  
-	<!--{{ 'jquery.cookie.js' | asset_url | script_tag }}
-	{{ 'jquery.slider.js' | asset_url | script_tag }}
+	{{ 'jquery.cookie.js' | asset_url | script_tag }}
+	{{ 'jquery.bxslider.min.js' | asset_url | script_tag }}
 	{{ 'jquery.selectbox-0.2.min.js' | asset_url | script_tag }}
-	{{ 'jquery.fancybox.pack.js' | asset_url | script_tag }}-->
+	{{ 'jquery.fancybox.pack.js' | asset_url | script_tag }}
 	{{ 'option_selection.js' | shopify_asset_url | script_tag }}
 	{{ 'ajaxify.js' | asset_url | script_tag }}
 	{{ 'shop.js' | asset_url | script_tag }}
