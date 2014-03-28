@@ -1,8 +1,8 @@
 body,input,textarea {
-	color:$text; 
+	color: $text; 
 	font-family: $main;
-	font-size:11px; 
-	line-height:18px;
+	font-size: 11px; 
+	line-height: 1.625em;
 	font-weight: normal;
 }
 
@@ -33,11 +33,11 @@ h6 {
 
 
 a {
-	color:#8cc63e;
+	color: $link;
 	text-decoration:none; 
 	outline:none;
 	&:hover {
-		
+		color: $hover;
 	}
 }
 
