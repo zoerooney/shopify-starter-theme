@@ -1,19 +1,45 @@
-body,input,textarea {color:#222; font-size:11px; line-height:18px; font-family: Georgia, serif;letter-spacing: 0.1em;font-weight: normal;
+body,input,textarea {
+	color:$text; 
+	font-family: $main;
+	font-size:11px; 
+	line-height:18px;
+	font-weight: normal;
 }
 
-h1,h2,h3,h4,h5,h6 { font-weight:600; font-family: 'Exo', sans-serif; color:#444444; margin:0 0 13px 0; text-transform:uppercase; }
+h1,h2,h3,h4,h5,h6 { 
+	
+	a {
+		color: inherit;
+	}
+}
+h1 {
+	
+}
+h2 {
+	
+}
+h3 {
+	
+}
+h4 {
+	
+}
+h5 {
+	
+}
+h6 {
+	
+}
 
-h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {color:#444444; }
 
-a {color:#8cc63e;font-weight:600; text-transform: uppercase; text-decoration:none; outline:none;}
-a:hover {text-decoration:none; color:#999; }
-a:active {outline:none;}
-
-h1 {font-size:24px;}
-h2 {font-size:16px;}
-h3 {font-size:11px;}
-h4 {font-size:11px; color: #999999;}
-h5 {font-size:11px;}
+a {
+	color:#8cc63e;
+	text-decoration:none; 
+	outline:none;
+	&:hover {
+		
+	}
+}
 
 
 .page-title {
