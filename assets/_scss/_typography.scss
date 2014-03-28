@@ -45,9 +45,8 @@ a {
 .page-title {
 	text-align: center;
 	padding: 22px 0;
-	border-bottom: 1px solid #444;
-	background: #f5f5f5;
-}
-.page-title h2 {
-	margin: 0;
+	border-bottom: $border;
+	h2 {
+		margin: 0;
+	}
 }
