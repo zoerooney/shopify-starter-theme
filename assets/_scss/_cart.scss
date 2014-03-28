@@ -1,4 +1,24 @@
-#cart td {padding:10px;}
-#cart .product_image a {display:block;}
-#cart .product_image img {display:block; padding:3px;}
-#cart .summary td {padding-top:30px;}
+table {
+	th {
+		vertical-align: middle;
+	}
+	td {
+		padding: 5px 10px;
+		vertical-align: middle;
+		&:first-child {
+			padding-left:0px;
+		}
+		&:last-child {
+			padding-right:0px;
+		}
+	}
+}
+#cart .summary td {
+	padding-top:30px;
+}
+#cart .product_image {
+	a,
+	img {
+		display: block;	
+	}
+}
