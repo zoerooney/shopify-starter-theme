@@ -5,61 +5,67 @@
 <!--[if IE 9 ]>    <html lang="en" class="no-js ie9"> <![endif]-->
 <!--[if (gt IE 9)|!(IE)]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <link rel="canonical" href="{{ canonical_url }}" /> 
-  {% if template == 'index' %}
-  <title>{{ shop.name }}</title>
-  {% elsif template == '404' %}
-  <title>Page Not Found | {{ shop.name }}</title>
-  {% else %}
-  <title>{{ page_title }} | {{ shop.name }}</title>
-  {% endif %}
-
-  {{ content_for_header }}
-
-  {% if page_description %}
-  <meta name="description" content="{{ page_description }}" />
-  {% endif %}
-  <link rel="shortcut icon" type="image/x-icon" href=" {{ 'favicon.ico' | asset_url }}">
-  {{ 'reset.css' | asset_url | stylesheet_tag }}
-  {{ 'shop.css' | asset_url | stylesheet_tag }}
-  {{ 'jquery.fancybox.css' | asset_url | stylesheet_tag }}
-
-  <!--[if IE]>
-  {{ 'ie.css' | asset_url | stylesheet_tag }}
-  <![endif]-->
-  <!--[if lt IE 7 ]>
-  {{ 'ie6.css' | asset_url | stylesheet_tag }}
-  <![endif]-->
-
-  {{ 'modernizr.js' | asset_url | script_tag }}
-   
-  {{ '//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js' | script_tag }}
-  
-  {{ 'option_selection.js' | shopify_asset_url | script_tag }}
-  {{ 'api.jquery.js' | shopify_asset_url | script_tag }}
-  {{ 'ajaxify-shop.js' | asset_url | script_tag }}
-  {{ 'jquery-ui-1.8.6.js' | asset_url | script_tag }}
-  {{ 'jquery.cookie.js' | asset_url | script_tag }}
-  {{ 'jquery.slider.js' | asset_url | script_tag }}
-  {{ 'jquery.selectbox-0.2.min.js' | asset_url | script_tag }}
-  {{ 'jquery.fancybox.pack.js' | asset_url | script_tag }}
-  {{ 'shop.js' | asset_url | script_tag }}
+	<!-- Basic page needs
+	================================================== -->
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	
+	
+	<!-- Title, description, favicon
+	================================================== -->
+	<title>
+	{{ page_title }}{% if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif %}{% if current_page != 1 %} &ndash; Page {{ current_page }}{% endif %}{% unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless %}
+	</title>
+	
+	{% if page_description %}
+	<meta name="description" content="{{ page_description | escape }}">
+	{% endif %}
+	
+	<link rel="shortcut icon" type="image/x-icon" href=" {{ 'favicon.ico' | asset_url }}">
+  	
+  	
+  	<!-- Social media open graph
+  	================================================== -->
+  	{% include 'open-graph' %}
   
   
-  {% if template contains 'customers' %}
-      {{ "shopify_common.js" | shopify_asset_url | script_tag }}
-      {{ "customer_area.js"  | shopify_asset_url | script_tag }}
-  {% endif %}
-
-  <script type="text/javascript">
-  Shopify.money_format = "{{ shop.money_format }}";
-  Shopify.currency = "{{ shop.currency }}";
-  </script>
-  
-  {% include 'open-graph' %}
-
+	<!-- Helpers
+	================================================== -->
+	<link rel="canonical" href="{{ canonical_url }}">
+	<meta name="viewport" content="width=device-width">
+	
+	
+	<!-- CSS files
+	================================================== -->
+	{{ 'shop.css' | asset_url | stylesheet_tag }}
+	<!--{{ 'jquery.fancybox.css' | asset_url | stylesheet_tag }}-->
+	
+	
+	<!-- Header hook for plugins
+	================================================== -->
+	{{ content_for_header }}
+	
+	
+	<!-- JS files
+	================================================== -->
+	<!--[if lt IE 9]>
+	{{ '//html5shiv.googlecode.com/svn/trunk/html5.js' | script_tag }}
+	<![endif]-->
+	
+	{% if template contains 'customers' %}
+	    {{ "shopify_common.js" | shopify_asset_url | script_tag }}
+	    {{ "customer_area.js"  | shopify_asset_url | script_tag }}
+	{% endif %}
+	
+	<script type="text/javascript">
+	Shopify.money_format = "{{ shop.money_format }}";
+	Shopify.currency = "{{ shop.currency }}";
+	</script>
+    
+    {% comment %}
+      Theme dependent JS is loaded at the very bottom of this file for performance reasons
+    {% endcomment %}
+	{{ '//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js' | script_tag }}
 </head>
 
 <body id="{{page.handle }}">
@@ -185,5 +191,15 @@
     </div><!-- end wrapper -->
     </footer>
 
+	{% comment %}
+	  Theme dependent JavaScript.
+	{% endcomment %}  
+	<!--{{ 'jquery.cookie.js' | asset_url | script_tag }}
+	{{ 'jquery.slider.js' | asset_url | script_tag }}
+	{{ 'jquery.selectbox-0.2.min.js' | asset_url | script_tag }}
+	{{ 'jquery.fancybox.pack.js' | asset_url | script_tag }}-->
+	{{ 'option_selection.js' | shopify_asset_url | script_tag }}
+	{{ 'ajaxify.js' | asset_url | script_tag }}
+	{{ 'shop.js' | asset_url | script_tag }}
 </body>
 </html>
