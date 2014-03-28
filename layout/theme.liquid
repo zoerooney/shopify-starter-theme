@@ -105,9 +105,9 @@
 				</div>
 				<form id="search_form" class="searchform" name="search" action="/search">
 					{% if template == "search" and search.performed and search.terms != "" %}
-					<input type="text" name="q" class="replace" value="{{ search.terms }}" />
+					<input type="text" name="q" value="{{ search.terms }}" />
 					{% else %}
-					<input type="text" class="replace" name="q" value="SEARCH" />
+					<input type="text" name="q" value="" placeholder="SEARCH" />
 					{% endif %}
 					<input type="submit" class="searchsubmit" />
 				</form>
