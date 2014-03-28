@@ -1,74 +1,43 @@
-
-input, a {outline:none !important;}
-input:hover, a:hover {outline:none !important;}
-input:active, a:active {outline:none !important;}
-
+input {
+	outline:none !important;
+	-webkit-appearance: none;
+}
 input[type=text],
 input[type=email],
 input[type=url],
 input[type=tel],
 input[type=password],
 textarea {
-	font-style: italic;
-	font-size: 10px;
+	border: $border;
+	padding: 4px 10px;
+	&.disabled {
+		opacity: 0.5;	
+	}
 }
-#contactFormWrapper,
-.feedback {
+input[type=submit], button, a.btn {
+	border: none;
+	padding: 7px 20px 5px;
+	text-transform: uppercase;
+	display: inline-block;
+	.c & {
+		text-align: center;	
+	}
+	&:hover {
+		color: #26AE98;
+	}
+}
+#contactFormWrapper {
 	width: 75%;
 	margin: 2em auto;
 }
 .feedback {
+	@extend #contactFormWrapper;
 	color: #b63a07;
 	font-style: italic;	
 	font-weight: bold;
 }
-#contactFormWrapper input[type=text],
-#contactFormWrapper input[type=email],
-#contactFormWrapper input[type=url],
-#contactFormWrapper input[type=tel],
-#contactFormWrapper input[type=password],
-#contactFormWrapper textarea {
-	border: 2px solid #d6d6d2;
-	padding: 3px 10px;
-	width: 85%;
-}
-#contactFormWrapper textarea {
-	height: 100px;
-	resize: vertical;
-}
-input[type=submit], button, a.btn {
-	border: none;
-	padding: 7px 12px 5px 20px;
-	outline:none; 
-	color:#fff; 
-	background:#222;
-	font-family: 'Tungsten A', 'Tungsten B'; font-weight: 500; font-style: normal;
-	text-transform: uppercase;
-	font-size: 16px;
-	display: inline-block;
-	position: relative;
-}
-input[type=submit]:hover, button:hover, a.btn:hover {
-	color: #26AE98;
-}
 placeholder {
-	font-style: italic;
-	font-weight: bold;
-	color: #222;
+	font-style: normal;
+	font-weight: normal;
+	color: $text;
 }
-::-webkit-input-placeholder {
-	color: #222;
-	font-weight: bold;
-	font-style: italic;
-}
-:-moz-placeholder {
-	color: #222;
-	font-weight: bold;
-	font-style: italic;
-}
-input.disabled {opacity:0.5;}
-
-
-
-input[type=text],input[type=email],input[type=url],input[type=password]{border:1px solid #444; padding:0px 10px;}
-.c input[type=text] {text-align:center;}
