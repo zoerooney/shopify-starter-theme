@@ -333,8 +333,19 @@
   </table>
 </fieldset>
 <fieldset>
-  <legend>Social Media</legend>
+  <legend>Social Media Integration</legend>
   <table>
+    <tr>
+      <td><label for="enable_twittercards">Enable <a href="https://dev.twitter.com/docs/cards/types/product-card" title="About Twitter Product Cards">Twitter Cards</a></label></td>
+      <td><input type="checkbox" id="enable_twittercards" name="enable_twittercards" /></td>
+    </tr>
+    <tr>
+      <th><label for="twittercard_handle">Your site's Twitter Handle</label></th>
+      <td>
+        <input type="text" id="twittercard_handle" name="twittercard_handle" value="" /><br />
+        <small>E.g. @zoe_ronoey. Required if Twitter Cards are enabled.</small>
+      </td>
+    </tr>
     <tr>
       <th><label for="facebook">Facebook</label></th>
       <td>        
