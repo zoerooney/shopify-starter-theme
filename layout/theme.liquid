@@ -104,12 +104,12 @@
       
       <div class="wrapper clearfix">
       <form id="search_form" class="searchform" name="search" action="/search">
-        {% if template == "search" and search.performed and search.terms != "" %}
-        <input type="text" name="q" class="replace" value="{{ search.terms }}" />
-        {% else %}
-        <input type="text" class="replace" name="q" value="SEARCH BY PRODUCT OR DESIGNER" />
-        {% endif %}
-        <input type="submit" class="searchsubmit"/>
+      {% if template == "search" and search.performed and search.terms != "" %}
+      <input type="text" name="q" class="replace" value="{{ search.terms }}" />
+      {% else %}
+      <input type="text" class="replace" name="q" value="SEARCH" />
+      {% endif %}
+      <input type="submit" class="searchsubmit" />
       </form>
       <div class="logo">
        
@@ -118,12 +118,10 @@
       </div> <!-- /.logo -->
       
       <div class="cart-summary">
-      	<span class="favorites">
-      		<a href="/pages/favorites">Favorites</a>
-      	</span>
-        <span class="cart"><a href="/cart">Shopping Bag: <span class="cart-total-items"><span class="count">{{ cart.item_count }}</span></a></span>
-        <div id="cart-updated"><a href="/cart">Added to cart</a></div>
-      </div> <!-- /.cart-summary -->
+      	<a href="/cart">
+      		Cart (<span class="cart-total-items">{{ cart.item_count }}</span>)
+      	</a>
+      </div>
       </div> <!-- end wrapper -->
     </header>
 	<div class="main-menu clearfix">

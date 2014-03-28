@@ -1,6 +1,10 @@
 body {
 	background: $bg; 
 }
+.wrapper {
+	width: $width;
+	margin: 0 auto;
+}
 
 table th {text-align:left; font-size:12px; font-weight:400; text-transform:lowercase;}
 table tr td {padding:5px 10px; vertical-align:middle;}
