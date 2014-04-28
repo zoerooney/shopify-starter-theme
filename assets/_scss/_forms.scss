@@ -22,8 +22,9 @@ input[type=submit], button, a.btn {
 	.c & {
 		text-align: center;	
 	}
+	&:focus,
 	&:hover {
-		color: #26AE98;
+		
 	}
 }
 

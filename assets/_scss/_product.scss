@@ -95,6 +95,7 @@
 		font-size: 12px;
 		letter-spacing: 0.1em;
 		text-transform: uppercase;
+		&:focus,
 		&:hover {
 			border: 1px solid $gold;
 			background: $gold;
@@ -174,6 +175,7 @@
 			width: 45px;	
 			background-position: -126px 0;
 		}
+		&:focus,
 		&:hover {
 			opacity: 0.6;
 		}

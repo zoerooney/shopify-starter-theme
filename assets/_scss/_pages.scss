@@ -47,16 +47,20 @@
 	text-indent: -9999em;
 	width:44px;
 	height: 32px
+	&:focus,
+	&:hover {
+		opacity: 0.7;
+	}
 }
 .bx-prev.disabled,
 .bx-next.disabled {
 	opacity: 0.2;
 	cursor: default;
-}
-.bx-prev.disabled:hover,
-.bx-next.disabled:hover {
-	opacity: 0.2;
-	cursor: default;
+	&:focus,
+	&:hover {
+		opacity: 0.2;
+		cursor: default;
+	}
 }
 .bx-prev {
 	top: 273px;
@@ -65,10 +69,6 @@
 .bx-next {
 	top: 315px;
 	background: url(arrow-right.png) no-repeat;
-}
-.bx-prev:hover,
-.bx-next:hover {
-	opacity: 0.7;
 }
 .loading {padding:200px 0; font-size:11px; text-align:center;}
 

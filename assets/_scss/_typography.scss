@@ -36,6 +36,7 @@ a {
 	color: $link;
 	text-decoration:none; 
 	outline:none;
+	&:focus,
 	&:hover {
 		color: $hover;
 	}

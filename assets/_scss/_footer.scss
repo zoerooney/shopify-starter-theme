@@ -7,6 +7,7 @@
 	float: left;
 	a {
 		color: $blue;	
+		&:focus,
 		&:hover {
 			text-decoration: underline;	
 		}

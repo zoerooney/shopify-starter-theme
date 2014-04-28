@@ -33,12 +33,14 @@
 	right: 5px;
 	top: 4px;
 	width: 30px;
+	&:focus,
 	&:hover {
 		background-position: 0 -167px;
 	}
 }
 .sbToggleOpen{
 	background-position: 0 -16px;
+	&:focus,
 	&:hover {
 		background-position: 0 -66px;
 	}

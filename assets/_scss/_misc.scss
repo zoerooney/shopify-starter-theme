@@ -19,6 +19,7 @@
 			text-transform: uppercase;	
 			letter-spacing: 0.05em;
 			font-weight: 300;
+			&:focus,
 			&:hover,
 			&.current {
 				color: $lblue;	
@@ -62,6 +63,7 @@
 		margin-left: 5px;
 		width: 14px;
 		height: 18px;
+		&:focus,
 		&:hover {
 			opacity: 0.5;	
 		}

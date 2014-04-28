@@ -55,6 +55,7 @@ li.social-link {
 		height: 20px;
 		overflow: hidden;
 		background: url('social.png') no-repeat;
+		&:focus,
 		&:hover {
 			opacity: 0.5;	
 		}
