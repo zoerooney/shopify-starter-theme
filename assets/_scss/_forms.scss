@@ -1,24 +1,24 @@
-input {
-	outline:none !important;
-	-webkit-appearance: none;
-}
-input[type=text],
-input[type=email],
-input[type=url],
-input[type=tel],
-input[type=password],
+/* See _mixins.scss for more on this method for handling HTML5 elements */
+#{$all-text-inputs}, 
 textarea {
 	border: $border;
 	padding: 4px 10px;
+	outline: none;
+	-webkit-appearance: none;
 	&.disabled {
 		opacity: 0.5;	
 	}
+}
+#{$all-text-inputs-focus},
+textarea:focus {
+	
 }
 input[type=submit], button, a.btn {
 	border: none;
 	padding: 7px 20px 5px;
 	text-transform: uppercase;
 	display: inline-block;
+	-webkit-appearance: none;
 	.c & {
 		text-align: center;	
 	}
@@ -26,6 +26,13 @@ input[type=submit], button, a.btn {
 		color: #26AE98;
 	}
 }
+
+/* Placeholders */
+::placeholder {
+	color: TEXTCOLOR;
+}
+
+/* Specific Forms */
 #contactFormWrapper {
 	width: 75%;
 	margin: 2em auto;
@@ -35,9 +42,4 @@ input[type=submit], button, a.btn {
 	color: #b63a07;
 	font-style: italic;	
 	font-weight: bold;
-}
-placeholder {
-	font-style: normal;
-	font-weight: normal;
-	color: $text;
 }

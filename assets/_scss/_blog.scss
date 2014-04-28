@@ -4,54 +4,25 @@
 .blog-sidebar {
 	float: right; width: 172px; padding: 34px 0;
 }
-#blog .article {padding:34px 0;}
-#blog .articles .article {
-	padding: 34px 0 45px;
-}
-#blog .articles .article:last-child {border-bottom:none;}
-
-.post-info {
-	width: 50px;
-	float: left;
-}
-.post-content,
-.article-body,
-#comments {
-	width: 676px;
-	float: right;
-}
-.article-body {
-	border-bottom: 1px solid #444;
-	padding-bottom: 36px;
-}
-.blog-main .content {
-	padding: 0 36px;
-	border-bottom: 1px solid #444;
-	margin-bottom: 12px;
+.article {
+	padding: 34px 0;
+	.articles & {
+		padding-bottom: 45px;
+	}
 }
 .post-title {
 	text-align: center;
 	padding-bottom: 18px;
 	border-bottom: 1px solid #444;
 }
-#blog .article .content p, #article .content p {margin-bottom:1.5em;}
-#article .back {font-size:11px; color:#c0c0c0;}
 .meta {
 	text-align: center;
 	font-size: 11px;
 }
-.meta .btn {
-	background: #f5f5f5;
-	color: #444 !important;
-}
+
+/* Comments */
 #comments {
 	clear: both;
-}
-.date,
-.comment-count a {
-	font-weight: 600;
-	color: #444;
-	font-size: 11px;
 }
 .date {
 	background: url('date.png' ) no-repeat;
@@ -59,28 +30,18 @@
 	text-align: center;
 	margin-bottom: 16px;
 }
-.comment-count a {
-	background: url('bubble.png') no-repeat;
-	display: block;
-	width: 50px;
-	height: 50px;
-	padding: 10px 0;
-	text-align: center;
+.comment-count {
+	a {
+		&:hover {
+		}
+	}
 }
-.comment-count a:hover {
-	opacity: 0.7;
-}
-#article .comments .comment {padding:16px; margin-bottom:30px; border-top: 1px solid #444;
-	border-bottom: 1px solid #444;
-}
-#article .comments .comment .author {float:left; height:25px; line-height:25px; font-size:13px; color:#000;}
-#article .comments .comment .gravatar {float:right; display:none;}
+
+/* Comment Form */
 .comment_form {
 	width: 415px;
 	padding-top: 36px;
 	clear: both;
-}
-#article .comment_form input[type=text],#article .comment_form input[type=email], #article .comment_form textarea {display:block; margin-bottom:10px; width:100%; border:1px solid #444; padding:5px 10px; font-size: 11px;
 }
 
 .blog-sidebar h3 {
