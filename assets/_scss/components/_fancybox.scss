@@ -26,12 +26,8 @@
 
 .fancybox-skin {
 	position: relative;
-	background: #f9f9f9;
-	color: #444;
+	background: $border;
 	text-shadow: none;
-	-webkit-border-radius: 4px;
-	   -moz-border-radius: 4px;
-	        border-radius: 4px;
 }
 
 .fancybox-opened {
@@ -48,7 +44,7 @@
 
 .fancybox-inner {
 	overflow: hidden;
-	border: 1px solid #444;
+	border: $border;
 }
 
 .fancybox-type-iframe .fancybox-inner {
@@ -56,8 +52,6 @@
 }
 
 .fancybox-error {
-	color: #444;
-	font: 14px/20px "Helvetica Neue",Helvetica,Arial,sans-serif;
 	margin: 0;
 	padding: 15px;
 	white-space: nowrap;
@@ -192,7 +186,6 @@
 
 .fancybox-title {
 	visibility: hidden;
-	font: normal 13px/20px "Helvetica Neue",Helvetica,Arial,sans-serif;
 	position: relative;
 	text-shadow: none;
 	z-index: 200050;

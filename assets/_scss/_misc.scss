@@ -1,44 +1,26 @@
-.announcement {
-	margin-bottom: 30px;
-	color: $lblue;
-	letter-spacing: 0.05em;
-	font-size: 11px;
-}
 .newsletter {
 	margin-bottom: 30px;
 	label {
-		font-size: 11px;
-		text-transform: uppercase;	
 	}
 	input {
 		display: inline-block;
 		vertical-align: middle;
 	}
 	input[type=email] {
-		border: $border-light;
-		font-size: 14px;
 	}
 	input[type=submit] {
-		text-indent: -9999em;	
-		background: white url('submit.png') no-repeat;
-		margin-left: 5px;
-		width: 14px;
-		height: 18px;
 		&:focus,
 		&:hover {
 			opacity: 0.5;	
 		}
 	}
 	::placeholder {
-		
 	}
 }
 #breadcrumbs,
 .pagination {
-	font-family: $main;
 	font-size: 10px;
 	text-transform: uppercase;
-	letter-spacing: 1px;
 	padding-bottom: 20px;
 }
 .upper,
@@ -50,15 +32,8 @@
 	border-top: $border;
 	padding: 1.5em 0 0;
 }
-#shop-by-color #breadcrumbs {
-	display: none;
-}
-#breadcrumbs {
-	float: left;
-}
 .pagination {
-	text-align: right;
-	float: right;
+	text-align: center;
 	.current,
 	a {
 		padding: 2px 3px;
