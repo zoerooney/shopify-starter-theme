@@ -2,15 +2,6 @@
 	input {
 		display: inline-block;
 		vertical-align: middle;	
-		&[type=text] {
-			background: transparent;
-			border: 1px solid #acacac;
-			padding: 3px;
-			font-size: 11px;
-			letter-spacing: 1px;
-			width: 125px;
-			text-transform: uppercase;
-		}
 		&[type=submit] {
 			background: url('icon-search.png') no-repeat;
 			text-indent: -9999em;
@@ -26,8 +17,8 @@
 
 /* Results */
 .highlight {
-	background: $link;
-	padding:2px 4px;
+	background: $hover;
+	padding: 2px 4px;
 }
 #search .results .item {
 	padding: 16px 0;

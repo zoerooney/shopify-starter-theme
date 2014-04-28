@@ -1,41 +1,38 @@
+$imagewidth: 240px;
+$imageside: left;
+$contentwidth: 430px;
+$contentside: right;
+$thumbsize: 50px;
+
 .product_body {
 	border: $border;
-	width: 763px;
-	float: right;
 	padding: 35px 35px 15px;
 	margin-bottom: 35px;
 	h1 {
-		font-family: $lato;
-		text-transform: uppercase;
-		color: $lblue;
-		font-size: 24px;
-		letter-spacing: 0.1em;
-		line-height: 1em;
-		margin-bottom: 20px;
 	}
 }
 #product {
 	.main {
-		border-top: $border-light;	
+		border-top: $border;	
 		#breadcrumbs {
 			padding: 10px 0;
 		}
 	}
 	.images {
-		float: left;
+		float: $imageside;
+		width: $imagewidth;
 		text-align: center;
-		width: 240px;
 		.featured {
 			padding: 20px 0 10px;	
 		}
 		.thumbs {
 			clear: both;
 			padding-top: 10px;
-			width: 240px;
+			width: $imagewidth;
 			.image {
 				margin: 8px 6px 8px 0; 
-				width: 50px; 
-				height: 50px; 
+				width: $thumbsize; 
+				height: $thumbsize; 
 				overflow: hidden; 
 				border: $border;
 				text-align:center; 
@@ -48,20 +45,18 @@
 		}
 	}
 	.content {
-		float: right;
-		width: 430px;
+		float: $contentside;
+		width: $contentwidth;
 	}
 }
 #product .select {
 	margin-bottom: 0;
-}
-#product .select .selector-wrapper:last-child {margin-right:0;}
-#product .selector-wrapper {margin-right:10px; float:left;}
-
-#product .description {
-	p {
-		margin-bottom: 1em;
+	.selector-wrapper {
+		margin-right: 10px;
+		float: left;
 	}
+}
+#product .description {
 }
 
 #product .variants {
@@ -79,26 +74,18 @@
 	}
 	#quantity {
 		width: 50px;
-		border: $border-gray;
+		border: $border;
 		text-align: center;
 		padding: 2px 4px;
 	}
 }
 #product .purchase {
-	margin:25px 0;
+	margin: 25px 0;
 	input[type=submit] {
-		background: $lblue;
-		border: 1px solid $lblue;
-		border-radius: 4px;
 		padding: 5px 15px;
-		color: white;
-		font-size: 12px;
-		letter-spacing: 0.1em;
 		text-transform: uppercase;
 		&:focus,
 		&:hover {
-			border: 1px solid $gold;
-			background: $gold;
 		}
 	}
 }
@@ -126,33 +113,12 @@
 				padding: 0;
 			}
 			.money {
-				font-family: $lato;
-				font-weight: 300;
-				font-size: 11px;
-				color: $text;
-				letter-spacing: 1px;
-				text-transform: uppercase;
 			}
 		}
 	}
-	h2 {
-		font-family: $paris;
-		color: $gold;
-		font-size: 26px;
-		-webkit-font-smoothing: antialiased;
-		margin-bottom: 34px;
-		padding: 2px;
-	}
 }
 #cart-updated {
- 	text-transform: uppercase;	
- 	color: $gold;
- 	font-family: $lato;
- 	font-size: 11px;
- 	text-transform: uppercase;
- 	letter-spacing: 1px;
- 	a {
- 		color: $gold;	
+ 	a {	
  	}
 }
 .social {
