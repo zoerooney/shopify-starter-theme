@@ -1,125 +1,106 @@
-.top {
-	text-indent: -9999em;
-	background: url('top.png') no-repeat;
-	width: 79px;
-	height: 48px;
-	display: block;
-	position: fixed;
-	right: 20px;
-	bottom: 250px;
-	display: none;
-	opacity: 0.8;
+.collection-sidebar {
+	float: left;
+	width: 220px;
+	padding-top: 40px;
+	padding-bottom: 80px;
+	ul.sidebar-categories {
+		margin-bottom: 30px;
+	}
+	ul {
+		list-style: none;
+		li {
+			padding: 4px 0;	
+			font-size: 11px;	
+			ul {
+				margin: 4px 0 0 10px;	
+			}
+		}
+		a {
+			text-transform: uppercase;	
+			letter-spacing: 0.05em;
+			font-weight: 300;
+			&:hover,
+			&.current {
+				color: $lblue;	
+			}
+		}
+	}
+	ul.drop-down {
+		display: none;
+	}
+	.current-parent ul.drop-down,
+	a.current + ul.drop-down {
+		display: block;
+	}
 }
-.top:hover {
-	opacity: 1;
+.current-parent > a {
+	color: $lblue;
 }
-
-/* SelectBox */
-
-
-.sbHolder{
-	background-color: #FFF;
-	border: solid 1px #444;
+.announcement {
+	margin-bottom: 30px;
+	color: $lblue;
+	letter-spacing: 0.05em;
 	font-size: 11px;
-	font-weight: normal;
-	height: 30px;
-	position: relative;
-	width: 200px;
 }
-.sbHolder:focus .sbSelector{
-	
+.newsletter {
+	margin-bottom: 30px;
+	label {
+		font-size: 11px;
+		text-transform: uppercase;	
+	}
+	input {
+		display: inline-block;
+		vertical-align: middle;
+	}
+	input[type=email] {
+		border: $border-light;
+		font-size: 14px;
+	}
+	input[type=submit] {
+		text-indent: -9999em;	
+		background: white url('submit.png') no-repeat;
+		margin-left: 5px;
+		width: 14px;
+		height: 18px;
+		&:hover {
+			opacity: 0.5;	
+		}
+	}
+	::placeholder {
+		color: $gray;
+	}
 }
-.sbSelector{
-	display: block;
-	height: 30px;
-	left: 0;
-	line-height: 30px;
-	outline: none;
-	overflow: hidden;
-	position: absolute;
-	text-indent: 10px;
-	top: 0;
-	width: 170px;
+#breadcrumbs,
+.pagination {
+	font-family: $lato;
+	font-size: 10px;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	padding-bottom: 20px;
 }
-.sbSelector:link, .sbSelector:visited, .sbSelector:hover{
-	color: #444;
-	outline: none;
-	text-decoration: none;
+.upper,
+.lower {
+	clear: both;
+	@extend %clearfix;
 }
-.sbToggle{
-	background: url('select-icons.png') 0 -116px no-repeat;
-	display: block;
-	height: 30px;
-	outline: none;
-	position: absolute;
-	right: 0;
-	top: 0;
-	width: 30px;
+.lower {
+	border-top: $border-light;
+	padding: 1.5em 0 0;
 }
-.sbToggle:hover{
-	background: url('select-icons.png') 0 -167px no-repeat;
+#shop-by-color #breadcrumbs {
+	display: none;
 }
-.sbToggleOpen{
-	background: url('select-icons.png') 0 -16px no-repeat;
+#breadcrumbs {
+	float: left;
 }
-.sbToggleOpen:hover{
-	background: url('select-icons.png') 0 -66px no-repeat;
-}
-.sbHolderDisabled{
-	background-color: #FFF;
-	border: solid 1px #444;
-}
-.sbHolderDisabled .sbHolder{
-	
-}
-.sbHolderDisabled .sbToggle{
-	
-}
-.sbOptions{
-	background-color: #FFF;
-	border: solid 1px #444;
-	list-style: none;
-	left: -1px;
-	margin: 0;
-	padding: 0;
-	position: absolute;
-	top: 30px;
-	width: 200px;
-	z-index: 1;
-	overflow-y: auto;
-	padding: 3px 0;
-}
-.sbOptions li{
-	list-style: none;
-}
-.sbOptions a{
-	display: block;
-	outline: none;
-	padding: 3px 0 0 10px;
-}
-.sbOptions a:link, .sbOptions a:visited{
-	color: #444;
-	text-decoration: none;
-}
-.sbOptions a:hover,
-.sbOptions a:focus,
-.sbOptions a.sbFocus{
-	color: #8cc63e;
-}
-.sbOptions li.last a{
-	border-bottom: none;
-}
-.sbOptions .sbDisabled{
-	color: #999;
-	display: block;
-	padding: 7px 0 7px 3px;
-}
-.sbOptions .sbGroup{
-	color: #444;
-	display: block;
-	font-weight: bold;
-	padding: 7px 0 7px 3px;
-}
-.sbOptions .sbSub{
-	padding-left: 17px;
+.pagination {
+	text-align: right;
+	float: right;
+	.current,
+	a {
+		padding: 2px 3px;
+	}
+	.current {
+		color: $gold;
+	}
 }

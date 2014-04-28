@@ -8,6 +8,7 @@ body {
 .wrapper {
 	width: $width;
 	margin: 0 auto;
+	@extend %clearfix;
 }
 
 #content,
