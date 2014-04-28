@@ -1,15 +1,21 @@
+%margins {
+	margin: 20px 0; 
+}
 #admin_header {
 	text-align: center;
 }
-.action_bottom { margin-top:20px; }
-#customer label, #recover-password label { display:block; }
-#customer input[type=email], #recover-password input[type=email], #customer input[type=password], #recover-password input[type=password], #customer input[type=text], #recover-password input[type=text] { display:block; padding:3px; width:300px; }
-#guest, #customer_sidebar, #order_address { margin:20px 0; float:left; width:260px; }
-#customer_orders, #order_details { margin:20px 0; float:right; width:600px; } 
-#order_payment, #order_shipping { margin-bottom:20px; }
-#address_tables td, #address_tables label, #address_tables input[type=text], #address_tables input[type=email] { display:block; margin:0; }
-.edit_address { margin-bottom:20px; }
-#address_tables tr, #address_tables tr td { padding:0px; border:none; }
+#customer,
+#recover-password,
+#address_tables {
+	label {
+		display:block;
+	}
+	#{$all-text-inputs}, 
+	textarea {
+		display: block; 
+		width: 300px;
+	}
+}
 #address_tables {
 	text-align: center;
 }
@@ -20,7 +26,26 @@
 	text-align: left;
 }
 
+#guest,
+#customer_sidebar,
+#order_address {
+	@extend %margins;
+	float: left; 
+	width: 260px;
+}
+#customer_orders, 
+#order_details { 
+	@extend %margins;
+	float:right; 
+	width:600px; 
+} 
+#order_payment, 
+#order_shipping { 
+	@extend %margins;
+}
+
 #add_address form {
+	@extend %margins
 	width: 400px;
-	margin: 20px auto;
-	text-align: left;}
+	text-align: left;
+}
