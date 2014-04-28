@@ -1,0 +1,25 @@
+table {
+	width: 100%;
+	th {
+		vertical-align: middle;
+	}
+	td {
+		padding: 5px 10px;
+		vertical-align: middle;
+		&:first-child {
+			padding-left:0px;
+		}
+		&:last-child {
+			padding-right:0px;
+		}
+	}
+}
+#cart .summary td {
+	padding-top:30px;
+}
+#cart .product_image {
+	a,
+	img {
+		display: block;	
+	}
+}

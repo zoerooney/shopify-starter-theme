@@ -4,7 +4,7 @@
 	height: 40px;
 	position: relative;
 	width: 220px;
-	border: 1px solid $light;
+	border: $border;
 	text-align: left;
 }
 .sbHolder:focus,
@@ -47,7 +47,7 @@
 }
 .sbOptions {
 	background: white;
-	border: 1px solid $light;
+	border: $border;
 	border-top: none;
 	list-style: none;
 	left: -1px;
@@ -71,7 +71,7 @@
 		&:hover,
 		&:focus,
 		&.sbFocus {
-			color: $gold;
+			color: $hover;
 			
 		}
 	}

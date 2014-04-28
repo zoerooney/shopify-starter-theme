@@ -44,7 +44,7 @@
 	color: #666;
 	padding-top: 20px;
 	a {
-		background: $links;
+		background: $link;
 		text-indent: -9999px;
 		display: block;
 		width: 10px;
@@ -74,7 +74,7 @@
 	right: 23px;
 	text-indent: -9999em;
 	width:44px;
-	height: 32px
+	height: 32px;
 	&:focus,
 	&:hover {
 		opacity: 0.7;

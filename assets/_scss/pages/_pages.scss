@@ -1,0 +1,45 @@
+.features {
+	float: left;
+	width: 334px;
+	margin-top: 20px;
+}
+.feature-box {
+	position: relative;
+	width: 330px;
+	height: 192px;
+	overflow: hidden;
+	border: $border;
+	margin-bottom: 20px;
+	text-align: center;
+}
+
+.slider-container {
+	width: 650px;
+	height: 620px; 
+	overflow: hidden;
+	float: right;
+	position: relative; 
+	margin-top: 20px;
+	margin-bottom: 20px; 
+	padding: 0;
+	border: $border;
+	> div {
+		width: 650px;
+		height: 620px; 
+		overflow: hidden;
+	}
+}
+#slider {
+	li,
+	img {
+		display: block; 
+		margin: 0;
+		padding: 0;
+	}
+}
+
+/* 404 */
+#not_found {padding:100px 0 160px 0; text-align:center;}
+#not_found h2 span {color:#aaa;}
+
+

@@ -1,0 +1,49 @@
+#search_form {
+	input {
+		display: inline-block;
+		vertical-align: middle;	
+		&[type=submit] {
+			background: url('icon-search.png') no-repeat;
+			text-indent: -9999em;
+			padding: 0;
+			width: 15px;
+			height: 17px;
+			border: none;
+			vertical-align: middle;
+			margin-left: 5px;
+		}
+	}
+}
+
+/* Results */
+.highlight {
+	background: $hover;
+	padding: 2px 4px;
+}
+#search .results .item {
+	padding: 16px 0;
+	border-bottom: $border;
+	&:last-child {
+		border-bottom: none;
+	}
+	.thumbnail {
+		float: left; 
+		margin-left: 16px; 
+		margin-right: 16px;
+		width: 50px; 
+		text-align: center; 
+		a,
+		img {
+			display: block; 
+			margin: 0 auto;
+			padding: 0;
+		}
+	}
+	.content {
+		float: left; 
+		width: 500px;
+		&.indented {
+			margin-left: 16px;
+		}
+	}
+}

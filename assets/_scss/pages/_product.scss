@@ -1,0 +1,149 @@
+$imagewidth: 240px;
+$imageside: left;
+$contentwidth: 430px;
+$contentside: right;
+$thumbsize: 50px;
+
+.product_body {
+	border: $border;
+	padding: 35px 35px 15px;
+	margin-bottom: 35px;
+	h1 {
+	}
+}
+#product {
+	.main {
+		border-top: $border;	
+		#breadcrumbs {
+			padding: 10px 0;
+		}
+	}
+	.images {
+		float: $imageside;
+		width: $imagewidth;
+		text-align: center;
+		.featured {
+			padding: 20px 0 10px;	
+		}
+		.thumbs {
+			clear: both;
+			padding-top: 10px;
+			width: $imagewidth;
+			.image {
+				margin: 8px 6px 8px 0; 
+				width: $thumbsize; 
+				height: $thumbsize; 
+				overflow: hidden; 
+				border: $border;
+				text-align:center; 
+				display: inline-block; 
+				vertical-align: top;
+				&.last {
+					margin: 8px 0 8px 0;
+				}
+			}
+		}
+	}
+	.content {
+		float: $contentside;
+		width: $contentwidth;
+	}
+}
+#product .select {
+	margin-bottom: 0;
+	.selector-wrapper {
+		margin-right: 10px;
+		float: left;
+	}
+}
+#product .description {
+}
+
+#product .variants {
+	label {
+		display:inline-block;
+		float: left; 
+		vertical-align: middle;
+		padding-top: 4px;
+		margin-right: 10px;
+	}
+	input,
+	select {
+		display:inline-block;
+		vertical-align: middle;
+	}
+	#quantity {
+		width: 50px;
+		border: $border;
+		text-align: center;
+		padding: 2px 4px;
+	}
+}
+#product .purchase {
+	margin: 25px 0;
+	input[type=submit] {
+		padding: 5px 15px;
+		text-transform: uppercase;
+		&:focus,
+		&:hover {
+		}
+	}
+}
+
+
+#related {
+	clear: both;
+	width: 100%;
+	padding: 0 0 35px;
+	ul {
+		list-style: none;	
+		margin: 0;
+		text-align: center;
+		li {
+			display: inline-block;
+			width: 160px;
+			margin: 0 40px 40px;
+			text-align: center;
+			img {
+				display: block;
+				margin: 0 auto 10px;
+			}
+			h3 {
+				margin: 0;
+				padding: 0;
+			}
+			.money {
+			}
+		}
+	}
+}
+#cart-updated {
+ 	a {	
+ 	}
+}
+.social {
+	padding: 10px 0 0;
+	a {
+		display: inline-block;	
+		height: 20px;
+		overflow: hidden;
+		text-indent: -9999em;
+		margin-right: 5px;
+		background: url('share.png') no-repeat;
+		&#share-pin {
+			width: 57px;
+		}
+		&#share-twitter {
+			width: 60px;
+			background-position: -61px 0;
+		}
+		&#share-fb {
+			width: 45px;	
+			background-position: -126px 0;
+		}
+		&:focus,
+		&:hover {
+			opacity: 0.6;
+		}
+	}
+}

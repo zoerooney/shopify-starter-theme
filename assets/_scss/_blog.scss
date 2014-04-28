@@ -51,7 +51,7 @@
 
 /* Sidebar */
 .sidebar-widget {
-	@extend %margin;
+	margin-bottom: 30px;
 	h3 {
 		text-align: center;
 	}
