@@ -1,63 +1,78 @@
+$collectionwidth: 775px;
+$sidebarwidth: 160px;
+$collectionside: right;
+$sidebarside: left;
+$itemwidth: 200px;
 
-#collection .details, #collection .description {padding-bottom:20px;}
-#collection .controls {padding-bottom:20px;}
-#collection .tags li {display:block; float:left; padding:5px 15px 5px 0;}
-#collection .tags li.active a {color:#000;}
-.collection-main {
-	float: right;
-	width: 775px;
-	padding-top: 20px;
+#collection {
+	.description {
+		padding-bottom:20px;
+	}
 }
-
+.collection-main {
+	float: $collectionside;
+	width: $collectionwidth;
+}
+.product {
+	width: $itemwidth;
+	display: inline-block;
+	vertical-align: top;
+	text-align: center;
+	padding: 20px 0;
+	margin:  0 20px 20px 0;
+	&.last {
+		margin-right: 0;
+	}
+	&:focus,	
+	&:hover {
+		opacity: 0.6;	
+	}
+	img {
+		max-width: $itemwidth;	
+		height: auto;
+	}
+	h3 {
+		margin: 0;
+	}
+	.price {
+		
+	}
+	.sale,
+	.soldout {
+		color: $hover;
+	}
+}
 
 .collection-sidebar {
-	float: left;
-	width: 160px;
-	padding-top: 20px;
-	padding-bottom: 80px;
+	float: $sidebarside;
+	width: $sidebarwidth;
+	ul.sidebar-categories {
+		margin-bottom: 30px;
+	}
+	ul {
+		list-style: none;
+		li {
+			padding: 4px 0;		
+			ul {
+				margin: 4px 0 0 10px;	
+			}
+		}
+		a {
+			&:focus,
+			&:hover,
+			&.current {
+				color: $hover;	
+			}
+		}
+	}
+	ul.drop-down {
+		display: none;
+	}
+	.current-parent ul.drop-down,
+	a.current + ul.drop-down {
+		display: block;
+	}
 }
-
-#content-table a, #content-scroll a, .content-table a {border-bottom:none;}
-#content-table .product, .content-table .product {float:left; margin:0 10px 16px 0; width:250px; text-align:left; font-size:11px; position:relative; overflow:hidden;}
-#content-table .product.last, .content-table .product.last {margin-right:0;}
-#content-table .product .image, .content-table .product .image {width:248px; text-align:center;border: 1px solid #444;}
-#content-table .product .image, #content-table .product .image img, .content-table .product .image, .content-table .product .image img {max-width:248px; margin:0 auto;}
-#content-table .product .details, .content-table .product .details  {position:absolute; opacity:0.0; padding:0; position:absolute; width:70%; top:70%; left:15%; }
-#content-table .product .details a, .content-table .product .details a  {padding:13px 8px;}
-#content-table .product .details span, .content-table .product .details span  {line-height:18px; padding:0 10px;}
-
-/* Using captions rather than tooltips */
-#content-table .product:hover .image img,
-.content-table .product:hover .image img {
-	opacity: 0.7;
+.current-parent > a {
+	color: $hover;
 }
-#content-table .product .caption,
-.content-table .product .caption  {
-	display: block;
-	padding: 18px 10px;
-}
-#content-table .product .caption h3,
-.content-table .product .caption h3 {
-	margin: 0;
-}
-#content-table .product .caption .price,
-.content-table .product .caption .price  {
-	color: #999;
-	font-size: 11px;
-}
-#content-table .product .caption ul li,
-.content-table .product .caption ul li {
-	list-style: none;
-	display: inline-block;
-	padding: 8px 0;
-}
-#content-table .product .caption .sale,
-#content-table .product .caption .soldout,
-.content-table .product .caption .sale,
-.content-table .product .caption .soldout  {
-color: #f16031;
-}
-.pagination span.current, .pagination a {display:block; float:left; padding:2px 6px;}
-.pagination span.current {text-decoration:none; font-weight:700; color:#000;}
-.pagination a {color:#888; text-decoration:none; font-weight:400; border-bottom:none;}
-.pagination a:hover {color:#666;}

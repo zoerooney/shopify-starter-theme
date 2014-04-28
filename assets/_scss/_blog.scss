@@ -1,9 +1,12 @@
+/* Layout */
 .blog-main {
 	float: left; width: 776px;padding: 0 0 34px;
 }
 .blog-sidebar {
 	float: right; width: 172px; padding: 34px 0;
 }
+
+/* Posts */
 .article {
 	padding: 34px 0;
 	.articles & {
@@ -45,59 +48,16 @@
 	clear: both;
 }
 
-.blog-sidebar h3 {
-	padding: 12px 15px;
-	border: 1px solid #444;
-	display: block;
-	text-align: center;
-	width: 140px;
-	margin: 0 auto 20px;
-}
+
+/* Sidebar */
 .sidebar-widget {
-	padding-bottom: 30px;
-	margin-bottom: 30px;
-	border-bottom: 1px solid #444;
-	font-size: 11px;
-}
-.blog-sidebar #search_form {
-	position: relative;
-	left: 0;
-	top: 0;
-	width: 172px;
-	padding-bottom: 30px;
-}
-.blog-sidebar #search_form input[type=text] {
-	width: 154px;
-	border-bottom: 1px solid #444;
-	text-transform: uppercase;
-}
-.blog-sidebar .replace {
-	color: #999 !important;
-}
-.sidebar-widget ul {
-	list-style: none;
-	text-align: center;
-	margin: 0;
-}
-.sidebar-widget ul li {
-	list-style: none;
-}
-.sidebar-widget ul li a {
-	color: #444;
-	font-weight: 500;
-}
-.sidebar-widget ul li a:hover {
-	color: #8cc63e;
-}
-.sidebar-widget.opt-in input[type=email] {
-	border: none;
-	border-bottom: 1px solid #444;
-	padding: 2px 5px 2px 0;
-	font-size: 10px;
-	width: 130px;
-}
-.sidebar-widget.opt-in input[type=submit] {
-	border: 1px solid #444;
-	padding: 2px 7px;
-	font-size: 10px;
+	@extend %margin;
+	h3 {
+		text-align: center;
+	}
+	ul {
+		list-style: none;
+		text-align: center;
+		margin: 0;
+	}
 }
