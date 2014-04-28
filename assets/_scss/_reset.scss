@@ -70,17 +70,12 @@ ul.unstyled {
   margin: 0!important;
 }
 
-// clearfix
-// http://nicolasgallagher.com/micro-clearfix-hack/
-
-.clearfix:before,
-.clearfix:after {
-    content: " "; /* 1 */
-    display: table; /* 2 */
-}
-
-.clearfix:after {
+%clearfix {
+  &:after {
+    content: "";
+    display: table;
     clear: both;
+  }
 }
 
 /**
