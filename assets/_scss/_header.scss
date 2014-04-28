@@ -1,19 +1,7 @@
-
-header {padding:0; position:relative;text-align:center;}
-header h1 {margin:0;}
-header h1 a:hover {color:#444444;}
-header div.logo {padding: 30px 0 20px;
-}
-
-header div.cart-summary {position: absolute;top: 30px;right: 10px; text-align:right; font-size:11px; text-transform:uppercase;  z-index:20000 !important;}
-header div.cart-summary span.favorites {
-	
-}
-header div.cart-summary span.favorites a {
-	padding: 0 20px; background: url('heart.png') no-repeat left 1px; font-size: 11px; color: #444;
-}
-header div.cart-summary span.cart a { padding-left:20px; background:url('bag.png') no-repeat left 1px; font-size:11px;color: #444;
-}
-header div.cart-summary a:hover {
-	opacity: 0.7;
+header {
+	position: relative;
+	text-align: center;
+	h1 {
+		margin:0;
+	}
 }
