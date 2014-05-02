@@ -5,71 +5,104 @@
  <div class="wrapper">
   <div class="blog-main clearfix">
   
-    <div class="post-info">
-      <div class="date">{{ article.created_at | date: "%m.%d" }}</div>
-      <div class="comment-count"><a href="#comments">{% if article.comments.size > 0 %}{{ article.comments_count }}{% else %}&nbsp;{% endif %}</a></div>
-    </div>
-    <div class="article-body clearfix">
-      <h2 class="post-title">{{ article.title }}</h2>
-      <div class="content clearfix">
-        {{ article.content }}
-      </div>
-      <div class="meta">
-      {% if article.tags.size > 0 %}
-      <strong>POSTED IN:</strong> {% for tag in article.tags %}<a href="{{ blog.url }}/tagged/{{ tag | handle }}">{{ tag }}</a>{% unless forloop.last %}, {% endunless %}{% endfor %}{% endif %}<br>
-      {% include 'like-article' %}
-     </div>
-    </div> <!-- /.article-body -->
-    {% if blog.comments_enabled? %}
-		<div id="comments" class="comments">
-	      {% if article.comments.size > 0 %}
-	      <h3>{{ article.comments_count }}{{ article.comments_count | pluralize : 'Comment', 'Comments' }}</h3>
-	      {% for comment in article.comments %}
-	      <div id="comment-{{ comment.id }}" class="comment clearfix">
-	        <div class="clearfix">
-	          <div class="author">
-	            <h5>{{ comment.author }}</h5>
-	          </div>
-	          <div class="gravatar">
-	            <span class="email" style="display:none;">{{ comment.email }}</span>
-	            <img src="" class="gravatar" alt="{{ comment.author }}" />
-	          </div>
-	        </div>
-	        <div class="content">
-	          {{ comment.content }}
-	        </div>
-	      </div> <!-- /.comment -->
-	      {% endfor %}
-	      {% endif %}
-	      <div class="comment_form">
-	        {% form article %}
-	        <h3>LEAVE A COMMENT</h3>
-	        <br>
-	        {% if form.posted_successfully? %}
-	        {% if blog.moderated? %}
-	        <div class="notice success">
-	          Your comment is awaiting moderation.
-	        </div>
-	        {% else %}
-	        <div class="notice success">Successfully posted your comment.</div>
-	        {% endif %}
-	        {% endif %}
-	
-	        {% if form.errors %}
-	        <div class="notice error">Not all the fields have been filled out correctly</div>
-	        {% endif %}
-	
-	        <input type="text" id="comment_author" name="comment[author]" size="40" value="NAME" class="replace"{% if form.errors contains 'author' %} class="input-error"{% endif %} />
-	        <input type="email" id="comment_email" name="comment[email]" size="40" value="EMAIL" class="replace"{% if form.errors contains 'email' %} class="input-error"{% endif %} />
-	        <textarea id="comment_body" name="comment[body]" cols="40" rows="5" class="replace"{% if form.errors contains 'body' %} class="input-error"{% endif %}>{{form.body}}</textarea>
-	
-	        <input type="submit" value="Post comment" id="comment-submit" />
-	
-	        {% endform %}
-	      </div> <!-- /#comments -->
-	    </div> <!-- /div.comment_form -->
-    {% endif %}
-  </div> <!-- /.main -->
+    <div class="article clearfix">
+    		<div class="post-info">
+    			<div class="post-date">{{ article.created_at | date: "%m.%d" }}</div>
+    			<h2 class="post-title"><a href="{{ article.url }}">{{ article.title }}</a></h2>
+    		</div>
+    		<div class="post-content">
+    			{% if article.excerpt.size > 0 %}
+    				{{ article.excerpt }}
+    				<a href="{{ article.url }}">Read more &rarr;</a>
+    			{% else %}
+    				{{ article.content }}
+    			{% endif %}
+    		</div> <!-- /.content -->
+    		<div class="comment-count">
+    			<a href="#comments">
+    				{% if article.comments.size > 0 %}
+    					{{ article.comments_count }}
+    				{% else %}
+    					Leave a comment
+    				{% endif %}
+    			</a>
+    		</div>
+    	</div> <!-- /.article -->
+        
+    	{% if blog.comments_enabled? %}
+    	<div id="comments" class="comments">
+    		{% paginate article.comments by 10 %}
+    			
+    			{% if number_of_comments > 0 %}
+    				<h3>
+    					{{ number_of_comments }} {{ number_of_comments | pluralize: 'comment', 'comments' }}
+    				</h3>
+    			
+    			
+    				{% for comment in article.comments %}
+    				
+    				<div id="comment-{{ comment.id }}" class="comment clearfix">
+    					<h4 class="comment-author">
+    					  {{ comment.author }} says...
+    					</h4>
+    					<h5 class="comment-date">
+    					  On {{ comment.created_at | date: "%B %d, %Y" }}
+    					</h5>
+    					
+    					<div class="comment-content">
+    					  {{ comment.content }}
+    					</div>
+    				</div> <!-- /.comment -->
+    				
+    				{% endfor %}
+    				
+    				{% if paginate.pages > 1 %}
+    					{% include 'pagination' %}
+    				{% endif %}
+    			
+    			{% endif %}<!-- number_of_comments > 0 -->
+    			
+    			
+    			<div class="comment_form">
+    				{% form article %}
+    				
+    					<h3>Leave a comment</h3>
+    					{% if form.posted_successfully? %}
+    						{% if blog.moderated? %}
+    							<div class="notice success">
+    							  Your comment is awaiting moderation.
+    							</div>
+    						{% else %}
+    							<div class="notice success">
+    								Successfully posted your comment.
+    							</div>
+    						{% endif %}
+    					{% endif %}
+    					
+    					{% if form.errors %}
+    						<div class="notice error">
+    							Please check your submission for errors.
+    						</div>
+    					{% endif %}
+    					
+    					<input {% if form.errors contains "author" %} class="error"{% endif %} type="text" name="comment[author]" placeholder="Enter your name here" id="comment-author" value="{{ form.author }}" autocapitalize="words">
+    					
+    					<input {% if form.errors contains "email" %} class="error"{% endif %} type="email" name="comment[email]" placeholder="Enter your email here" id="comment-email" value="{{ form.email }}" autocorrect="off" autocapitalize="off">
+    					
+    					<textarea {% if form.errors contains "body" %} class="error"{% endif %} name="comment[body]" id="comment-body" placeholder="Enter your comments here...">{{ form.body }}</textarea>
+    					
+    					<input type="submit" value="Post comment" id="comment-submit" />
+    				
+    				{% endform %}
+    			</div> <!-- /.comment_form -->
+    			
+    		{% endpaginate %}
+    		
+    	</div> <!-- /#comments -->
+    	
+    	{% endif %}<!-- blog.comments_enabled -->
+    
+    </div> <!-- /.blog-main -->
   
  
   <div class="blog-sidebar">
