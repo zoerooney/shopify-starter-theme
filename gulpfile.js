@@ -10,7 +10,7 @@ var gulp = require('gulp'),
     server = lr();
     
 gulp.task('default', function(){
-	return gulp.src('assets/_scss/style.scss')
+	return gulp.src('assets/_scss/style.scss', {base: 'assets/_scss'})
 	    .pipe(plumber())
 	    .pipe(sass({ style: 'expanded' }))
 	    .pipe(gulp.dest('assets/'))
