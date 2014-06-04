@@ -1,41 +1,32 @@
-<div id="collection" class="{{ collection.handle }} clearfix">
-  
-  {% paginate collection.products by 9999 %}
-  
-  <div class="wrapper">
-	  <div class="collection-sidebar">
-	   {% include 'sidebar' %}
-	  </div>
-	  <div class="collection-main">
-	  	  <div class="page-title {% if current_tags %}subtitle{% endif %} clearfix">
-	  	  	{% unless current_tags %}
-	  	  	{% if collection.image %}
-	  	  	{{ collection.image.src | collection_img_url: '1024x1024' | img_tag: collection.image.alt }}
-	  	  	{% endif %} 
-	  	  	{% endunless %}
-	  	  	{% if current_tags %}
-	  	  		<h1>{{ current_tags.first | replace: '-', ' ' }}</a>
-	  	  	{% else %}
-	  	  		<h1>{{ collection.title }}</h1><span>{{ collection.description }}<span>
-	  	  	{% endif %}
-	  	  	
-	  	 </div>
-	  	  {% if collection.all_products_count  == 0 %}
-	  	  No products found.
-	  	  {% else %}
-		  <div class="content-table clearfix">
-		    {% for product in collection.products %}
-		    {% include 'product-loop' with collection.handle %}
-		    {% endfor %}
-		   </div>
-		{% endif %}
-		<div class="pagination">
-		  {{ paginate | default_pagination | replace: 'Previous', '<' | replace: 'Next', '>' }}
-		  <a class="view-all" href="/collections/{{ collection.handle }}">view fewer</a>
-		</div>
-	  </div>
-  </div>
-  
-  {% endpaginate %}
-  
-</div> <!-- /#collection -->
+{% paginate collection.products by 9999 %}
+
+<div class="page-title {% if current_tags %}subtitle{% endif %} clearfix">
+	{% unless current_tags %}
+		{% if collection.image %}
+			{{ collection.image.src | collection_img_url: '1024x1024' | img_tag: collection.image.alt }}
+		{% endif %} 
+	{% endunless %}
+	{% if current_tags %}
+		<h1>{{ current_tags.first | replace: '-', ' ' }}</a>
+	{% else %}
+		<h1>{{ collection.title }}</h1><span>{{ collection.description }}<span>
+	{% endif %}
+</div>
+
+{% if collection.all_products_count  == 0 %}
+	<div class="not-found">
+		No products found
+	</div>
+{% else %}
+	<div class="content-table clearfix">
+	{% for product in collection.products %}
+		{% include 'product-loop' with collection.handle %}
+	{% endfor %}
+	</div>
+	<div class="pagination">
+		{{ paginate | default_pagination | replace: 'Previous', '<' | replace: 'Next', '>' }}
+		<a class="view-all" href="/collections/{{ collection.handle }}">view fewer</a>
+	</div>
+{% endif %}
+
+{% endpaginate %}

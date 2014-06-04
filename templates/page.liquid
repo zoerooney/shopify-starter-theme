@@ -1,19 +1,12 @@
-<div id="page" class="clearfix">
-  <div class="page-title">
-  	 <h2>{{ page.title }}</h2>
-  </div>
-  <div class="wrapper">
-  	  <div class="collection-sidebar">
-  	  {% include 'sidebar' %}
-  		</div>
-  <div class="main">
-    <div class="content">
-      {% if page.content == null %}
-      	<h4>Coming soon...</h4>
-      {% else %}
-      {{ page.content }}
-      {% endif %}
-    </div>
-  </div> <!-- /.main -->
-  </div>
-</div> <!-- /#page -->
+<div class="page-title">
+    <h2>{{ page.title }}</h2>
+</div>
+<div id="content">
+    {% if page.content == null %}
+        <div class="not-found">
+            <h2>Coming soon...</h2>
+        </div>
+    {% else %}
+        {{ page.content }}
+    {% endif %}
+</div><!-- #content -->

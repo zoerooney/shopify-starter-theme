@@ -159,8 +159,17 @@
 		</div> <!-- end wrapper -->
 	</header>
 
-	<section id="body" class="clearfix">
-		{{ content_for_layout }}
+	<section id="body" class="wrapper">
+		<div class="sidebar">
+			{% if template contains 'blog' or 'article' %}
+				{% include 'sidebar-blog' %}
+			{% else %}
+				{% include 'sidebar' %}
+			{% endif %}
+		</div>
+		<div class="main">
+			{{ content_for_layout }}
+		</div>
 	</section> <!-- /#body -->
     
 	<footer class="clearfix">

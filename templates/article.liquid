@@ -1,113 +1,32 @@
-<div id="article" class="clearfix">
- <div class="page-title">
- 	 <h2>{{ blog.title | link_to : blog.url }}</h2>
- </div>
- <div class="wrapper">
-  <div class="blog-main clearfix">
-  
-    <div class="article clearfix">
-    		<div class="post-info">
-    			<div class="post-date">{{ article.created_at | date: "%m.%d" }}</div>
-    			<h2 class="post-title"><a href="{{ article.url }}">{{ article.title }}</a></h2>
-    		</div>
-    		<div class="post-content">
-    			{% if article.excerpt.size > 0 %}
-    				{{ article.excerpt }}
-    				<a href="{{ article.url }}">Read more &rarr;</a>
-    			{% else %}
-    				{{ article.content }}
-    			{% endif %}
-    		</div> <!-- /.content -->
-    		<div class="comment-count">
-    			<a href="#comments">
-    				{% if article.comments.size > 0 %}
-    					{{ article.comments_count }}
-    				{% else %}
-    					Leave a comment
-    				{% endif %}
-    			</a>
-    		</div>
-    	</div> <!-- /.article -->
-        
-    	{% if blog.comments_enabled? %}
-    	<div id="comments" class="comments">
-    		{% paginate article.comments by 10 %}
-    			
-    			{% if number_of_comments > 0 %}
-    				<h3>
-    					{{ number_of_comments }} {{ number_of_comments | pluralize: 'comment', 'comments' }}
-    				</h3>
-    			
-    			
-    				{% for comment in article.comments %}
-    				
-    				<div id="comment-{{ comment.id }}" class="comment clearfix">
-    					<h4 class="comment-author">
-    					  {{ comment.author }} says...
-    					</h4>
-    					<h5 class="comment-date">
-    					  On {{ comment.created_at | date: "%B %d, %Y" }}
-    					</h5>
-    					
-    					<div class="comment-content">
-    					  {{ comment.content }}
-    					</div>
-    				</div> <!-- /.comment -->
-    				
-    				{% endfor %}
-    				
-    				{% if paginate.pages > 1 %}
-    					{% include 'pagination' %}
-    				{% endif %}
-    			
-    			{% endif %}<!-- number_of_comments > 0 -->
-    			
-    			
-    			<div class="comment_form">
-    				{% form article %}
-    				
-    					<h3>Leave a comment</h3>
-    					{% if form.posted_successfully? %}
-    						{% if blog.moderated? %}
-    							<div class="notice success">
-    							  Your comment is awaiting moderation.
-    							</div>
-    						{% else %}
-    							<div class="notice success">
-    								Successfully posted your comment.
-    							</div>
-    						{% endif %}
-    					{% endif %}
-    					
-    					{% if form.errors %}
-    						<div class="notice error">
-    							Please check your submission for errors.
-    						</div>
-    					{% endif %}
-    					
-    					<input {% if form.errors contains "author" %} class="error"{% endif %} type="text" name="comment[author]" placeholder="Enter your name here" id="comment-author" value="{{ form.author }}" autocapitalize="words">
-    					
-    					<input {% if form.errors contains "email" %} class="error"{% endif %} type="email" name="comment[email]" placeholder="Enter your email here" id="comment-email" value="{{ form.email }}" autocorrect="off" autocapitalize="off">
-    					
-    					<textarea {% if form.errors contains "body" %} class="error"{% endif %} name="comment[body]" id="comment-body" placeholder="Enter your comments here...">{{ form.body }}</textarea>
-    					
-    					<input type="submit" value="Post comment" id="comment-submit" />
-    				
-    				{% endform %}
-    			</div> <!-- /.comment_form -->
-    			
-    		{% endpaginate %}
-    		
-    	</div> <!-- /#comments -->
-    	
-    	{% endif %}<!-- blog.comments_enabled -->
-    
-    </div> <!-- /.blog-main -->
-  
- 
-  <div class="blog-sidebar">
-  {% include 'sidebar-blog' %}
-  </div>
-</div> <!-- /#article -->
+<div class="page-title">
+    <h2>{{ blog.title | link_to : blog.url }}</h2>
 </div>
-{% include 'featured-products' %}
+
+<div class="blog-main">
+    <div class="article">
+        <div class="post-info">
+            <div class="post-date">{{ article.created_at | date: "%m.%d" }}</div>
+            <h2 class="post-title"><a href="{{ article.url }}">{{ article.title }}</a></h2>
+        </div>
+        <div class="post-content">
+            {% if article.excerpt.size > 0 %}
+                {{ article.excerpt }}
+                <a href="{{ article.url }}">Read more &rarr;</a>
+            {% else %}
+                {{ article.content }}
+            {% endif %}
+        </div> <!-- /.content -->
+        <div class="comment-count">
+            <a href="#comments">
+                {% if article.comments.size > 0 %}
+                    {{ article.comments_count }}
+                {% else %}
+                    Leave a comment
+                {% endif %}
+            </a>
+        </div>
+    </div> <!-- /.article -->
+    
+    {% include 'comments' %}
+
+</div> <!-- /.blog-main -->

@@ -1,84 +1,75 @@
-<div id="product" class="wrapper {{ product.handle }}{% if product.images.size == 1 %} one_image{% endif %} clearfix">
-  <div class="collection-sidebar">
-   {% include 'sidebar' %}
-  </div>
-  <div class="collection-main">
-  <div class="product_body clearfix">
-  	<div class="breadcrumbs">
-  		{% include 'breadcrumbs' %}
-  	</div>
+<div class="product_body clearfix">
+    <div class="breadcrumbs">
+      {% include 'breadcrumbs' %}
+    </div>
+
     <div class="images">
-      {% include 'product-image' %}
+        {% include 'product-image' %}
     </div> <!-- /.images -->
 
     <div class="content">
            
-      <h3>{{ product.vendor }}</h3>
-      <h4>{{ product.title }}</h4>
-      {% if product.price_min < product.compare_at_price_min %}
-      <p class="price sale" id="price-preview"><del>{{ product.compare_at_price_min | money }}</del> {{ product.price_min | money }}</p>
-      {% else %}
-      <p class="price" id="price-preview">{{ product.price_min | money }}{% if product.price_varies %} - {{ product.price_max | money }}{% endif %}</p>
-      {% endif %}
-      <div class="description">
-        {{ product.description }}
-      </div>
-            
-      <form id="add-item-form" action="/cart/add" method="post" class="variants clearfix">
-        {% if product.options.size > 1 %}
-        <div class="select clearfix">
-          <select id="product-select" name='id'>
-            {% for variant in product.variants %}
-            <option value="{{ variant.id }}">{{ variant.title }} - {{ variant.price | money }}</option>
-            {% endfor %}
-          </select>
-        </div>
-        {% elsif product.options.size == 1 and product.variants.size > 1 %}
-        <div class="select clearfix">
-          <label>{{ product.options[0] }}</label>
-          <select id="product-select" name='id'>
-            {% for variant in product.variants %}
-            <option value="{{ variant.id }}">{{ variant.title }} - {{ variant.price | money }}</option>
-            {% endfor %}
-          </select>
-        </div>
+        <h3>{{ product.title }}</h3>
+        <h4>{{ product.vendor }}</h4>
+
+        {% if product.price_min < product.compare_at_price_min %}
+            <p class="price sale" id="price-preview"><del>{{ product.compare_at_price_min | money }}</del> {{ product.price_min | money }}</p>
         {% else %}
-        <input type="hidden" name="id" value="{{ product.variants.first.id }}" />
+            <p class="price" id="price-preview">{{ product.price_min | money }}{% if product.price_varies %} - {{ product.price_max | money }}{% endif %}</p>
         {% endif %}
         
-        
-        {% if product.available %}
-        <div>
-        	<input min="1" type="number" id="quantity" name="quantity" value="1" />  
-       		<label for="quantity">QUANTITY</label> 
+        <div class="description">
+            {{ product.description }}
         </div>
-        <div id="cart-updated"></div> 
-        <div class="purchase clearfix">
-          <input type="submit" name="add" id="add-to-cart" value="ADD TO CART" class="cart cufon" />
-          <div id="cart-updated"></div>
+
+        <form id="add-item-form" action="/cart/add" method="post" class="variants clearfix">
+            {% if product.options.size > 1 %}
+                <div class="select clearfix">
+                    <select id="product-select" name='id'>
+                        {% for variant in product.variants %}
+                            <option value="{{ variant.id }}">{{ variant.title }} - {{ variant.price | money }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            {% elsif product.options.size == 1 and product.variants.size > 1 %}
+                <div class="select clearfix">
+                    <label>{{ product.options[0] }}</label>
+                    <select id="product-select" name='id'>
+                        {% for variant in product.variants %}
+                            <option value="{{ variant.id }}">{{ variant.title }} - {{ variant.price | money }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            {% else %}
+                <input type="hidden" name="id" value="{{ product.variants.first.id }}" />
+            {% endif %}
+            {% if product.available %}
+                <div class="quantity">
+                    <label for="quantity">QUANTITY</label> 
+                    <input min="1" type="number" id="quantity" name="quantity" value="1" />  
+                </div>
+                <div class="purchase clearfix">
+                    <input type="submit" name="add" id="add-to-cart" value="ADD TO CART" class="cart" />
+                    <div id="cart-updated"></div>
+                </div>
+            {% else %}
+                <div class="purchase clearfix">
+                    <input type="submit" name="add" id="add-to-cart" value="Sold Out" class="cart disabled" disabled="disabled" />
+                </div>
+            {% endif %}
+
+        </form>
+
+        <div class="add-favorite">
+            {% include 'add-favorite' %}
         </div>
-        {% else %}
-        <div class="purchase clearfix">
-          <span><input type="submit" name="add" id="add-to-cart" value="Sold Out" class="cart cufon disabled" disabled="disabled" /></span>
-          
-        </div>
-        {% endif %}
-       	
-      </form>
-       <div class="add-favorite">
-       		{% include 'add-favorite' %}
-       </div>
-       {% include 'social' %}
-    </div>
+
+        {% include 'social' %}
+    </div><!-- /.content -->
     
   </div> <!-- /.product_body -->
   
   {% include 'related' %}
-  
-  
- </div><!-- /right column -->
-</div> <!-- /#product -->
-
 
 <script type="text/javascript">
 
@@ -119,7 +110,7 @@ function remove(s, t) {
 jQuery(function() {
 
   jQuery('.favorites-link.off').click(function(){
-  	jQuery('.tip').toggle();
+    jQuery('.tip').toggle();
   });
  
   

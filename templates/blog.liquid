@@ -1,38 +1,31 @@
-<div id="blog" class="clearfix">
-  <div class="page-title">
-  	 <h2>{{ blog.title }}</h2>
-  </div>
-  <div class="wrapper">
-  {% paginate blog.articles by settings.pagination_limit %}
- <div class="articles clearfix">
-   <div class="blog-main">
-     <h2>Listen here sonny boy<br>
-     let me tell you a little story</h2>
-     {% for article in blog.articles %}
- 	      <div class="article clearfix">
- 	        <div class="post-info">
- 	          <div class="post-date">{{ article.created_at | date: "%m.%d" }}</div>
- 	           <h2 class="post-title"><a href="{{ article.url }}">{{ article.title }}</a></h2>
- 	        </div>
- 	        <div class="post-content">
- 	            {% if article.excerpt.size > 0 %}
- 	              {{ article.excerpt }}
- 	              <a href="{{ article.url }}">Read more &rarr;</a>
- 	            {% else %}
- 	              {{ article.content }}
- 	            {% endif %}
- 	        </div> <!-- /.content -->
- 	        <div class="comment-count"><a href="#comments">{% if article.comments.size > 0 %}{{ number_of_comments }} {{ number_of_comments | pluralize: 'comment', 'comments' }}{% else %}Leave a comment{% endif %}</a></div>
- 	      </div> <!-- /.article -->
- 	   {% endfor %}
- 	   {% include 'pagination' %}
-   </div> <!-- /.main -->
-   <div class="blog-sidebar">
-   {% include 'sidebar-blog' %}
-   </div>
-   
- </div> <!-- /.articles -->
- 
-  {% endpaginate %}
-  </div>
-</div> <!-- /#blog -->
+<div class="page-title">
+    <h2>{{ blog.title }}</h2>
+</div>
+<div class="blog-main">
+{% paginate blog.articles by settings.blog_pagination_limit %}
+    
+    {% for article in blog.articles %}
+        <div class="article">
+            <div class="post-info">
+                <div class="post-date">{{ article.created_at | date: "%m.%d" }}</div>
+                <h2 class="post-title"><a href="{{ article.url }}">{{ article.title }}</a></h2>
+            </div>
+            
+            <div class="post-content">
+                {% if article.excerpt.size > 0 %}
+                    {{ article.excerpt }}
+                    <a href="{{ article.url }}">Read more &rarr;</a>
+                {% else %}
+                    {{ article.content }}
+                {% endif %}
+            </div> <!-- /.post-content -->
+            <div class="comment-count">
+                <a href="#comments">{% if article.comments.size > 0 %}{{ number_of_comments }} {{ number_of_comments | pluralize: 'comment', 'comments' }}{% else %}Leave a comment{% endif %}</a>
+            </div>
+        </div> <!-- /.article -->
+    {% endfor %}
+    
+    {% include 'pagination' %}
+    
+{% endpaginate %}
+</div> <!-- /.blog-main -->
