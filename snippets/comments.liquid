@@ -1,4 +1,5 @@
 {% if blog.comments_enabled? %}
+{% assign number_of_comments = article.comments_count %}
 	<div id="comments" class="comments">
 		{% paginate article.comments by 10 %}
 			
