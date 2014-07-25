@@ -70,14 +70,6 @@ ul.unstyled {
   margin: 0!important;
 }
 
-%clearfix {
-  &:after {
-    content: "";
-    display: table;
-    clear: both;
-  }
-}
-
 /* 2 RESETS
 ================================================== */
 
