@@ -9,25 +9,29 @@ var gulp = require('gulp'),
     lr = require('tiny-lr'),
     server = lr();
     
-gulp.task('default', function(){
-  return gulp.src('assets/_scss/style.scss', {base: 'assets/_scss'})
+gulp.task('default', function() {
+  return gulp.src(['assets/_scss/*.scss',
+                   'assets/_scss/_*.scss',
+                   'assets/_scss/**/_*.scss',
+                   'assets/_scss/**/*.scss'], {base:  'assets/_scss'})
       .pipe(plumber())
-      .pipe(sass({ style: 'expanded' }))
+      .pipe(sass({sourcemap: true, sourcemapPath: 'scss'}))
       .pipe(gulp.dest('assets/'))
       .pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
       .pipe(minifycss())
-      .pipe(gulp.dest('assets/'))
-      .pipe(livereload(server));
+      .pipe(gulp.dest('assets/'));
 });
-gulp.task('checkout', function(){
-  return gulp.src('assets/_scss/checkout.scss')
+gulp.task('checkout', function() {
+  return gulp.src(['assets/_scss/*.scss',
+                   'assets/_scss/_*.scss',
+                   'assets/_scss/**/_*.scss',
+                   'assets/_scss/**/*.scss'], {base:  'assets/_scss'})
       .pipe(plumber())
-      .pipe(sass({ style: 'expanded' }))
+      .pipe(sass({sourcemap: true, sourcemapPath: 'scss'}))
       .pipe(gulp.dest('assets/'))
       .pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
       .pipe(minifycss())
-      .pipe(gulp.dest('assets/'))
-      .pipe(livereload(server));
+      .pipe(gulp.dest('assets/'));
 });
 gulp.task('watch', function() {
   // Listen on port 35729
@@ -38,7 +42,7 @@ gulp.task('watch', function() {
   
       // Watch .scss files
       gulp.watch('assets/**/*.scss', ['default']);
-      gulp.watch('assets/**/_checkout.scss', ['checkout']);
+      gulp.watch('assets/_scss/pages/_checkout.scss', ['checkout']);
     });
 
 });
