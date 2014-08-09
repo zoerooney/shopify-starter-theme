@@ -62,7 +62,9 @@
             {% capture slide_link %}image_{{ i }}_link{% endcapture %}
             {% if settings[slide_enabled] %}
                 <li class="slide">
+                	{% if settings[slide_link %}<a href="{{ settings[slide_link }}">{% endif %}
                     <img src="{{ slide_image | asset_url }}" data-url="{{ settings[slide_link] }}" alt="{{ settings[slide_image_alt] }}" class="slide-img" />
+                    {% if settings[slide_link %}</a>{% endif %}
                 </li>
             {% endif %}
         {% endfor %}
