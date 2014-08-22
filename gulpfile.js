@@ -4,30 +4,31 @@ var gulp = require('gulp'),
     autoprefixer = require('gulp-autoprefixer'),
     minifycss = require('gulp-minify-css'),
     newer = require('gulp-newer'),
+    rename = require('gulp-rename'),
+    replace = require('gulp-replace'),
     imagemin = require('gulp-imagemin'),
     livereload = require('gulp-livereload'),
     lr = require('tiny-lr'),
     server = lr();
-    
+function replaceWithAssetURL( match, imgurl){
+  return 'background:url({{ "'+ imgurl + '" | asset_url }})';
+}    
 gulp.task('default', function() {
   return gulp.src(['assets/_scss/*.scss',
-                   'assets/_scss/_*.scss',
-                   'assets/_scss/**/_*.scss',
                    'assets/_scss/**/*.scss'], {base:  'assets/_scss'})
       .pipe(plumber())
-      .pipe(sass({sourcemap: true, sourcemapPath: 'scss'}))
-      .pipe(gulp.dest('assets/'))
+      .pipe(sass())
       .pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
       .pipe(minifycss())
+      .pipe(rename({extname: '.css.liquid'}))
+      .pipe(replace(/background:url\((.*?)\)/g, replaceWithAssetURL))
       .pipe(gulp.dest('assets/'));
 });
 gulp.task('checkout', function() {
   return gulp.src(['assets/_scss/*.scss',
-                   'assets/_scss/_*.scss',
-                   'assets/_scss/**/_*.scss',
                    'assets/_scss/**/*.scss'], {base:  'assets/_scss'})
       .pipe(plumber())
-      .pipe(sass({sourcemap: true, sourcemapPath: 'scss'}))
+      .pipe(sass())
       .pipe(gulp.dest('assets/'))
       .pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
       .pipe(minifycss())
@@ -41,7 +42,7 @@ gulp.task('watch', function() {
       };
   
       // Watch .scss files
-      gulp.watch('assets/**/*.scss', ['default']);
+      gulp.watch(['assets/**/*.scss','!assets/_scss/pages/_checkout.scss'], ['default']);
       gulp.watch('assets/_scss/pages/_checkout.scss', ['checkout']);
     });
 
