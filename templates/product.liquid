@@ -10,7 +10,6 @@
     <div class="content">
            
         <h3>{{ product.title }}</h3>
-        <h4>{{ product.vendor }}</h4>
 
         {% if product.price_min < product.compare_at_price_min %}
             <p class="price sale" id="price-preview"><del>{{ product.compare_at_price_min | money }}</del> {{ product.price_min | money }}</p>
@@ -64,7 +63,8 @@
             {% include 'add-favorite' %}
         </div>
 
-        {% include 'social' %}
+        {% include 'share' %}
+
     </div><!-- /.content -->
     
   </div> <!-- /.product_body -->
@@ -122,7 +122,7 @@ jQuery(function() {
       {% if variant.available and found_one_in_stock == false %}
         {% assign found_one_in_stock = true %}
         {% for option in product.options %}
-          jQuery('#product-select-option-' + {{ forloop.index0 }}).val({{ variant.options[forloop.index0] | json }}).trigger('change').selectbox({});
+          jQuery('#product-select-option-' + {{ forloop.index0 }}).val({{ variant.options[forloop.index0] | json }}).trigger('change');
         {% endfor %}
       {% endif %}
     {% endfor %}

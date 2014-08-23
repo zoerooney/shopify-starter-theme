@@ -1,0 +1,19 @@
+{% assign number_of_comments = article.comments_count %}
+<div class="article">
+    <div class="post-info">
+        <h2 class="post-title"><a href="{{ article.url }}">{{ article.title }}</a></h2>
+        <div class="post-date">{{ article.created_at | date: "%m.%d" }}</div>
+    </div>
+    <div class="post-content">
+        {% if article.excerpt.size > 0 %}
+            {{ article.excerpt }}
+            <a href="{{ article.url }}">Read more &rarr;</a>
+        {% else %}
+            {{ article.content }}
+        {% endif %}
+    </div> <!-- /.content -->
+    {% include 'share-article' %}
+    <div class="comment-count">
+        <a href="{{ article.url }}#comments">{% if article.comments.size > 0 %}{{ number_of_comments }} {{ number_of_comments | pluralize: 'comment', 'comments' }}{% else %}Leave a comment{% endif %}</a>
+    </div>
+</div> <!-- /.article -->

@@ -3,29 +3,8 @@
 </div>
 
 <div class="blog-main">
-    <div class="article">
-        <div class="post-info">
-            <div class="post-date">{{ article.created_at | date: "%m.%d" }}</div>
-            <h2 class="post-title"><a href="{{ article.url }}">{{ article.title }}</a></h2>
-        </div>
-        <div class="post-content">
-            {% if article.excerpt.size > 0 %}
-                {{ article.excerpt }}
-                <a href="{{ article.url }}">Read more &rarr;</a>
-            {% else %}
-                {{ article.content }}
-            {% endif %}
-        </div> <!-- /.content -->
-        <div class="comment-count">
-            <a href="#comments">
-                {% if article.comments.size > 0 %}
-                    {{ article.comments_count }}
-                {% else %}
-                    Leave a comment
-                {% endif %}
-            </a>
-        </div>
-    </div> <!-- /.article -->
+    
+    {% include 'blog-post' %}
     
     {% include 'comments' %}
 
