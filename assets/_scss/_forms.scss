@@ -33,6 +33,13 @@ input[type=submit], button, a.btn {
 	color: $text;
 }
 
+// Customize Chrome autofill background (yellow by default)
+// input:-webkit-autofill,
+// input:-webkit-autofill:focus {
+//     -webkit-box-shadow:0 0 0 50px #6d6e6e inset; 
+//     -webkit-text-fill-color: white;
+// }
+
 /* Specific Forms */
 #contactFormWrapper {
 	width: 75%;
