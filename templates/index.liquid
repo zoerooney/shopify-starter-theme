@@ -59,12 +59,12 @@
             {% capture slide_enabled %}slideshow_{{ i }}_active{% endcapture %}
             {% capture slide_image %}slideshow_{{ i }}.jpg{% endcapture %}
             {% capture slide_image_alt %}slideshow_{{ i }}_alt{% endcapture %}
-            {% capture slide_link %}image_{{ i }}_link{% endcapture %}
+            {% capture slide_link %}slideshow_image_{{ i }}_link{% endcapture %}
             {% if settings[slide_enabled] %}
                 <li class="slide">
-                	{% if settings[slide_link %}<a href="{{ settings[slide_link }}">{% endif %}
-                    <img src="{{ slide_image | asset_url }}" data-url="{{ settings[slide_link] }}" alt="{{ settings[slide_image_alt] }}" class="slide-img" />
-                    {% if settings[slide_link %}</a>{% endif %}
+                	{% if settings[slide_link] %}<a href="{{ settings[slide_link] }}">{% endif %}
+                    <img src="{{ slide_image | asset_url }}" alt="{{ settings[slide_image_alt] }}" class="slide-img" />
+                    {% if settings[slide_link] %}</a>{% endif %}
                 </li>
             {% endif %}
         {% endfor %}
