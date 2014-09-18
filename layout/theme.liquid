@@ -110,7 +110,7 @@
 		
 			<div class="logo">
 				<a href="/" class="shop_logo">
-					<img src="{{ 'logo.png' | asset_url }}" alt="{{ shop.name }}" class="png_bg" />
+					<img src="{{ 'logo.svg' | asset_url }}" onerror="this.onerror=null; this.src='{{ 'logo.png' | asset_url }}'" alt="{{ shop.name }}" />
 				</a>
 			</div> <!-- /.logo -->
 			
