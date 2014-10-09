@@ -25,7 +25,9 @@
 	</div>
 	<div class="pagination">
 		{{ paginate | default_pagination | replace: 'Previous', '<' | replace: 'Next', '>' }}
-		<a class="view-all" href="/collections/{{ collection.handle }}">view fewer</a>
+		{% if paginate.pages > 1 %}
+			<a class="view-all" href="/collections/{{ collection.handle }}?view=all">view all</a>
+		{% endif %}
 	</div>
 {% endif %}
 

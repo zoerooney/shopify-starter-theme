@@ -24,7 +24,6 @@
 	{% endfor %}
 	</div>
 	<div class="pagination">
-		{{ paginate | default_pagination | replace: 'Previous', '<' | replace: 'Next', '>' }}
 		<a class="view-all" href="/collections/{{ collection.handle }}">view fewer</a>
 	</div>
 {% endif %}
