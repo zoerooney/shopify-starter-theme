@@ -99,6 +99,8 @@ fieldset {
 }
 
 img {
+  max-width: 100%;
+  height: auto;
   border: 0;
   -ms-interpolation-mode: bicubic;
   /* Read more > http://bit.ly/qh1V0T */
