@@ -11,10 +11,13 @@
            
         <h3>{{ product.title }}</h3>
 
-        {% if product.price_min < product.compare_at_price_min %}
-            <p class="price sale" id="price-preview"><del>{{ product.compare_at_price_min | money }}</del> {{ product.price_min | money }}</p>
+        {% if product.selected_or_first_available_variant.price < product.selected_or_first_available_variant.compare_at_price %}
+            <p class="price sale" id="price-preview"><del>{{ product.selected_or_first_available_variant.compare_at_price | money }}</del> {{ product.selected_or_first_available_variant.price | money }}</p>
+        {% elsif product.price_varies %}
+            <p class="price" id="price-preview">{{ product.price_min | money }} - {{ product.price_max | money }}</p>
         {% else %}
-            <p class="price" id="price-preview">{{ product.price_min | money }}{% if product.price_varies %} - {{ product.price_max | money }}{% endif %}</p>
+            <p class="price" id="price-preview">{{ product.selected_or_first_available_variant.price | money }}
+            </p>
         {% endif %}
         
         <div class="description">
@@ -26,7 +29,7 @@
                 <div class="select clearfix">
                     <select id="product-select" name='id'>
                         {% for variant in product.variants %}
-                            <option value="{{ variant.id }}">{{ variant.title }} - {{ variant.price | money }}</option>
+                            <option {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}">{{ variant.title }} - {{ variant.price | money }}</option>
                         {% endfor %}
                     </select>
                 </div>
@@ -35,7 +38,7 @@
                     <label>{{ product.options[0] }}</label>
                     <select id="product-select" name='id'>
                         {% for variant in product.variants %}
-                            <option value="{{ variant.id }}">{{ variant.title }} - {{ variant.price | money }}</option>
+                            <option {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}">{{ variant.title }} - {{ variant.price | money }}</option>
                         {% endfor %}
                     </select>
                 </div>
@@ -90,6 +93,15 @@ var selectCallback = function(variant, selector) {
     jQuery('#add-to-cart').addClass('disabled').attr('disabled', 'disabled').val('Sold Out');      // set add-to-cart button to unavailable class and disable button
     jQuery('#product .variants .price').text(message); // update price-field message
   }
+  if (variant && variant.featured_image) {
+      var originalImage = jQuery(".featured img");
+      var newImage = variant.featured_image;
+      var element = originalImage[0];
+      Shopify.Image.switchImage(newImage, element, function (newImageSizedSrc, newImage, element) {
+          jQuery('#placeholder').attr('href', newImageSizedSrc);
+          jQuery(element).attr('src', newImageSizedSrc);
+      });
+  }
 };
 
 function remove(s, t) {
@@ -106,28 +118,23 @@ function remove(s, t) {
   return r;
 }
 
-// initialize multi selector for product
-jQuery(function() {
-
+// Favorites toggle
+jQuery(function(){
   jQuery('.favorites-link.off').click(function(){
     jQuery('.tip').toggle();
   });
- 
-  
+});
+
+// initialize multi selector for product
+jQuery(function() {
+
   {% if product.variants.size > 1 or product.options.size > 1 %}
-  new Shopify.OptionSelectors("product-select", { product: {{ product | json }}, onVariantSelected: selectCallback });
-  
-    {% assign found_one_in_stock = false %}
-    {% for variant in product.variants %}
-      {% if variant.available and found_one_in_stock == false %}
-        {% assign found_one_in_stock = true %}
-        {% for option in product.options %}
-          jQuery('#product-select-option-' + {{ forloop.index0 }}).val({{ variant.options[forloop.index0] | json }}).trigger('change');
-        {% endfor %}
-      {% endif %}
-    {% endfor %}
-    
+  new Shopify.OptionSelectors("product-select", { product: {{ product | json }}, onVariantSelected: selectCallback, enableHistoryState: true  });
+    {% if product.options.size > 1 %}
+    Shopify.linkOptionSelectors({{ product | json }});
+    {% endif %}
   {% endif %}
+  jQuery('.selector-wrapper:eq(0) option[value=\'{{featured_variant.title}}\']').attr('selected','selected');
 });
 // ]]>
 </script>

@@ -19,13 +19,13 @@
                     <tr>
                         <td class="r">
                             <div class="product_image">
-                                <a href="{{ item.product.url }}">
-                                    <img src="{{ item.product.featured_image.src | product_img_url: 'thumb' }}"  alt="{{ item.product.featured_image.url }}" />
+                                <a href="{{ item.url }}">
+                                    <img src="{{ item | img_url: 'thumb' }}"  alt="{{ item.product.featured_image.url }}" />
                                 </a>
                             </div>
                         </td>
                         <td>
-                            <a href="{{item.product.url }}">{{ item.title }}</a><br>
+                            <a href="{{ item.url }}">{{ item.title }}</a><br>
                             {% for p in item.properties %}
                                 {% unless p.last == blank %}
                                     {{ p.first }}:
