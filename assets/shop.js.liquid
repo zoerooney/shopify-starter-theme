@@ -1,33 +1,15 @@
 jQuery(document).ready(function($){
-  
-  $('.slider, #slider, .related').fadeIn("slow");
-  $('div.loading').remove();
-  
-  if ($("#slider li").size() == 0) {
-    $("#slider").remove();
-    $("#slider-empty").show(); 
-  } 
-  else {
-    if ($("#slider li").size() > 1) {
-      $('#slider').bxSlider({
-        infiniteLoop: true,
-        speed: 500,
-        auto: true,
-        controls: false,
-        pager: true,
-        autoDelay: 1000,
-        mode: 'fade',
-        pause: {{ settings.slideshow_speed }}
-      });
-    }    
-    $('#slider').fadeIn('slow');
-  }
- 
-	 $('#slider li img').error(function(){ // remove problematic images
-	   $(this).parents("li.slide").remove();
-	 });
-	 
-	 $('.slider-container').append('<div class="loading">Loading...</div>');
+	$('.slider, #slider, .related').fadeIn("slow");
+	$('#slider').bxSlider({
+		infiniteLoop: true,
+		speed: 500,
+		auto: true,
+		controls: false,
+		pager: true,
+		autoDelay: 1000,
+		mode: 'fade',
+		pause: {{ settings.slideshow_speed }}
+	});
 });
 
 jQuery(document).ready(function($){
@@ -35,25 +17,25 @@ jQuery(document).ready(function($){
 	$("#product .content").fadeIn('slow');
 	$('#product .social, #product .zoom').fadeIn(600);
 
-  
-  $("#add-to-cart").click(function(){
-    var width = $("#add-to-cart").outerWidth();
-    $("#add-to-cart").css({'width': width+'px'});
-    $("#add-to-cart").val("Adding...").animate({
-      color: '#444',
-      backgroundColor: '#fff'
-    }, 400);
-  });
-  
-  
-  $('.image img').each(function(){
-    if (!this.complete) { // if image is NOT cached
-      $(this).load(function(){
-        $(this).fadeIn(400);
-      });
-    } else { // if image is cached
-      $(this).fadeIn(400);
-    }
-  });
+	
+	$("#add-to-cart").click(function(){
+		var width = $("#add-to-cart").outerWidth();
+		$("#add-to-cart").css({'width': width+'px'});
+		$("#add-to-cart").val("Adding...").animate({
+			color: '#444',
+			backgroundColor: '#fff'
+		}, 400);
+	});
+	
+	
+	$('.image img').each(function(){
+		if (!this.complete) { // if image is NOT cached
+			$(this).load(function(){
+				$(this).fadeIn(400);
+			});
+		} else { // if image is cached
+			$(this).fadeIn(400);
+		}
+	});
 
 });
