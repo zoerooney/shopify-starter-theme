@@ -18,7 +18,7 @@ gulp.task('default', function() {
                    'assets/_scss/**/*.scss'], {base:  'assets/_scss'})
       .pipe(plumber())
       .pipe(sass())
-      .pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
+      .pipe(autoprefixer()
       .pipe(minifycss())
       .pipe(rename({extname: '.css.liquid'}))
       .pipe(replace(/background:url\((.*?)\)/g, replaceWithAssetURL))
@@ -29,9 +29,9 @@ gulp.task('checkout', function() {
                    'assets/_scss/**/*.scss'], {base:  'assets/_scss'})
       .pipe(plumber())
       .pipe(sass())
-      .pipe(gulp.dest('assets/'))
-      .pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
+      .pipe(autoprefixer()
       .pipe(minifycss())
+      .pipe(rename({extname: '.scss.liquid'}))
       .pipe(gulp.dest('assets/'));
 });
 gulp.task('watch', function() {
