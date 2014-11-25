@@ -2,83 +2,119 @@
 	 <h2>Shopping Bag</h2>
 </div>
 
-<div id="cart">
+<div id="cart" class="container">
     {% if cart.item_count == 0 %}
 
-        <div class="not-found">
-            <h2>Your Cart is Empty</h2>
+        <div class="row top-border">
+            <p>There is no item in your cart.</p>
+            <a href="{{ settings.main_url }}/shop/" class="btn tier-2">CONTINUE SHOPPING</a>
         </div>
 
     {% else %}
 
         <form action="/cart" method="post" id="cartform">
 
-            <table>
-                <tbody>
+            <div class="row cart-layout">
+                <div class="row heading-row">
+                    <div class="col pull-left span_6 product-title th">
+                        <h3>ITEM</h3>
+                    </div>
+                    <div class="col span_6">
+                        <div class="col span_4 pull-left th c"><h3>PRICE</h3></div>
+                        <div class="col span_4 th c"><h3>QUANTITY</h3></h3></div>
+                        <div class="col span_4 th r"><h3>TOTAL</h3></div>
+                    </div>
+                </div>
                 {% for item in cart.items %}
-                    <tr>
-                        <td class="r">
-                            <div class="product_image">
-                                <a href="{{ item.url }}">
-                                    <img src="{{ item | img_url: 'thumb' }}"  alt="{{ item.product.featured_image.url }}" />
-                                </a>
+                    <div class="row">
+                        <div class="col pull-left span_6 product-title">
+                            <div class="col pull-left span_5">
+                                <div class="product_image">
+                                    <img src="{{ item | img_url: 'compact' }}"  alt="{{ item.product.featured_image.url }}" />
+                                </div>
                             </div>
-                        </td>
-                        <td>
-                            <a href="{{ item.url }}">{{ item.title }}</a><br>
-                            {% for p in item.properties %}
-                                {% unless p.last == blank %}
-                                    {{ p.first }}:
-                                    {% if p.last contains '/uploads/' %}
-                                        <a class="lightbox" href="{{ p.last }}">{{ p.last | split: '/' | last }}</a>
-                                    {% else %}
-                                        {{ p.last }}
-                                    {% endif %}
-                                    <br />
+                            <div class="col span_7 product-title">
+                                {% if item.product.type == 'Event' %}
+                                    <a href="{{ settings.main_url }}/events/{{ item.product.handle }}">{{ item.product.title }}</a><br>
+                                    {% for opt in item.product.options %}
+                                        {{ opt }}: {% if forloop.first %}{{ item.variant.option1 }}{% elsif forloop.index == 2 %}{{ item.variant.option2 }}{% elsif forloop.index == 3 %}{{ item.variant.option3 }}{% endif %}<br>
+                                    {% endfor %}
+                                {% elsif item.title == 'Gift Wrap' %}
+                                    {{ item.product.title }}<br>
+                                {% else %}
+                                     <a href="{{ item.url }}">{{ item.product.title }}</a><br>
+                                     {% for opt in item.product.options %}
+                                        {{ opt }}: {% if forloop.first %}{{ item.variant.option1 }}{% elsif forloop.index == 2 %}{{ item.variant.option2 }}{% elsif forloop.index == 3 %}{{ item.variant.option3 }}{% endif %}<br>
+                                    {% endfor %}
+                                {% endif %}
+                                
+                                {% for p in item.properties %}
+                                    {% unless p.last == blank %}
+                                        {{ p.first }}:
+                                        {% if p.last contains '/uploads/' %}
+                                            <a class="lightbox" href="{{ p.last }}">{{ p.last | split: '/' | last }}</a>
+                                        {% else %}
+                                            {{ p.last }}
+                                        {% endif %}
+                                        <br />
+                                    {% endunless %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="col span_6">
+                            <div class="col span_4 pull-left c">
+                                {{ item.price | money }}
+                            </div>
+                            <div class="col span_4 c">
+                                <input type="text" size="4" name="updates[]" id="updates_{{item.id}}" value="{{ item.quantity }}" onfocus="this.select();" class="item-quantity" />
+                                {% unless item.title == 'Gift Wrap' %}
+                                <input type="submit" id="update-cart" class="text-button" name="update" value="Update" />
                                 {% endunless %}
-                            {% endfor %}
-                        </td>
-                        <td class="c">
-                            <input type="text" size="4" name="updates[]" id="updates_{{item.id}}" value="{{ item.quantity }}" onfocus="this.select();" class="item-quantity" />
-                        </td>
-                        <td class="c">
-                            {{ item.line_price | money }}
-                        </td>
-                        <td class="c">
-                            <a href="/cart/change?line={{ forloop.index }}&quantity=0" title="remove">Remove</a>
-                        </td>
-                    </tr>
+                                <a href="/cart/change?line={{ forloop.index }}&quantity=0" title="remove">Remove</a>
+                            </div>
+                            <div class="col span_4 r">
+                                {{ item.line_price | money }}
+                            </div>
+                        </div>
+                    </div>
                 {% endfor %}
-                <tr class="summary">
-                    <td colspan="2">
-                        <label for="note" style="display:block;"><a href="#" onClick="jQuery('#note').toggle(); return false;">Add special instructions for your order&hellip;</a></label>
-                    </td>
-                    <td class="c">
-                        <input type="submit" id="update-cart" name="update" value="Update" />
-                    </td>
-                    <td class="c">
-                        <span class="total"><strong>{{ cart.total_price | money }}</strong></span>
-                    </td>
-                    <td class="c">
-                        <input type="submit" id="checkout" name="checkout" value="Check Out" />
-                    </td>
-                </tr>
+                <div class="row summary summary-first">
+                    <div class="col pull-left span_6">
+                        <label for="note" style="display:block;"><a href="#" onClick="jQuery('#note').toggle(); return false;">Add Special Instructions or a Gift Message</a></label>
+                        <textarea id="note" name="note" rows="2" cols="50" style="display:none;">{{ cart.note }}</textarea>
+                        {% comment %}{% include 'gift-wrap' %}{% endcomment %}
+                    </div>
+                    <div class="col span_6 r">
+                        <div class="row no-border subtotal-details">
+                            <div class="col pull-left span_6">
+                                <span class="total"><strong>SUBTOTAL</strong></span>
+                                 <span class="small">Excluding tax &amp; shipping</span>
+                            </div>
+                            <div class="col span_6">
+                                <span class="price">{{ cart.total_price | money }}</span>
+                            </div>
+                        </div>
+                        <div class="row no-border checkout-links">
+                            <div class="col pull-left span_6">
+                                <div class="more-shopping">
+                                    <a href="{{ settings.main_url }}/shop/">Continue Shopping</a>
+                                </div>
+                            </div>
+                            <div class="col span_6">
+                               <input type="submit" id="checkout" name="checkout" value="CheckOut" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 {% if additional_checkout_buttons %}
-                    <tr>
-                        <td colspan="4"></td>
-                        <td class="c">
-                            <div class="additional-checkout-buttons">
+                    <div class="row">
+                        <div class="col pull-left span_12 r">
                                 <p>- or -</p>
                                 {{ content_for_additional_checkout_buttons }}
-                            </div>
-                        </td>
-                    </tr>
+                        </div>
+                    </div>
                 {% endif %}
-                </tbody>
-            </table>
-
-            <textarea id="note" name="note" rows="10" cols="50" style="display:none;">{{ cart.note }}</textarea>
-
+            </div>
         </form>
     {% endif %}
 
