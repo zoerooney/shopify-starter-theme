@@ -1,4 +1,7 @@
-<div class="product_body clearfix">
+<div itemscope itemtype="http://schema.org/Product" class="product_body clearfix">
+  <meta itemprop="url" content="{{ shop.url }}{{ product.url }}">
+  <meta itemprop="image" content="{{ product.featured_image.src | product_img_url: 'grande' }}">
+    
     <div class="breadcrumbs">
       {% include 'breadcrumbs' %}
     </div>
@@ -9,8 +12,9 @@
 
     <div class="content">
            
-        <h3>{{ product.title }}</h3>
+        <h1 itemprop="name">{{ product.title }}</h1>
 
+        <meta itemprop="priceCurrency" content="{{ shop.currency }}">
         {% if product.selected_or_first_available_variant.price < product.selected_or_first_available_variant.compare_at_price %}
             <p class="price sale" id="price-preview"><del>{{ product.selected_or_first_available_variant.compare_at_price | money }}</del> {{ product.selected_or_first_available_variant.price | money }}</p>
         {% elsif product.price_varies %}
@@ -20,7 +24,7 @@
             </p>
         {% endif %}
         
-        <div class="description">
+        <div itemprop="description" class="description">
             {{ product.description }}
         </div>
 
@@ -45,6 +49,7 @@
             {% else %}
                 <input type="hidden" name="id" value="{{ product.variants.first.id }}" />
             {% endif %}
+            <link itemprop="availability" href="http://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}">
             {% if product.available %}
                 <div class="quantity">
                     <label for="quantity">QUANTITY</label> 
