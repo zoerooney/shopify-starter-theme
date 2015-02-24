@@ -1,12 +1,9 @@
 var gulp = require('gulp'),
-    plumber = require('gulp-plumber'),
     sass = require('gulp-ruby-sass'),
     autoprefixer = require('gulp-autoprefixer'),
     minifycss = require('gulp-minify-css'),
-    newer = require('gulp-newer'),
     rename = require('gulp-rename'),
     replace = require('gulp-replace'),
-    imagemin = require('gulp-imagemin'),
     livereload = require('gulp-livereload'),
     lr = require('tiny-lr'),
     server = lr();

@@ -1,7 +1,7 @@
 Shopify Starter Theme
 ============================
 
-This is a Sass- and Gulp-ready starter mobile theme for Shopify theme development. It is meant to be heavily edited and modified for each custom theme project.
+This is a Sass- and Gulp-ready starter theme for Shopify theme development. It is meant to be heavily edited and modified for each custom theme project.
 
 ## Dependencies
 
