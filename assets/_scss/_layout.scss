@@ -8,11 +8,6 @@ body {
 	background: $bg; 
 	min-width: $width-outer;
 }
-.wrapper {
-	width: $width;
-	margin: 0 auto;
-	@extend %clearfix;
-}
 
 #content,
 #template,
@@ -35,10 +30,11 @@ body {
 	width: 90%;
 	max-width: $width;
 	margin: 0 auto;
+	@include clearfix;
 }
 
 .row { 
-	@extend %clearfix;
+	@include clearfix;
 	clear: both;
 	padding-bottom: 0em;
 	&.top-border {

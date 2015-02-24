@@ -1,6 +1,6 @@
 .top-bar {
 	height: 40px;
-	@extend %clearfix;
+	@include clearfix;
 	text-align: right;
 	.account-links {
 		padding-top: 10px;	

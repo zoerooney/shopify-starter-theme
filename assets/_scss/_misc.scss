@@ -23,15 +23,6 @@
 	text-transform: uppercase;
 	padding-bottom: 20px;
 }
-.upper,
-.lower {
-	clear: both;
-	@extend %clearfix;
-}
-.lower {
-	border-top: $border;
-	padding: 1.5em 0 0;
-}
 .pagination {
 	text-align: center;
 	.current,
