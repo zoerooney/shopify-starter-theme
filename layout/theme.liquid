@@ -66,78 +66,12 @@
 </head>
 
 <body id="{% if template contains 'page' %}page{% else %}{{ template | handleize }}{% endif %}" class="{{ template | handleize }} {% if template contains 'customer' %}account{% endif %}">
-	<header class="clearfix">
-	
-		<div class="wrapper">
-			<div class="top-bar clearfix">
-				<nav class="account-links">
-					<ul class="customer">
-					{% if shop.customer_accounts_enabled %}
-						{% if customer %}
-							<li>
-								<a href="/account">My Account</a>
-							</li>
-							<li>
-								{{ 'Logout' | customer_logout_link }}
-							</li>
-						{% else %}
-							{% if shop.customer_accounts_optional %}
-								<li>
-									{{ 'Register' | customer_register_link }}
-								</li>
-						{% endif %}
-						<li>
-							{{ 'Login' | customer_login_link }}
-						</li>
-						{% endif %}
-					{% endif %}
-					</ul>
-				</nav>
-				<div class="cart-summary">
-					<a href="/cart">
-						Cart (<span class="cart-total-items">{{ cart.item_count }}</span>)
-					</a>
-				</div>
-				<form id="search_form" class="searchform" name="search" action="/search">
-					{% if template == "search" and search.performed and search.terms != "" %}
-					<input type="text" name="q" value="{{ search.terms }}" />
-					{% else %}
-					<input type="text" name="q" value="" placeholder="SEARCH" />
-					{% endif %}
-					<input type="submit" class="searchsubmit" />
-				</form>
-			</div><!-- /top-bar -->
-		
-			<div class="logo">
-				<a href="/" class="shop_logo">
-					<img src="{{ 'logo.svg' | asset_url }}" onerror="this.onerror=null; this.src='{{ 'logo.png' | asset_url }}'" alt="{{ shop.name }}" />
-				</a>
-			</div> <!-- /.logo -->
-			
-			<nav class="page-menu">
-				<ul>
-					{% for link in linklists.main-menu.links %}
-						{% if linklists[link.handle] == empty %}
-							<li><a href="{{ link.url }}"{% if link.active %} class="current"{% endif %}><span>{{ link.title }}</span></a></li>
-						{% else %}
-							<li class="dropdown"><a href="{{ link.url }}"{% if link.active %} class="current"{% endif %}><span>{{ link.title }}</span></a>
-						  		<ul class="dropdown">
-						    		{% for link in linklists[link.handle].links %}
-						    			<li><a href="{{ link.url }}"{% if link.active %} class="current"{% endif %}>{{ link.title }}</a></li>
-						   			 {% endfor %}
-						  		</ul>
-							</li>
-						{% endif %}
-					{% endfor %}
-				</ul>
-			</nav>
-			{% include 'social' %}
-		</div> <!-- end wrapper -->
-	</header>
+
+	{% include 'header' %}
 
 	<section id="body" class="wrapper">
 		<div class="sidebar">
-			{% if template contains 'blog' or 'article' %}
+			{% if template contains 'blog' or template contains 'article' %}
 				{% include 'sidebar-blog' %}
 			{% else %}
 				{% include 'sidebar' %}
@@ -148,23 +82,7 @@
 		</div>
 	</section> <!-- /#body -->
     
-	<footer class="clearfix">
-		<div class="wrapper">
-			<div id="copyright">
-				Copyright {{ 'now' | date: "%Y" }} {{ shop.name }}. All rights reserved. Site design by <a href="http://designer.com" target="_blank" rel="nofollow">designer</a> | Code by <a href="http://zoerooney.com" target="_blank" rel="nofollow">Zoe Rooney Web Development</a>	     	
-			</div>
-		
-			<div class="footer-nav">
-				<nav>
-					<ul>
-					{% for link in linklists.footer.links %}
-						<li><a href="{{ link.url }}"{% if link.active %} class="current"{% endif %}>{{ link.title }}</a></li>
-					{% endfor %}
-					</ul>
-				</nav>
-			</div>
-		</div><!-- end wrapper -->
-	</footer>
+	{% include 'footer' %}
 
 	{% comment %}
 	  Theme dependent JavaScript.
