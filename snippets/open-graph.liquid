@@ -23,6 +23,7 @@
 {% elsif template contains 'article' %}
   <meta property="og:type" content="article">
   <meta property="og:title" content="{{ article.title | strip_html | escape }}">
+  <meta name="author" content="{{ article.author }}">
   {% assign img_tag = '<' | append: 'img' %}
   {% if article.content contains img_tag %}
     {% assign src = article.content | split: 'src="' %}
