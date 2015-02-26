@@ -1,0 +1,17 @@
+<footer class="clearfix">
+	<div class="wrapper">
+		<div id="copyright">
+			Copyright {{ 'now' | date: "%Y" }} {{ shop.name }}. All rights reserved. Site design by <a href="http://designer.com" target="_blank" rel="nofollow">designer</a> | Code by <a href="http://zoerooney.com" target="_blank" rel="nofollow">Zoe Rooney Web Development</a>	     	
+		</div>
+	
+		<div class="footer-nav">
+			<nav>
+				<ul>
+				{% for link in linklists.footer.links %}
+					<li><a href="{{ link.url }}"{% if link.active %} class="current"{% endif %}>{{ link.title }}</a></li>
+				{% endfor %}
+				</ul>
+			</nav>
+		</div>
+	</div><!-- end wrapper -->
+</footer>
