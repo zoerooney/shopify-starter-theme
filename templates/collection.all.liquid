@@ -22,6 +22,9 @@
 	{% for product in collection.products %}
 		{% include 'product-loop' with collection.handle %}
 	{% endfor %}
+		<div class="grid-spacer"></div>
+		<div class="grid-spacer"></div>
+		<div class="grid-spacer"></div>
 	</div>
 	<div class="pagination">
 		<a class="view-all" href="/collections/{{ collection.handle }}">view fewer</a>

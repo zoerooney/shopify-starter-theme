@@ -13,7 +13,14 @@ $itemwidth: 200px;
 	float: $collectionside;
 	width: $collectionwidth;
 }
-.product {
+.content-table {
+	text-align: justify;
+}
+.grid-spacer {
+	width: $itemwidth;
+	display: inline-block;
+}
+.grid-product {
 	width: $itemwidth;
 	display: inline-block;
 	vertical-align: top;
