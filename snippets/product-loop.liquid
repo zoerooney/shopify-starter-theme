@@ -1,6 +1,6 @@
 {% capture collection_handle %}{{ product-loop | handleize }}{% endcapture %}
 
-<div id="product-{{ forloop.index | plus:paginate.current_offset }}" class="grid-product">
+<div id="product-{{ forloop.index | plus:paginate.current_offset }}" class="grid-product col span_3">
   <div class="image">
     <a href="{% if collection_handle == "" %}{{ product.url }}{% else %}/collections/{{ product-loop }}{{ product.url }}{% endif %}"><img src="{{ product.featured_image.src | product_img_url: 'large' }}" alt="{{ product.featured_image.alt | escape  }}" /></a>
   </div>
