@@ -2,15 +2,15 @@
   <meta itemprop="url" content="{{ shop.url }}{{ product.url }}">
   <meta itemprop="image" content="{{ product.featured_image.src | product_img_url: 'grande' }}">
     
-    <div class="breadcrumbs">
+    <div class="breadcrumbs row">
       {% include 'breadcrumbs' %}
     </div>
 
-    <div class="images">
+    <div class="images col pull-left span_6">
         {% include 'product-image' %}
     </div> <!-- /.images -->
 
-    <div class="content">
+    <div class="content col span_4">
            
         <h1 itemprop="name">{{ product.title }}</h1>
 

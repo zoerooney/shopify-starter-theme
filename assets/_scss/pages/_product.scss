@@ -1,7 +1,3 @@
-$imagewidth: 240px;
-$imageside: left;
-$contentwidth: 430px;
-$contentside: right;
 $thumbsize: 50px;
 
 .product_body {
@@ -10,29 +6,17 @@ $thumbsize: 50px;
 	}
 }
 #product {
-	.main {
-		border-top: $border;	
-		#breadcrumbs {
-			padding: 10px 0;
-		}
-	}
 	.images {
-		float: $imageside;
-		width: $imagewidth;
 		text-align: center;
-		.featured {
-			padding: 20px 0 10px;	
-		}
+		.featured {}
 		.thumbs {
 			clear: both;
 			padding-top: 10px;
-			width: $imagewidth;
 			.image {
 				margin: 8px 6px 8px 0; 
 				width: $thumbsize; 
 				height: $thumbsize; 
-				overflow: hidden; 
-				border: $border;
+				overflow: hidden;
 				text-align:center; 
 				display: inline-block; 
 				vertical-align: top;
@@ -42,11 +26,6 @@ $thumbsize: 50px;
 			}
 		}
 	}
-	.content {
-		float: $contentside;
-		width: $contentwidth;
-	}
-}
 #product .select {
 	margin-bottom: 0;
 	.selector-wrapper {
@@ -118,30 +97,4 @@ $thumbsize: 50px;
 #cart-updated {
  	a {	
  	}
-}
-.social {
-	padding: 10px 0 0;
-	a {
-		display: inline-block;	
-		height: 20px;
-		overflow: hidden;
-		text-indent: -9999em;
-		margin-right: 5px;
-		background: url('share.png') no-repeat;
-		&#share-pin {
-			width: 57px;
-		}
-		&#share-twitter {
-			width: 60px;
-			background-position: -61px 0;
-		}
-		&#share-fb {
-			width: 45px;	
-			background-position: -126px 0;
-		}
-		&:focus,
-		&:hover {
-			opacity: 0.6;
-		}
-	}
 }
