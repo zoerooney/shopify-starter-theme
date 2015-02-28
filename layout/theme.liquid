@@ -69,15 +69,15 @@
 
 	{% include 'header' %}
 
-	<section id="body" class="wrapper">
-		<div class="sidebar">
+	<section id="body" class="row">
+		<div class="sidebar col span_3 pull-left">
 			{% if template contains 'blog' or template contains 'article' %}
 				{% include 'sidebar-blog' %}
 			{% else %}
 				{% include 'sidebar' %}
 			{% endif %}
 		</div>
-		<div class="main">
+		<div class="main col span_9">
 			{{ content_for_layout }}
 		</div>
 	</section> <!-- /#body -->

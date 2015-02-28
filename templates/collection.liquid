@@ -18,14 +18,9 @@
 		No products found
 	</div>
 {% else %}
-	<div class="content-table clearfix">
-	{% for product in collection.products %}
-		{% include 'product-loop' with collection.handle %}
-	{% endfor %}
-		<div class="grid-spacer"></div>
-		<div class="grid-spacer"></div>
-		<div class="grid-spacer"></div>
-	</div>
+	
+	{% include 'product-grid' %}
+	
 	<div class="pagination">
 		{{ paginate | default_pagination | replace: 'Previous', '<' | replace: 'Next', '>' }}
 		{% if paginate.pages > 1 %}

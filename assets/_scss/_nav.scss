@@ -42,41 +42,41 @@
 		letter-spacing: 1px;
 	}
 }
-li.social-link {
-	margin-left: 0;
-	&.facebook {
-		margin-left: 20px;
-	}
-	a {
-		display: inline-block;	
-		vertical-align: middle;
-		text-indent: -9999em;
-		width: 22px;
-		height: 20px;
-		overflow: hidden;
-		background: url('social.png') no-repeat;
-		&:focus,
-		&:hover {
-			opacity: 0.5;	
-		}
-	}
-	&.twitter a {
-		background-position: -22px 0;	
-	}
-	&.pinterest a {
-		background-position: -44px 0;
-	}
-	&.instagram a {
-		background-position: -66px 0;
-	}
-	&.email a {
-		background-position: -90px 0;
-		margin-left: 5px;
-	}
-}
 nav a {
 	&.current,
 	li.active & {
 		color: $hover;
 	}
+}
+
+.sidebar {
+	ul.sidebar-categories {
+		margin-bottom: 30px;
+	}
+	ul {
+		list-style: none;
+		li {
+			padding: 4px 0;		
+			ul {
+				margin: 4px 0 0 10px;	
+			}
+		}
+		a {
+			&:focus,
+			&:hover,
+			&.current {
+				color: $hover;	
+			}
+		}
+	}
+	ul.drop-down {
+		display: none;
+	}
+	.current-parent ul.drop-down,
+	a.current + ul.drop-down {
+		display: block;
+	}
+}
+.current-parent > a {
+	color: $hover;
 }
