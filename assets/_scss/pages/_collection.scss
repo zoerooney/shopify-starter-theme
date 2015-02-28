@@ -1,11 +1,12 @@
 .content-table {
 	text-align: justify;
 }
-.grid-spacer {
-	display: inline-block;
-}
+.grid-spacer,
 .grid-product {
 	display: inline-block;
+	float: none;
+}
+.grid-product {
 	vertical-align: top;
 	text-align: center;
 	margin-bottom: 2em;
