@@ -1,0 +1,8 @@
+<div class="content-table clearfix">
+	{% for product in collection.products %}
+		{% include 'product-loop' with collection.handle %}
+	{% endfor %}
+	<div class="grid-spacer col span_4"></div>
+	<div class="grid-spacer col span_4"></div>
+	<div class="grid-spacer col span_4"></div>
+</div>
