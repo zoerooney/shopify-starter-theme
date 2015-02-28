@@ -67,10 +67,6 @@
 
         </form>
 
-        <div class="add-favorite">
-            {% include 'add-favorite' %}
-        </div>
-
         {% include 'share' %}
 
     </div><!-- /.content -->
@@ -122,13 +118,6 @@ function remove(s, t) {
   r += s.substring(0,i) + remove(s.substring(i + t.length), t);
   return r;
 }
-
-// Favorites toggle
-jQuery(function(){
-  jQuery('.favorites-link.off').click(function(){
-    jQuery('.tip').toggle();
-  });
-});
 
 // initialize multi selector for product
 jQuery(function() {
