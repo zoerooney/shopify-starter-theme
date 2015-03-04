@@ -28,6 +28,41 @@ input[type=submit], button, a.btn {
 	}
 }
 
+// Just sticking this here for now... customized selects
+// select {
+// 	width: 65%;
+// 	background: white;
+// 	border: none;
+// 	-webkit-appearance: none;
+// 	-moz-appearance: none;
+// 	padding: 6px 8px;
+// 	font-size: 12px;
+// 	height: 31px;
+// 	width: calc(100% + 1.5em);
+// 	border: 1px solid #cacaca;
+// 	border-radius: 0 !important;
+// }
+// .selector-wrapper {
+// 	clear: both;
+// 	margin-bottom: 8px;
+// 	overflow: hidden;
+// 	position: relative;
+// 	&:after {
+// 		content: "";
+// 		position: absolute;
+// 		width: 22px;
+// 		height: 31px;
+// 		bottom: 0;
+// 		right: 0;
+// 		padding-right: 1em;
+// 		background-repeat: no-repeat;
+// 	    background-image: url('arrow.png');
+// 	    background-position: left 13px;
+// 	    z-index: 2;
+// 	    border-right: 1px solid #cacaca;
+// 	}
+// }
+
 /* Placeholders */
 ::placeholder {
 	color: $text;
