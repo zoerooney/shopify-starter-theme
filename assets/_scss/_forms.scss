@@ -39,7 +39,7 @@ input[type=submit], button, a.btn {
 // 	font-size: 12px;
 // 	height: 31px;
 // 	width: calc(100% + 1.5em);
-// 	border: 1px solid #cacaca;
+// 	border: $border;
 // 	border-radius: 0 !important;
 // }
 // .selector-wrapper {
@@ -56,10 +56,10 @@ input[type=submit], button, a.btn {
 // 		right: 0;
 // 		padding-right: 1em;
 // 		background-repeat: no-repeat;
-// 	    background-image: url('arrow.png');
+// 	    background-image: url('select-arrow.png');
 // 	    background-position: left 13px;
 // 	    z-index: 2;
-// 	    border-right: 1px solid #cacaca;
+// 	    border-right: $border;
 // 	}
 // }
 
