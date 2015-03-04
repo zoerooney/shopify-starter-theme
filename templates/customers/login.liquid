@@ -1,7 +1,7 @@
 {% layout settings.customer_layout %}
 
 <div id="template" class="centered">
-	<div class="page-title subtitle">
+	<div class="page-title">
 		  {% if shop.checkout.guest_login %}
 		  	<h1>Check Out</h1>
 		  {% else %}
@@ -13,10 +13,10 @@
     	{% if shop.checkout.guest_login %}<h2>Log In to Your Account</h2>{% endif %}
       {{ form.errors | default_errors }}
 
-      <div id="login_email" class="clearfix large_form">
+      <p id="login_email" class="clearfix large_form">
         <label for="customer_email" class="login">Email Address</label>
         <input type="email" value="" name="customer[email]" id="customer_email" class="large" size="30" />
-      </div>
+      </p>
 
       {% if form.password_needed %}
 
@@ -24,22 +24,22 @@
           Customer Account Login
         {% endcomment %}
 
-        <div id="login_password" class="clearfix large_form">
+        <p id="login_password" class="clearfix large_form">
           <label for="customer_password" class="login">Password</label>
           <input type="password" value="" name="customer[password]" id="customer_password" class="large password" size="16" />
-          <div id="forgot_password">
+        </p>
+        <p id="forgot_password">
             <a href="#" onclick="showRecoverPasswordForm();return false;">Forgot your password?</a>
-          </div>
-        </div>
+        </p>
 
       {% endif %}
 
-      <div class="action_bottom">
+      <p class="action_bottom">
         <input class="btn" type="submit" value="Sign In" />
         {% unless shop.checkout.guest_login %}
         <span class="note">or {{ 'Create a new account' | customer_register_link }}</span>
         {% endunless %}
-      </div>
+      </p>
     {% endform %}
   </div>
 
@@ -56,14 +56,14 @@
     {% form 'recover_customer_password' %}
       {{ form.errors | default_errors }}
 
-      <div id="recover_email" class="clearfix large_form">
+      <p id="recover_email" class="clearfix large_form">
         <label for="email" class="large">Email</label>
         <input type="email" value="" size="30" name="email" id="recover-email" class="large" />
-      </div>
-      <div class="action_bottom">
+      </p>
+      <p class="action_bottom">
         <input class="btn" type="submit" value="Submit" />
         <span class="note">or <a href="#" onclick="hideRecoverPasswordForm();return false;">Cancel</a></span>
-      </div>
+      </p>
     {% endform %}
   </div>
 

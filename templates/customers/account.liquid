@@ -2,25 +2,25 @@
 
 <div id="template" class="centered">
   <div class="page-title subtitle">
-	 <h1>Your Account & Order History</h1>
+	 <h1>Your Account</h1>
 </div>
 <div id="admin_header">
   <div class="action_link action_return note" id='return_to_store'><a href="{{ shop.url }}">Return to Store</a> | {{ 'Logout' | customer_logout_link }}</div>
 </div>
 
-<div id="customer_sidebar">
+<div id="customer_sidebar" class="col pull-left span_4">
   <div id="customer_detail" class="group">
     <h2 class="name">{{ customer.name }}</h2>
     <p class="email note">{{ customer.email }}</p>
     <div class="address note">
       {% if customer.default_address != nil %}
-        <p>{{ customer.default_address.address1 }}</p>
+        <p>{{ customer.default_address.address1 }}<br>
         {% if customer.default_address.address2 != "" %}
-          <p>{{ customer.default_address.address2 }}</p>
+          {{ customer.default_address.address2 }}<br>
         {% endif %}
-        <p>{{ customer.default_address.city}}, {% if address.province_code %}{{customer.default_address.province_code}}, {% endif %}{{customer.default_address.country}}</p>
-        <p>{{ customer.default_address.zip}}</p>
-        <p>{{ customer.default_address.phone }}</p>
+        {{ customer.default_address.city}}, {% if address.province_code %}{{customer.default_address.province_code}}, {% endif %}{{customer.default_address.country}}<br>
+        {{ customer.default_address.zip}}<br>
+        {{ customer.default_address.phone }}</p>
       {% endif %}
       <a id="view_address" href="/account/addresses">View Addresses ({{ customer.addresses_count }})</a>
     </div>
@@ -28,7 +28,7 @@
   </div>
 </div>
 
-<div id="customer_orders">
+<div id="customer_orders" class="col span_8">
   {% if customer.orders.size != 0 %}
   <table>
     <thead>

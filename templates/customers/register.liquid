@@ -11,30 +11,30 @@
 	    {% form 'create_customer' %}
 	      {{ form.errors | default_errors }}
 
-	      <div id="first_name" class="clearfix large_form">
+	      <p id="first_name" class="clearfix large_form">
 	        <label for="first_name" class="login">First Name</label>
 	        <input type="text" value="" name="customer[first_name]" id="first_name" class="large" size="30" />
-	      </div>
+	      </p>
 
-	      <div id="last_name" class="clearfix large_form">
+	      <p id="last_name" class="clearfix large_form">
 	        <label for="last_name" class="login">Last Name</label>
 	        <input type="text" value="" name="customer[last_name]" id="last_name" class="large" size="30" />
-	      </div>
+	      </p>
 
-	      <div id="email" class="clearfix large_form">
+	      <p id="email" class="clearfix large_form">
 	        <label for="email" class="login">Email Address</label>
 	        <input type="email" value="" name="customer[email]" id="email" class="large" size="30" />
-	      </div>
+	      </p>
 
-	      <div id="password" class="clearfix large_form">
+	      <p id="password" class="clearfix large_form">
 	        <label for="password" class="login">Password</label>
 	        <input type="password" value="" name="customer[password]" id="password" class="large password" size="30" />
-	      </div>
+	      </p>
 
-	      <div class="action_bottom">
+	      <p class="action_bottom">
 	        <input class="btn" type="submit" value="Create" />
 	        <span class="note">or {{ "Log In" | customer_login_link }}</span>
-	      </div>
+	      </p>
 	    {% endform %}
 	  </div><!-- /#create-customer -->
 	 {% else %}
