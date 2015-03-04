@@ -4,13 +4,13 @@
 		 <h1>Order {{ order.name }}</h1>
 	</div>
 	<div id="admin_header">
-	  <div class="action_link action_return note" id='return_to_store'><a href="/account">Return to Account page</a></div>
+	  <p class="action_link action_return note" id='return_to_store'><a href="/account">Return to Account page</a></p>
 	</div>
 
 	{% if order.cancelled %}
 	<div id="order_cancelled" class="flash notice">
 	  <h5 id="order_cancelled_title">Order Cancelled <span class="note">on {{ order.cancelled_at | date: "%B %d, %Y %I:%M%p" }}</span></h5>
-	  <span class="note">{{ order.cancel_reason }}</span>
+	  <p class="note">{{ order.cancel_reason }}</p>
 	</div>
 	{% endif %}
 
