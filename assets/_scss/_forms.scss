@@ -29,24 +29,24 @@ input[type=submit], button, a.btn {
 }
 
 // Just sticking this here for now... customized selects
-// select {
-// 	width: 65%;
-// 	background: white;
-// 	border: none;
-// 	-webkit-appearance: none;
-// 	-moz-appearance: none;
-// 	padding: 6px 8px;
-// 	font-size: 12px;
-// 	height: 31px;
-// 	width: calc(100% + 1.5em);
-// 	border: $border;
-// 	border-radius: 0 !important;
-// }
 // .selector-wrapper {
 // 	clear: both;
 // 	margin-bottom: 8px;
 // 	overflow: hidden;
 // 	position: relative;
+// 	select {
+// 		width: 65%;
+// 		background: white;
+// 		border: none;
+// 		-webkit-appearance: none;
+// 		-moz-appearance: none;
+// 		padding: 6px 8px;
+// 		font-size: 12px;
+// 		height: 31px;
+// 		width: calc(100% + 1.5em);
+// 		border: $border;
+// 		border-radius: 0 !important;
+// 	}
 // 	&:after {
 // 		content: "";
 // 		position: absolute;
