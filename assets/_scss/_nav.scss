@@ -49,32 +49,37 @@ nav a {
 	}
 }
 
-.sidebar {
-	ul.sidebar-categories {
-		margin-bottom: 30px;
-	}
+.sidebar-categories {
+	margin-bottom: 30px;
 	ul {
 		list-style: none;
-		li {
-			padding: 4px 0;		
-			ul {
-				margin: 4px 0 0 10px;	
-			}
-		}
-		a {
-			&:focus,
-			&:hover,
-			&.current {
-				color: $hover;	
-			}
+		margin: 0;
+	}
+	&.desktop-nav {
+		@media (max-width: 741px){
+			display: none;
 		}
 	}
-	ul.drop-down {
-		display: none;
+	&.mobile-nav {
+		@media (max-width: $m){
+			margin-bottom: 30px !important;
+		}
+		@media (min-width: $m){
+			display: none;
+		}
 	}
-	.current-parent ul.drop-down,
-	a.current + ul.drop-down {
+}
+ul.submenu { 
+	// sidebar submenus
+	margin: 2px 0 25px;
+	a {
 		display: block;
+		position: relative;
+		&.current,
+		&:hover,
+		&:focus {
+			
+		}
 	}
 }
 .current-parent > a {

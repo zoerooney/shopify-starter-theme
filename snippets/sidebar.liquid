@@ -1,31 +1,48 @@
-<div class="sidebar-categories">
-	<h3>Shop by Category</h3>
-	
-	  <ul class="clearfix">
-	    {% for link in linklists[settings.main_linklist].links %}
-	    {% if linklists[link.handle] == empty %}
-	    <li><a href="{{ link.url }}"{% if link.active %} class="current"{% endif %}><span>{{ link.title }}</span></a></li>
-	    {% else %}
-	    <li class="drop-down"><a href="{{ link.url }}"{% if link.active %} class="current"{% endif %}><span>{{ link.title }}</span></a>
-	      <ul class="drop-down">
-	        {% for link in linklists[link.handle].links %}
-	        <li><a href="{{ link.url }}"{% if link.active %} class="current"{% endif %}>{{ link.title }}</a></li>
-	        {% endfor %}
-	      </ul>
-	    </li>
-	    {% endif %}
-	    {% endfor %}
-	  </ul>
-  
-</div>
-
-<div class="feature-categories">
-	<h3>Shop by Feature</h3>
-	<ul class="clearfix">
-		{% for link in linklists.features.links %}
-		<li><a href="{{ link.object.url }}"{% if link.active %} class="current"{% endif %}>{% if link.object.image %}
-		{{ link.object.image.src | collection_img_url: 'pico' | img_tag: link.object.title  }}
-		{% endif %}<span>{{ link.object.title }}</span></a></li>
+<div class="sidebar-categories desktop-nav">	
+	<ul>
+		{% for link in linklists.sidebar.links %}
+			{% if linklists[link.handle] == empty %}
+				<li class="solo-link"><a href="{{ link.url }}"{% if link.active %} class="current"{% endif %}>{{ link.title }}</a></li>
+			{% else %}
+				<li class="submenu-parent">
+					<h3>
+						{% if settings.top_level_nav %}
+						<a href="{{ link.url }}"{% if link.active %} class="current"{% endif %}>
+						{% endif %}
+							{{ link.title }}
+						{% if settings.top_level_nav %}
+						</a>
+						{% endif %}
+					</h3>
+					<ul class="submenu">
+						{% for link in linklists[link.handle].links %}
+							<li><a href="{{ link.url }}"{% if link.active %} class="current"{% endif %}>{{ link.title }}</a></li>
+						{% endfor %}
+					</ul>
+				</li>
+			{% endif %}
 		{% endfor %}
 	</ul>
 </div>
+<div class="sidebar-categories mobile-nav selector-wrapper">
+	<select id="browse" onchange="browse()">
+		<option value="">shop by category</option>
+		{% for link in linklists.sidebar.links %}
+			{% if linklists[link.handle] == empty %}
+				<option value="{{ link.url }}">{{ link.title }}</option>
+			{% else %}
+				<optgroup label="{{ link.title }}">
+			    	{% if settings.top_level_nav %}
+			    	<option value="{{ link.url }}">All {{ link.title }}</option>
+			    	{% endif %}
+			        {% for link in linklists[link.handle].links %}
+			        <option value="{{ link.url }}">{{ link.title }}</option>
+			        {% endfor %}
+			    </optgroup>
+			{% endif %}
+		{% endfor %}
+	</select>
+</div>
+<script type="text/javascript">
+	function browse() {var href = document.getElementById('browse').value; window.location = href;}
+</script>
