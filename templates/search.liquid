@@ -30,7 +30,6 @@
 						<div class="caption">
 							<a href="{{ item.url }}">
 								<h3>{{ item.title }}</h3>
-								<h4>{{ item.vendor }}</h4>
 								<span class="price{% if item.compare_at_price > item.price %} sale{% endif %}{% unless item.available %} soldout{% endunless %}">
 									{% if item.available %}
 										{% if item.compare_at_price > item.price %}

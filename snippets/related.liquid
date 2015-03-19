@@ -1,33 +1,79 @@
 <!-- Solution brought to you by Caroline Schnapp -->
-<!-- See this: http://wiki.shopify.com/Related_Products -->
+<!-- See this: https://docs.shopify.com/support/your-store/products/can-i-recommend-related-products -->
 
-{% assign image_size = 'large' %}
-{% assign heading = 'PS' %}
+{% assign number_of_products = 4 %}
+{% assign heading = 'You may also like' %}
 
-{% if product.metafields.recommendations.productHandles %}
-<div id="content-table" class="related">
-<h2>{{ heading }}</h2>
-<div class="related-products"></div>
-</div>
+{% comment %}Limits and exclusions{% endcomment %}
+{% assign same_vendor = false %}
+{% assign same_type = false %}
+{% assign exclusions = 'frontpage,all' | split: ',' %}
+
+
+{% comment %}
+Looking for a relevant collection.
+{% endcomment %}
+
+{% assign found_a_collection = false %}
+{% if collection and collection.all_products_count > 1 %}
+	{% unless exclusions contains collection.handle %}
+		{% assign found_a_collection = true %}
+	{% endunless %}
+{% endif %}
+{% unless found_a_collection %}
+	{% for c in product.collections %}
+		{% unless exclusions contains c.handle or c.all_products_count < 2 %}
+			{% assign found_a_collection = true %}
+			{% assign collection = c %}
+			{% break %}
+		{% endunless %}
+	{% endfor %}
+{% endunless %}
+
+{% comment %}
+If we have a relevant collection.
+{% endcomment %}
+
+{% if found_a_collection %}
+
+	{% assign counter = 0 %}
+	{% assign break_at = number_of_products %}
+	{% assign current_product = product %}
+
+	{% capture related_items %}
+		{% for product in collection.products %}
+			{% unless product.handle == current_product.handle %}
+				{% unless same_vendor and current_product.vendor != product.vendor %}
+					{% unless same_type and current_product.type != product.type %}
+						{% include 'product-loop' %}
+						{% assign counter = counter | plus: 1 %}
+						{% if counter == break_at %}
+							{% break %}
+						{% endif %}
+					{% endunless %}
+				{% endunless %}
+			{% endunless %}
+		{% endfor %}
+	{% endcapture %}
+
+	{% assign related_items = related_items | trim %}
+
+	{% unless related_items == blank %}
+
+		<div class="related row">
+
+			{% unless heading == blank %}
+				<h2>{{ heading }}</h2>
+			{% endunless %}
+
+			<div class="content-table">
+				{{ related_items }}
+				<div class="grid-spacer col span_4"></div>
+				<div class="grid-spacer col span_4"></div>
+				<div class="grid-spacer col span_4"></div>
+			</div>
+		</div>
+
+	{% endunless %}
 
 {% endif %}
-
-<script>!window.jQuery && document.write('<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"><\/script>')</script>
-{{ 'api.jquery.js' | shopify_asset_url | script_tag }}
-
-<script type="text/javascript" charset="utf-8">
-//<![CDATA[
-  var recommendations = [];
-  {% if product.metafields.recommendations.productHandles %}
-  recommendations = jQuery.trim({{ product.metafields.recommendations.productHandles | json }}).split(/[\s,;]+/);
-  {% endif %}
-  if (recommendations.length && recommendations[0] !== '') {
-    var list = jQuery('div.related-products');
-    for (var i=0; i<recommendations.length; i++) {
-      jQuery.getJSON('/products/' + recommendations[i] + '.js', function(product) {
-        list.append('<div id="product-slide-{{ product.handle }}" class="product"><div class="image"><a href="' + product.url +'"><img src="' + product.images[0].replace(/(\.jpg|\.png|\.jpeg|\.gif)/, '_{{ image_size }}$1') + '" /></a></div><div class="caption"><a href="' + product.url + '"><h3>' + product.vendor + '</h3><h4>' + product.title + '</h4><span class="money">' + Shopify.formatMoney(product.price, '{{ shop.money_format }}') + '</span></a></div></div>');
-      });
-    }
-  }  
-//]]>
-</script>

@@ -1,0 +1,21 @@
+.row {
+	&.heading-row,
+	&.item-row,
+	&.footer-row {
+		padding: 10px 0;
+		@media (max-width: $m){
+			padding: 10px;
+		}
+	}
+	&.heading-row {
+		@media (max-width: $m){
+			display: none;
+		}
+	}
+	&.item-row {
+		&:nth-of-type(even) {
+			// alternating background colors:
+			// background: lighten($lightblue,6);
+		}
+	}
+}

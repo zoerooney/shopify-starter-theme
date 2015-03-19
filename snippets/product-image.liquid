@@ -11,14 +11,14 @@
 
 {% if product.images.size > 1 %}
 <div class="thumbs clearfix">
-  <div class="thumbs-header">additional views</div>
-  {% for image in product.images %}
-  <div class="image{% cycle 'position': '', '', '', ' last' %}">
-    <a href="{{ image.src | product_img_url: 'original' }}" class="fancybox" rel="gallery">
-      <img src="{{ image.src | product_img_url: 'compact' }}" alt="{{ image.alt | escape }}" />
-    </a>
-  </div>
-  {% endfor %}
+	<div class="thumbs-header">additional views</div>
+		{% for image in product.images %}
+		<div class="image{% cycle 'position': '', '', '', ' last' %}">
+			<a href="{{ image.src | product_img_url: 'original' }}" class="fancybox" rel="gallery">
+				<img src="{{ image.src | product_img_url: 'compact' }}" alt="{{ image.alt | escape }}" />
+			</a>
+		</div>
+	{% endfor %}
 </div><!-- /.thumbs -->
 {% endif %}
 <script>
