@@ -29,39 +29,47 @@ input[type=submit], button, a.btn {
 }
 
 // Just sticking this here for now... customized selects
-// .selector-wrapper {
-// 	clear: both;
-// 	margin-bottom: 8px;
-// 	overflow: hidden;
-// 	position: relative;
-// 	select {
-// 		width: 65%;
-// 		background: white;
-// 		border: none;
-// 		-webkit-appearance: none;
-// 		-moz-appearance: none;
-// 		padding: 6px 8px;
-// 		font-size: 12px;
-// 		height: 31px;
-// 		width: calc(100% + 1.5em);
-// 		border: $border;
-// 		border-radius: 0 !important;
-// 	}
-// 	&:after {
-// 		content: "";
-// 		position: absolute;
-// 		width: 22px;
-// 		height: 31px;
-// 		bottom: 0;
-// 		right: 0;
-// 		padding-right: 1em;
-// 		background-repeat: no-repeat;
-// 	    background-image: url('select-arrow.png');
-// 	    background-position: left 13px;
-// 	    z-index: 2;
-// 	    border-right: $border;
-// 	}
-// }
+.selector-wrapper {
+	clear: both;
+	margin-bottom: 8px;
+	overflow: hidden;
+	position: relative;
+	select {
+		width: 70%;
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		padding: 6px 8px;
+		font-family: $main;
+		color: $text;
+		height: 31px;
+		width: calc(100% + 2.25em);
+		border: $border;
+		border-radius: 0 !important;
+		position: relative;
+		z-index: 2;
+		background: transparent;
+		&:hover {
+			cursor: pointer;
+		}
+		&:focus {
+			outline: none;
+		}
+	}
+ 	&:after {
+ 		content: "";
+		position: absolute;
+		width: 22px;
+		height: 31px;
+		top: 0px;
+		right: 0;
+		padding-right: 2em;
+		background-repeat: no-repeat;
+	    background-image: url('select-arrow.png');
+	    background-position: left top;
+	    z-index: 0;
+	    border-right: $border;
+ 	}
+}
 
 /* Placeholders */
 ::placeholder {
