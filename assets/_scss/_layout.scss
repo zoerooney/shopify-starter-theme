@@ -1,53 +1,25 @@
-html {
-	box-sizing: border-box;
-}
-*, *:before, *:after {
-  box-sizing: inherit;
-}
+// box-sizing: border-box; is set in _reset.scss
+
 body {
 	background: $bg; 
-	min-width: $width-outer;
 }
-
-#content,
-#template {
-	padding: 34px 0;
+.main {
 	min-height: 400px;
 }
-
-#template.centered {
-	text-align: center;
-	form {
-		width: 300px;
-		margin: 0 auto;
-		text-align: left;
-	}
-}
-
-.wrapper,
 .container {
-	width: 90%;
+	width: 98%;
 	max-width: $width;
 	margin: 0 auto;
 	@include clearfix;
+	@media (max-width: $m) {
+		width: 96%;
+	}
 }
 
+// Simple grid system:
 .row { 
 	@include clearfix;
 	clear: both;
-	padding-bottom: 0em;
-	&.top-border {
-		border-top: $border;
-		margin-top: 3em;
-		padding-top: 2em;
-		@media all and (max-width: $m) {
-			margin-top: 1.5rem;
-			padding-top: 1.5rem;
-		}
-	}
-	p {
-		margin-right: 10px;
-	}
 }
 .col { 
 	display: block;
@@ -57,7 +29,14 @@ body {
 	&.pull-left {
 		margin-left: 0;
 	}
+	&.c {
+		text-align: center;
+	}
+	&.r {
+		text-align: right;
+	}
 }
+
 .span_1 { width: 6.5%; }
 .span_2 { width: 15.0%; }
 .span_3 { width: 23.5%; }
@@ -71,6 +50,13 @@ body {
 .span_11 { width: 91.5%; }
 .span_12 { width: 100%; }
 
+.span_3,
+.span_4 {
+	@media (max-width: $m) {
+		width: 49.0%;
+	}
+}
+
 .span_1,
 .span_2,
 .span_3,
@@ -79,8 +65,11 @@ body {
 .span_6,
 .span_7,
 .span_8,
-.span_9 {
-	@media all and (max-width: $s) {
+.span_9,
+.span_10,
+.span_11,
+.span_12 {
+	@media (max-width: $s) {
 		width: 100%;
 		margin-left: 0;
 	}

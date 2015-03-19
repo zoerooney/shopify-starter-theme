@@ -87,9 +87,8 @@
 	{% comment %}
 	  Theme dependent JavaScript.
 	{% endcomment %}  
-	{{ 'jquery.cookie.js' | asset_url | script_tag }}
+	{% comment %}{{ 'jquery.cookie.js' | asset_url | script_tag }}{% endcomment %}
 	{{ 'jquery.bxslider.min.js' | asset_url | script_tag }}
-	{{ 'jquery.fancybox.pack.js' | asset_url | script_tag }}
 	{{ 'option_selection.js' | shopify_asset_url | script_tag }}
 	{{ 'ajaxify.js' | asset_url | script_tag }}
 	{{ 'shop.js' | asset_url | script_tag }}

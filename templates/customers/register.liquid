@@ -1,45 +1,38 @@
 {% layout settings.customer_layout %}
 
-<div id="template" class="centered">
-  <div class="page-title">
-  	 <h1>Create Your Account</h1>
-  </div>
-  <div id="customer">
-  	{% unless customer %}
-	  <!-- Create Customer -->
-	  <div id="create-customer">
-	    {% form 'create_customer' %}
-	      {{ form.errors | default_errors }}
+<div class="page-title">
+	<h1>Create Your Account</h1>
+</div>
 
-	      <p id="first_name" class="clearfix large_form">
-	        <label for="first_name" class="login">First Name</label>
-	        <input type="text" value="" name="customer[first_name]" id="first_name" class="large" size="30" />
-	      </p>
-
-	      <p id="last_name" class="clearfix large_form">
-	        <label for="last_name" class="login">Last Name</label>
-	        <input type="text" value="" name="customer[last_name]" id="last_name" class="large" size="30" />
-	      </p>
-
-	      <p id="email" class="clearfix large_form">
-	        <label for="email" class="login">Email Address</label>
-	        <input type="email" value="" name="customer[email]" id="email" class="large" size="30" />
-	      </p>
-
-	      <p id="password" class="clearfix large_form">
-	        <label for="password" class="login">Password</label>
-	        <input type="password" value="" name="customer[password]" id="password" class="large password" size="30" />
-	      </p>
-
-	      <p class="action_bottom">
-	        <input class="btn" type="submit" value="Create" />
-	        <span class="note">or {{ "Log In" | customer_login_link }}</span>
-	      </p>
-	    {% endform %}
-	  </div><!-- /#create-customer -->
-	 {% else %}
-	 	<p style="text-align:center;">Logged in as {{ customer.name }}</p>
-	 	<p style="text-align:center;"><a href="/account/logout">Logout</p>
-	 {% endunless %}
-  </div>
+<div class="account-form">
+	{% if customer %}
+		<p>Logged in as {{ customer.name }}</p>
+		<p><a href="/account/logout" class="btn">Log Out</p>
+	{% else %}
+		<div id="create-customer">
+			{% form 'create_customer' %}
+				{{ form.errors | default_errors }}
+				<p>
+					<label for="first_name">First Name</label>
+					<input type="text" value="" name="customer[first_name]" id="first_name" size="30" />
+				</p>
+				<p>
+					<label for="last_name">Last Name</label>
+					<input type="text" value="" name="customer[last_name]" id="last_name" size="30" />
+				</p>
+				<p>
+					<label for="email">Email Address</label>
+					<input type="email" value="" name="customer[email]" id="email" size="30" />
+				</p>
+				<p>
+					<label for="password">Password</label>
+					<input type="password" value="" name="customer[password]" id="password" size="30" />
+				</p>
+				<p>
+					<input class="btn" type="submit" value="Create Account" />
+					or {{ "Log In" | customer_login_link }}
+				</p>
+			{% endform %}
+		</div><!-- #create-customer -->
+	{% endif %}
 </div>

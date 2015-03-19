@@ -1,25 +1,30 @@
-table {
-	width: 100%;
-	th {
-		vertical-align: middle;
+.cart-layout {
+	h2 {
+		padding-left: 2%;
 	}
-	td {
-		padding: 5px 10px;
-		vertical-align: middle;
-		&:first-child {
-			padding-left:0px;
-		}
-		&:last-child {
-			padding-right:0px;
+	.small {
+		display: block;
+		clear: both;
+	}
+}
+.product-image {
+	padding: 0 10px 10px;
+	@media (max-width: $m){
+		padding: 0 0 10px;
+	}
+}
+.subtotal-details {
+	.col {
+		@media (max-width: $m){
+			width: 49%;
 		}
 	}
 }
-#cart .summary td {
-	padding-top:30px;
+.item-quantity {
+	width: 55px;
 }
-#cart .product_image {
-	a,
-	img {
-		display: block;	
+.more-shopping {
+	@media (max-width: $m){
+		display: none;
 	}
 }

@@ -1,111 +1,100 @@
 {% layout settings.customer_layout %}
-	<div id="template" class="centered">
-	  <div class="page-title subtitle">
-		 <h1>Order {{ order.name }}</h1>
-	</div>
-	<div id="admin_header">
-	  <p class="action_link action_return note" id='return_to_store'><a href="/account">Return to Account page</a></p>
-	</div>
 
+<div class="page-title">
+	<h1>Order {{ order.name }}</h1>
+</div>
+
+<div class="admin-header row">
+	<p><a href="/account">Back to Account Page</a></p>
+	<p>Order placed on {{ order.created_at | date: "%B %d, %Y %I:%M%p" }}</p>
 	{% if order.cancelled %}
-	<div id="order_cancelled" class="flash notice">
-	  <h5 id="order_cancelled_title">Order Cancelled <span class="note">on {{ order.cancelled_at | date: "%B %d, %Y %I:%M%p" }}</span></h5>
-	  <p class="note">{{ order.cancel_reason }}</p>
-	</div>
+		<h5>Order cancelled on {{ order.cancelled_at | date: "%B %d, %Y %I:%M%p" }}</h5>
+		<p>{{ order.cancel_reason }}</p>
 	{% endif %}
+</div>
 
-	<div class="note order_date">Placed on {{ order.created_at | date: "%B %d, %Y %I:%M%p" }}</div>
-
-	<div id="order_address" class="col span_4 pull-left">
-	  <div id="order_payment">
-	    <h5 class="order_section_title">Billing Address</h5>
-	    <p><span class="note">Payment Status:</span> <span class="status_{{ order.financial_status }}">{{ order.financial_status }}</span></p>
-	    <div class="address note">
-	      <p>{{ order.billing_address.name }}<br>
+<div class="row">
+	<div class="col span_4 pull-left">
+		<h4>Billing Address</h4>
+		<p>Payment Status: <span class="status_{{ order.financial_status }}">{{ order.financial_status }}</span></p>
+		<p>
+			{{ order.billing_address.name }}<br>
 			{% if order.billing_address.company != blank %}{{ order.billing_address.company }}<br>{% endif %}
 			{{ order.billing_address.street }}<br>
 			{{ order.billing_address.city }}, {{ order.billing_address.province }}<br>
 			{{ order.billing_address.country }} {{ order.billing_address.zip }}<br>
-			{{ order.billing_address.phone }}</p>
-	    </div>
-	  </div>
-	  {% if order.shipping_address %}
-	    <div id="order_shipping">
-	      <h5 class="order_section_title">Shipping Address</h5>
-	      <p><span class="note">Fulfillment Status:</span> <span class="status_{{ order.fulfillment_status }}">{{ order.fulfillment_status }}</span></p>
-	      <div class="address note">
-	        <p>{{ order.shipping_address.name }}<br>
-	        {% if order.shipping_address.company != blank %}{{ order.shipping_address.company }}<br>{% endif %}
-	        {{ order.shipping_address.street }}<br>
-	        {{ order.shipping_address.city }}, {{ order.shipping_address.province }}<br>
-	        {{ order.shipping_address.country }} {{ order.shipping_address.zip }}<br>
-	        {{ order.shipping_address.phone }}</p>
-	      </div>
-	    </div>
-	  {% endif %}
+			{{ order.billing_address.phone }}
+		</p>
+
+		{% if order.shipping_address %}
+			<h4>Shipping Address</h4>
+			<p>Fulfillment Status: <span class="status_{{ order.fulfillment_status }}">{{ order.fulfillment_status }}</span></p>
+			<p>
+				{{ order.shipping_address.name }}<br>
+				{% if order.shipping_address.company != blank %}{{ order.shipping_address.company }}<br>{% endif %}
+				{{ order.shipping_address.street }}<br>
+				{{ order.shipping_address.city }}, {{ order.shipping_address.province }}<br>
+				{{ order.shipping_address.country }} {{ order.shipping_address.zip }}<br>
+				{{ order.shipping_address.phone }}
+			</p>
+		{% endif %}
 	</div>
 	<div class="col span_8">
-		<table id="order_details">
-		  <thead>
-		    <tr>
-		      <th>Product</th>
-		      <th>Price</th>
-		      <th class="center">Quantity</th>
-		      <th class="total">Total</th>
-		    </tr>
-		  </thead>
-		  <tbody>
-		    {% for line_item in order.line_items %}
-		    <tr id="{{ line_item.id }}" class="{% cycle 'odd', 'even' %}">
-		      <td class="product">
-		        {{ line_item.title | link_to: line_item.product.url }} 
-		        {% if line_item.fulfillment %}
-		          <div class="note">
-		            Fulfilled {{ line_item.fulfillment.created_at | date: "%b %d" }}
-		            {% if line_item.fulfillment.tracking_number %}
-		              <a href="{{ line_item.fulfillment.tracking_url }}">{{ line_item.fulfillment.tracking_company }} #{{ line_item.fulfillment.tracking_number}}</a>
-		            {% endif %}
-		          </div>
-		        {% endif %}
-		      </td>
-		      <td class="money">{{ line_item.price | money }}</td>
-		      <td class="quantity cente">{{ line_item.quantity }}</td>
-		      <td class="total money">{{ line_item.quantity | times: line_item.price | money }}</td>
-		    </tr>
-		    {% endfor %}
-		  </tbody>  
-		  <tfoot>
-		    <tr class="order_summary note">
-		      <td class="label" colspan="3">Subtotal:</td>
-		      <td class="total money">{{ order.subtotal_price | money }}</td>
-		    </tr>   
+		<div class="row heading-row">
+			<div class="col span_6 pull-left"><strong>Product</strong></div>
+			<div class="col span_3"><strong>Price</strong></div>
+			<div class="col span_3 c"><strong>Qty</strong></div>
+			<div class="col span_3 total r"><strong>Total</strong></div>
+		</div>
+		{% for line_item in order.line_items %}
+			<div class="row item-row">
+				<div class="col span_6 pull-left">
+					<h5>{{ line_item.title | link_to: line_item.product.url }}</h5>
+					{% if line_item.fulfillment %}
+						<p>
+							Fulfilled {{ line_item.fulfillment.created_at | date: "%b %d" }}
+							{% if line_item.fulfillment.tracking_number %}
+								<br>
+								<a href="{{ line_item.fulfillment.tracking_url }}">{{ line_item.fulfillment.tracking_company }} #{{ line_item.fulfillment.tracking_number}}</a>
+							{% endif %}
+						</p>
+					{% endif %}
+				</div>
+				<div class="col span_3">{{ line_item.price | money }}</div>
+				<div class="col span_3 c">{{ line_item.quantity }}</div>
+				<div class="col span_3 r total">{{ line_item.quantity | times: line_item.price | money }}</div>
+			</div>
+		{% endfor %}
+		
+		<div class="row footer-row">
+			<div class="col span_9 pull-left r">Subtotal: </div>
+			<div class="col span_3 r">{{ order.subtotal_price | money }}</div>
+		</div>
 
-		    {% for discount in order.discounts %}
-		      <tr class="order_summary discount">
-		        <td class="label" colspan="3">{{ discount.code }} Discount:</td>
-		        <td class="total money">{{ discount.savings | money }}</td>
-		      </tr>
-		    {% endfor %}
+		{% for discount in order.discounts %}
+		<div class="row footer-row">
+			<div class="col span_9 pull-left r">{{ discount.code }} Discount: </div>
+			<div class="col span_3 r">{{ discount.savings | money }}</div>
+		</div>
+		{% endfor %}
 
-		    {% for shipping_method in order.shipping_methods %}
-		    <tr class="order_summary note">
-		      <td class="label" colspan="3">Shipping ({{ shipping_method.title }}):</td>
-		      <td class="total money">{{ shipping_method.price | money }}</td>
-		    </tr>
-		    {% endfor %}
-		    
-		    {% for tax_line in order.tax_lines %}
-		      <tr class="order_summary note">
-		        <td class="label" colspan="3">Tax ({{ tax_line.title }} {{ tax_line.rate | times: 100 }}%):</td>
-		        <td class="total money">{{ tax_line.price | money }}</td>
-		      </tr>
-		    {% endfor %}    
-		            
-		    <tr class="order_summary order_total">
-		      <td class="label" colspan="3">Total:</td>
-		      <td class="total money">{{ order.total_price | money }} {{ order.currency }}</td>
-		    </tr>   
-		  </tfoot>  
-		</table>
+		{% for shipping_method in order.shipping_methods %}
+		<div class="row footer-row">
+			<div class="col span_9 pull-left r">Shipping ({{ shipping_method.title }}): </div>
+			<div class="col span_3 r">{{ shipping_method.price | money }}</div>
+		</div>
+		{% endfor %}
+
+		{% for tax_line in order.tax_lines %}
+		<div class="row footer-row">
+			<div class="col span_9 pull-left r">Tax ({{ tax_line.title }} {{ tax_line.rate | times: 100 }}%): </div>
+			<div class="col span_3 r">{{ tax_line.price | money }}</div>
+		</div>
+		{% endfor %}    
+
+		<div class="row footer-row total">
+			<div class="col span_9 pull-left r">Total: </div>
+			<div class="col span_3 r">{{ order.total_price | money }} {{ order.currency }}</div>
+		</div>
 	</div>
-</div>
+</div><!-- row -->

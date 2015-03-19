@@ -1,12 +1,12 @@
 <div class="page-title">
-	 <h2>Shopping Bag</h2>
+	<h1>Your Cart</h1>
 </div>
 
 <div id="cart" class="container">
     {% if cart.item_count == 0 %}
 
-        <div class="row top-border">
-            <p>There is no item in your cart.</p>
+        <div class="row top-border centered-text">
+            <p class="not-found">Your cart is empty</p>
             <a href="{{ settings.main_url }}/shop/" class="btn tier-2">CONTINUE SHOPPING</a>
         </div>
 
@@ -17,32 +17,27 @@
             <div class="row cart-layout">
                 <div class="row heading-row">
                     <div class="col pull-left span_6 product-title th">
-                        <h3>ITEM</h3>
+                        <h2>ITEM</h2>
                     </div>
                     <div class="col span_6">
-                        <div class="col span_4 pull-left th c"><h3>PRICE</h3></div>
-                        <div class="col span_4 th c"><h3>QUANTITY</h3></h3></div>
-                        <div class="col span_4 th r"><h3>TOTAL</h3></div>
+                        <div class="col span_4 pull-left th c"><h2>PRICE</h2></div>
+                        <div class="col span_4 th c"><h2>QUANTITY</h2></div>
+                        <div class="col span_4 th r"><h2>TOTAL</h2></div>
                     </div>
                 </div>
                 {% for item in cart.items %}
-                    <div class="row">
+                    <div class="row item-row">
                         <div class="col pull-left span_6 product-title">
-                            <div class="col pull-left span_5">
-                                <div class="product_image">
-                                    <img src="{{ item | img_url: 'compact' }}"  alt="{{ item.product.featured_image.url }}" />
+                            <div class="col pull-left span_4">
+                                <div class="product-image">
+                                    <img src="{{ item | img_url: 'small' }}"  alt="{{ item.product.featured_image.url }}" />
                                 </div>
                             </div>
-                            <div class="col span_7 product-title">
-                                {% if item.product.type == 'Event' %}
-                                    <a href="{{ settings.main_url }}/events/{{ item.product.handle }}">{{ item.product.title }}</a><br>
-                                    {% for opt in item.product.options %}
-                                        {{ opt }}: {% if forloop.first %}{{ item.variant.option1 }}{% elsif forloop.index == 2 %}{{ item.variant.option2 }}{% elsif forloop.index == 3 %}{{ item.variant.option3 }}{% endif %}<br>
-                                    {% endfor %}
-                                {% elsif item.title == 'Gift Wrap' %}
-                                    {{ item.product.title }}<br>
+                            <div class="col span_8 product-title">
+                                {% if item.title == 'Gift Wrap' %}
+                                    <strong>{{ item.product.title }}</strong><br>
                                 {% else %}
-                                     <a href="{{ item.url }}">{{ item.product.title }}</a><br>
+                                     <a href="{{ item.url }}"><strong>{{ item.product.title }}</strong></a><br>
                                      {% for opt in item.product.options %}
                                         {{ opt }}: {% if forloop.first %}{{ item.variant.option1 }}{% elsif forloop.index == 2 %}{{ item.variant.option2 }}{% elsif forloop.index == 3 %}{{ item.variant.option3 }}{% endif %}<br>
                                     {% endfor %}
@@ -66,11 +61,8 @@
                                 {{ item.price | money }}
                             </div>
                             <div class="col span_4 c">
-                                <input type="text" size="4" name="updates[]" id="updates_{{item.id}}" value="{{ item.quantity }}" onfocus="this.select();" class="item-quantity" />
-                                {% unless item.title == 'Gift Wrap' %}
-                                <input type="submit" id="update-cart" class="text-button" name="update" value="Update" />
-                                {% endunless %}
-                                <a href="/cart/change?line={{ forloop.index }}&quantity=0" title="remove">Remove</a>
+                                <input type="number" size="4" name="updates[]" id="updates_{{item.id}}" value="{{ item.quantity }}" onfocus="this.select();" class="item-quantity" />
+                                <a href="/cart/change?line={{ forloop.index }}&quantity=0" class="text-button">Remove</a>
                             </div>
                             <div class="col span_4 r">
                                 {{ item.line_price | money }}
@@ -80,34 +72,42 @@
                 {% endfor %}
                 <div class="row summary summary-first">
                     <div class="col pull-left span_6">
-                        <label for="note" style="display:block;"><a href="#" onClick="jQuery('#note').toggle(); return false;">Add Special Instructions or a Gift Message</a></label>
-                        <textarea id="note" name="note" rows="2" cols="50" style="display:none;">{{ cart.note }}</textarea>
+                    	<div class="row footer-row">
+	                        <h6>Add Special Instructions</h6>
+	                        <textarea id="note" name="note" rows="2" cols="40">{{ cart.note }}</textarea>
+                        </div>
                         {% comment %}{% include 'gift-wrap' %}{% endcomment %}
                     </div>
                     <div class="col span_6 r">
-                        <div class="row no-border subtotal-details">
+                        <div class="row no-border subtotal-details footer-row">
                             <div class="col pull-left span_6">
                                 <span class="total"><strong>SUBTOTAL</strong></span>
                                  <span class="small">Excluding tax &amp; shipping</span>
                             </div>
-                            <div class="col span_6">
-                                <span class="price">{{ cart.total_price | money }}</span>
+                            <div class="col span_6 centered-text">
+                                <h4><span class="price">{{ cart.total_price | money }}</span></h4>
                             </div>
                         </div>
-                        <div class="row no-border checkout-links">
+                        <div class="row no-border checkout-links footer-row">
                             <div class="col pull-left span_6">
                                 <div class="more-shopping">
                                     <a href="{{ settings.main_url }}/shop/">Continue Shopping</a>
                                 </div>
                             </div>
-                            <div class="col span_6">
-                               <input type="submit" id="checkout" name="checkout" value="CheckOut" />
+                            <div class="col span_6 centered-text">
+                               <input type="submit" id="update-cart" class="text-button" name="update" value="Update" />
+                            </div>
+                        </div>
+                        <div class="row no-border checkout-links footer-row">
+                            <div class="col pull-left span_4"></div>
+                            <div class="col span_8 centered-text">
+                               <button type="submit" id="checkout" class="fancy" name="checkout">CHECKOUT</button>
                             </div>
                         </div>
                     </div>
                 </div>
                 {% if additional_checkout_buttons %}
-                    <div class="row">
+                    <div class="row footer-row">
                         <div class="col pull-left span_12 r">
                                 <p>- or -</p>
                                 {{ content_for_additional_checkout_buttons }}

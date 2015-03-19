@@ -1,10 +1,5 @@
 $thumbsize: 50px;
 
-.product_body {
-	margin-bottom: 35px;
-	h1 {
-	}
-}
 #product {
 	.images {
 		text-align: center;
@@ -13,92 +8,50 @@ $thumbsize: 50px;
 			clear: both;
 			padding-top: 10px;
 			.image {
-				margin: 8px 6px 8px 0; 
+				display: inline-block; 
+				vertical-align: top;
 				width: $thumbsize; 
 				height: $thumbsize; 
 				overflow: hidden;
-				text-align:center; 
-				display: inline-block; 
-				vertical-align: top;
+				margin: 8px 6px 8px 0; 
 				&.last {
-					margin: 8px 0 8px 0;
+					margin-right: 0;
 				}
 			}
 		}
-	}
-	img {
-		width: 100%;
-		max-width: 100%;
-		height: auto;
-	}
-}
-#product .select {
-	margin-bottom: 0;
-	.selector-wrapper {
-		margin-right: 10px;
-		float: left;
+		img {
+			width: 100%;
+			max-width: 100%;
+			height: auto;
+		}
 	}
 }
-
-#product .variants {
+.variants {
 	label {
-		display:inline-block;
-		float: left; 
-		vertical-align: middle;
-		padding-top: 4px;
-		margin-right: 10px;
+		margin: 0 0 0.5em;
 	}
 	input,
-	select {
-		display:inline-block;
-		vertical-align: middle;
+	select,
+	textarea {
+		margin: 0 0 1em;
 	}
-	#quantity {
-		width: 50px;
-		border: $border;
-		text-align: center;
-		padding: 2px 4px;
-	}
-}
-#product .purchase {
-	margin: 25px 0;
-	input[type=submit] {
-		padding: 5px 15px;
-		text-transform: uppercase;
-		&:focus,
-		&:hover {
-		}
-	}
-}
-
-
-#related {
-	clear: both;
-	width: 100%;
-	padding: 0 0 35px;
-	ul {
-		list-style: none;	
-		margin: 0;
-		text-align: center;
-		li {
+	.quantity {
+		label,
+		input {
 			display: inline-block;
-			width: 160px;
-			margin: 0 40px 40px;
+			vertical-align: middle;
+		}
+		input {
+			width: 50px;
 			text-align: center;
-			img {
-				display: block;
-				margin: 0 auto 10px;
-			}
-			h3 {
-				margin: 0;
-				padding: 0;
-			}
-			.money {
-			}
+			padding: 2px 4px;
 		}
 	}
 }
-#cart-updated {
+.purchase {
+	margin: 25px 0;
+}
+.cart-updated {
  	a {	
  	}
 }

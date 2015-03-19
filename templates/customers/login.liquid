@@ -1,96 +1,66 @@
 {% layout settings.customer_layout %}
 
-<div id="template" class="centered">
-	<div class="page-title">
-		  {% if shop.checkout.guest_login %}
-		  	<h1>Check Out</h1>
-		  {% else %}
-		  	<h1>Account Log In</h1>
-		  {% endif %}
-	</div>
-	<div id="customer" {% if shop.checkout.guest_login %}class="checkoutflow"{% endif %}>
-    {% form 'customer_login' %}
-    	{% if shop.checkout.guest_login %}<h2>Log In to Your Account</h2>{% endif %}
-      {{ form.errors | default_errors }}
-
-      <p id="login_email" class="clearfix large_form">
-        <label for="customer_email" class="login">Email Address</label>
-        <input type="email" value="" name="customer[email]" id="customer_email" class="large" size="30" />
-      </p>
-
-      {% if form.password_needed %}
-
-        {% comment %}
-          Customer Account Login
-        {% endcomment %}
-
-        <p id="login_password" class="clearfix large_form">
-          <label for="customer_password" class="login">Password</label>
-          <input type="password" value="" name="customer[password]" id="customer_password" class="large password" size="16" />
-        </p>
-        <p id="forgot_password">
-            <a href="#" onclick="showRecoverPasswordForm();return false;">Forgot your password?</a>
-        </p>
-
-      {% endif %}
-
-      <p class="action_bottom">
-        <input class="btn" type="submit" value="Sign In" />
-        {% unless shop.checkout.guest_login %}
-        <span class="note">or {{ 'Create a new account' | customer_register_link }}</span>
-        {% endunless %}
-      </p>
-    {% endform %}
-  </div>
-
-  {% comment %}
-    Recover Password Form
-  {% endcomment %}
-
-  <div id="recover-password" style='display:none'>
-    <div class="template_header">
-      <h2 class="title">Reset Password</h2>
-      <p class="note">We will send you an email to reset your password.</p>
-    </div>
-
-    {% form 'recover_customer_password' %}
-      {{ form.errors | default_errors }}
-
-      <p id="recover_email" class="clearfix large_form">
-        <label for="email" class="large">Email</label>
-        <input type="email" value="" size="30" name="email" id="recover-email" class="large" />
-      </p>
-      <p class="action_bottom">
-        <input class="btn" type="submit" value="Submit" />
-        <span class="note">or <a href="#" onclick="hideRecoverPasswordForm();return false;">Cancel</a></span>
-      </p>
-    {% endform %}
-  </div>
-
-  {% if shop.checkout.guest_login %}
-  <div id="guest">
-    <div class="template_header">
-      <h2 class="title">Continue as a guest</h2>
-    </div>
-    {% form 'guest_login' %}
-      <input class="btn" type="submit" value="Continue" />
-    {% endform %}
-  </div>
-  {% endif %}
-  </div>
+<div class="page-title">
+	<h1>Account Log In</h1>
 </div>
 
+<div id="customer" class="account-form">
+	{% form 'customer_login' %}
+		{{ form.errors | default_errors }}
+		<p>
+			<label for="customer_email">Email Address</label>
+			<input type="email" value="" name="customer[email]" id="customer_email" class="large" size="30" />
+		</p>
+
+		{% if form.password_needed %}
+			<p>
+				<label for="customer_password">Password</label>
+				<input type="password" value="" name="customer[password]" id="customer_password" class="large password" size="16" />
+			</p>
+			<p>
+				<a href="#" onclick="showRecoverPasswordForm();return false;">Forgot your password?</a>
+			</p>
+		{% endif %}
+
+		<p>
+			<input class="btn" type="submit" value="Sign In" />
+			or {{ 'Create a new account' | customer_register_link }}
+		</p>
+	{% endform %}
+</div>
+
+{% comment %}
+Recover Password Form
+{% endcomment %}
+<div id="recover-password" class="account-form" style='display:none'>
+	<div>
+		<h2>Reset Password</h2>
+		<p>We will send you an email to reset your password.</p>
+	</div>
+
+	{% form 'recover_customer_password' %}
+		{{ form.errors | default_errors }}
+		<p>
+			<label for="email">Email</label>
+			<input type="email" value="" size="30" name="email" id="recover-email" class="large" />
+		</p>
+		<p>
+			<input class="btn" type="submit" value="Submit" />
+			or <a href="#" onclick="hideRecoverPasswordForm();return false;">Cancel</a>
+		</p>
+	{% endform %}
+</div>
 
 <script type="text/javascript">
-  function showRecoverPasswordForm() {
-    document.getElementById('recover-password').style.display = 'inline-block';
-    document.getElementById('customer').style.display='none';
-  }
+	function showRecoverPasswordForm() {
+		document.getElementById('recover-password').style.display = 'inline-block';
+		document.getElementById('customer').style.display='none';
+	}
 
-  function hideRecoverPasswordForm() {
-    document.getElementById('recover-password').style.display = 'none';
-    document.getElementById('customer').style.display = 'inline-block';
-  }
+	function hideRecoverPasswordForm() {
+		document.getElementById('recover-password').style.display = 'none';
+		document.getElementById('customer').style.display = 'inline-block';
+	}
 
-  if (window.location.hash == '#recover') { showRecoverPasswordForm() }
+	if (window.location.hash == '#recover') { showRecoverPasswordForm() }
 </script>

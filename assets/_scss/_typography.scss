@@ -45,9 +45,7 @@ a {
 
 .page-title {
 	text-align: center;
-	padding: 22px 0;
-	border-bottom: $border;
-	h2 {
+	h1 {
 		margin: 0;
 	}
 }
@@ -56,4 +54,11 @@ p,
 ul,
 ol {
 	margin-bottom: 1em;
+}
+
+.centered-text {
+	text-align: center;
+}
+.small {
+	font-size: 0.8em;
 }

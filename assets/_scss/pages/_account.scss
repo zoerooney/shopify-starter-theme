@@ -1,12 +1,16 @@
-%margins {
-	margin: 20px 0; 
+@mixin margins($top: 20px, $sides: auto) {
+	margin: $top $sides; 
 }
-#admin_header {
+.admin-header {
 	text-align: center;
 }
-#customer,
-#recover-password,
-#address_tables {
+.account-form {
+	form {
+		width: 100%;
+		max-width: 400px;
+		margin: 0 auto;
+		text-align: left;
+	}
 	label {
 		display:block;
 	}
@@ -16,36 +20,9 @@
 		width: 300px;
 	}
 }
-#address_tables {
-	text-align: center;
-}
-.address_table {
+.address-table {
 	display: inline-block;
 	vertical-align: top;
 	margin: 15px;
-	text-align: left;
-}
-
-#guest,
-#customer_sidebar,
-#order_address {
-	@extend %margins;
-	float: left; 
-	width: 260px;
-}
-#customer_orders, 
-#order_details { 
-	@extend %margins;
-	float:right; 
-	width:600px; 
-} 
-#order_payment, 
-#order_shipping { 
-	@extend %margins;
-}
-
-#add_address form {
-	@extend %margins;
-	width: 400px;
 	text-align: left;
 }

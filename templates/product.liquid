@@ -30,7 +30,7 @@
 
         <form id="add-item-form" action="/cart/add" method="post" class="variants clearfix">
             {% if product.options.size > 1 %}
-                <div class="select clearfix">
+                <div class="select product-wrapper">
                     <select id="product-select" name='id'>
                         {% for variant in product.variants %}
                             <option {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}">{{ variant.title }} - {{ variant.price | money }}</option>
@@ -40,11 +40,13 @@
             {% elsif product.options.size == 1 and product.variants.size > 1 %}
                 <div class="select clearfix">
                     <label>{{ product.options[0] }}</label>
-                    <select id="product-select" name='id'>
-                        {% for variant in product.variants %}
-                            <option {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}">{{ variant.title }} - {{ variant.price | money }}</option>
-                        {% endfor %}
-                    </select>
+                    <div class="product-wrapper">
+	                    <select id="product-select" name='id'>
+	                        {% for variant in product.variants %}
+	                            <option {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}">{{ variant.title }} - {{ variant.price | money }}</option>
+	                        {% endfor %}
+	                    </select>
+	                </div>
                 </div>
             {% else %}
                 <input type="hidden" name="id" value="{{ product.variants.first.id }}" />
@@ -53,11 +55,11 @@
             {% if product.available %}
                 <div class="quantity">
                     <label for="quantity">QUANTITY</label> 
-                    <input min="1" type="number" id="quantity" name="quantity" value="1" />  
+                    <input min="1" type="number" name="quantity" value="1" />  
                 </div>
                 <div class="purchase clearfix">
                     <input type="submit" name="add" id="add-to-cart" value="ADD TO CART" class="cart" />
-                    <div id="cart-updated"></div>
+                    <div class="cart-updated"></div>
                 </div>
             {% else %}
                 <div class="purchase clearfix">
@@ -81,12 +83,12 @@
 var selectCallback = function(variant, selector) {
   if (variant && variant.available == true) {
     // selected a valid variant
-    jQuery('#add-to-cart').removeClass('disabled').removeAttr('disabled').val('ADD TO BAG'); // remove unavailable class from add-to-cart button, and re-enable button
-//    if(variant.price < variant.compare_at_price){
-//      jQuery('#price-preview').html(Shopify.formatMoney(variant.price, "{{shop.money_format}}") + " <span>was " + Shopify.formatMoney(variant.compare_at_price, "{{shop.money_format}}") + "</span>");
-//    } else {
-//      jQuery('#price-preview').html(Shopify.formatMoney(variant.price, "{{shop.money_format}}"));
-//    }
+    jQuery('#add-to-cart').removeClass('disabled').removeAttr('disabled').val('ADD TO BASKET'); // remove unavailable class from add-to-cart button, and re-enable button
+   if(variant.price < variant.compare_at_price){
+     jQuery('#price-preview').html("<del>" + Shopify.formatMoney(variant.compare_at_price, "{{shop.money_format}}") + "</del> " + Shopify.formatMoney(variant.price, "{{shop.money_format}}"));
+   } else {
+     jQuery('#price-preview').html(Shopify.formatMoney(variant.price, "{{shop.money_format}}"));
+   }
 
   } else {
     // variant doesn't exist
@@ -104,20 +106,6 @@ var selectCallback = function(variant, selector) {
       });
   }
 };
-
-function remove(s, t) {
-  /*
-  **  Remove all occurrences of a token in a string
-  **    s  string to be processed
-  **    t  token to be removed
-  **  returns new string
-  */
-  i = s.indexOf(t);
-  r = "";
-  if (i == -1) return s;
-  r += s.substring(0,i) + remove(s.substring(i + t.length), t);
-  return r;
-}
 
 // initialize multi selector for product
 jQuery(function() {

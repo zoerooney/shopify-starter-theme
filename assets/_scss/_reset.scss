@@ -18,6 +18,20 @@
   (B) http://csswizardry.com/web-design+/#css
   (C) WordPress image styles */
 
+html {
+	box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+// See: http://trentwalton.com/2013/01/16/windows-phone-8-viewport-fix/
+@-webkit-viewport{width:device-width}
+@-moz-viewport{width:device-width}
+@-ms-viewport{width:device-width}
+@-o-viewport{width:device-width}
+@viewport{width:device-width}
+
 html, body {
 	height: 100%;
 }
@@ -80,9 +94,6 @@ Based on 'reset.css' in the Yahoo! User Interface Library: http://developer.yaho
   margin: 0;
   padding: 0;
   border: 0;
-  font-style: normal;
-  font-family: inherit;
-  font-size: 100%;
 }
 
 article, aside, details, figcaption, figure, footer, header, hgroup, nav, section {
