@@ -3,7 +3,7 @@
 	{% paginate search.results by settings.pagination_limit %} 
 
 	<div class="page-title">
-		<h2>SEARCH RESULTS</h2>
+		<h1>SEARCH RESULTS</h1>
 		<span>
 			{{ search.results_count }} {{ search.results_count | pluralize: 'match', 'matches' }}
 		</span>
@@ -58,9 +58,9 @@
 
 {% else %}{% comment %}Search not performed, throw error{% endcomment %}
 	<div class="page-title">
-		<h2>Uh Oh!</h2>
+		<h1>Uh Oh!</h1>
 	</div>	
-	<div id="not_found" class="not-found">
+	<div class="not-found">
 		Your search query was empty or no results were found. Please try again.
 	</div> <!-- /#not_found -->
 {% endif %}
