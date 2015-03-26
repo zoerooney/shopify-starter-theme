@@ -11,8 +11,8 @@
 	<meta itemprop="price" property="og:price:amount" content="{{ product.price | money_without_currency }}">
 	<meta itemprop="currency" property="og:price:currency" content="{{ shop.currency }}">
 	{% for image in product.images limit:3 %}
-		<meta property="og:image" content="http:{{ image.src | product_img_url: 'grande' }}">
-		<meta property="og:image:secure_url" content="https:{{ image.src | product_img_url: 'grande' }}">
+		<meta property="og:image" content="http:{{ image.src | product_img_url: 'master' }}">
+		<meta property="og:image:secure_url" content="https:{{ image.src | product_img_url: 'master' }}">
 	{% endfor %}
 {% elsif template contains 'article' %}
 	<meta property="og:type" content="article">
