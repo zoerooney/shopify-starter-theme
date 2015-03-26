@@ -1,428 +1,326 @@
 <fieldset>
-  <legend>General Theme Options</legend>
-  <table class="search_bar_location">
-	<tr>
-		<th><label for="pagination_limit">Products Per Page</label></th>
-		<td>
-		  <input type="text" id="pagination_limit" name="pagination_limit" value="4" />
-		</td>
-	</tr>
-	<tr>
-		<th><label for="blog_pagination_limit">Blog Posts Per Page</label></th>
-		<td>
-		  <input type="text" id="blog_pagination_limit" name="blog_pagination_limit" value="4" />
-		</td>
-	  </tr>
-   </table>
+	<legend>General Theme Options</legend>
+	<table class="search_bar_location">
+		<tr><th><label for="pagination_limit">Products Per Page</label></th>
+			<td><input type="text" id="pagination_limit" name="pagination_limit" value="4" /></td>
+		</tr>
+		<tr><th><label for="blog_pagination_limit">Blog Posts Per Page</label></th>
+			<td><input type="text" id="blog_pagination_limit" name="blog_pagination_limit" value="4" /></td>
+		</tr>
+		<tr>
+			<th><label for="show_address_details">Use detailed address information in search results/ meta data (street address, latitude, longitude)?</label></th>
+			<td><input type="checkbox" id="show_address_details" name="show_address_details" /></td>
+		</tr>
+		<tr>
+			<th><label for="show_phone_number">Use phone number from shop settings in search results/ meta data?</label></th>
+			<td><input type="checkbox" id="show_phone_number" name="show_phone_number" /></td>
+		</tr>
+	</table>
 </fieldset>
 
 <fieldset>
-  <legend>Home Page Content Blocks</legend>
-  For best results, upload images that are 330px wide by 192px tall.
-  <table>
+	<legend>Home Page Content Blocks</legend>
+	For best results, upload images that are AAA wide by BBB tall.
+	<table>
+		<tr><td colspan="2">Top Block</td>
+		</tr>
+		<tr><th><label for="tb_header">Label</label></th>
+			<td><input type="text" id="tb_header" name="tb_header" maxlength="40" /></td>
+		</tr>
+		<tr><th><label for="tb_image">Image</label></th>
+			<td><input type="file" id="tb_image" name="tb_image.jpg" data-max-width="AAA" /></td>
+		</tr>
+		<tr><th><label for="tb_image_link">Link to URL:</label></th>
+			<td><input type="text" id="tb_image_link" name="tb_image_link" value="" /></td>
+		</tr>
+		<tr>
+			<td colspan="2">&nbsp;</td>
+		</tr>
+		<tr>
+			<td colspan="2">Middle Block</td>
+		</tr>
+		<tr>
+			<th><label for="mb_header">Label</label></th>
+			<td><input type="text" id="mb_header" name="mb_header" maxlength="40" /></td>
+		</tr>
+		<tr>
+			<th><label for="mb_image">Image</label></th>
+			<td><input type="file" id="mb_image" name="mb_image.jpg" data-max-width="AAA" /></td>
+		</tr>
+		<tr>
+			<th><label for="mb_image_link">Link to URL:</label></th>
+			<td><input type="text" id="mb_image_link" name="mb_image_link" value="" /></td>
+		</tr>
+		<tr>
+			<td colspan="2">&nbsp;</td>
+		</tr>
+		<tr>
+			<td colspan="2">Bottom Block</td>
+		</tr>
+		<tr>
+			<th><label for="bb_header">Label</label></th>
+			<td><input type="text" id="bb_header" name="bb_header" maxlength="40" /></td>
+		</tr>
+		<tr>
+			<th><label for="bb_image">Image</label></th>
+			<td><input type="file" id="bb_image" name="bb_image.jpg" data-max-width="AAA" /></td>
+		</tr>
+		<tr>
+			<th><label for="bb_image_link">Link to URL:</label></th>
+			<td><input type="text" id="bb_image_link" name="bb_image_link" value="" /></td>
+		</tr>
+		<tr>
+			<td colspan="2">&nbsp;</td>
+		</tr>
+		<tr>
+			<td colspan="2">Mailing List</td>
+		</tr>
+		<tr>
+			<th><label for="mc_label">Label</label></th>
+			<td><input type="text" id="mc_label" name="mc_label" maxlength="65" /></td>
+		</tr>
+	</table>
+</fieldset>
+
+<fieldset>
+	<legend>Home Page Slider</legend>
 	<table>
 		<tr>
-		  <td colspan="2">Top Block</td>
+			<th><label for="slideshow_speed">Show slideshow images for</label></th>
+			<td>
+				<select name="slideshow_speed" id="slideshow_speed">
+					<option value="8000">8 seconds</option>
+					<option value="7000">7 seconds</option>
+					<option value="6000">6 seconds</option>
+					<option value="5000" selected="selected">5 seconds</option>
+					<option value="4000">4 seconds</option>
+					<option value="3000">3 seconds</option>
+					<option value="2000">2 seconds</option>
+				</select>
+			</td>
 		</tr>
-	  <tr>
-		<th><label for="tb_header">Label</label></th>
-		<td><input type="text" id="tb_header" name="tb_header" maxlength="40" /></td>
-	  </tr>
-	  <tr>
-		<th><label for="tb_image">Image</label></th>
-		<td>
-		  <input type="file" id="tb_image" name="tb_image.jpg" data-max-width="330" />
-		</td>
-	  </tr>
-	  <tr>
-		<th><label for="tb_image_link">Link to URL:</label></th>
-		<td>
-		  <input type="text" id="tb_image_link" name="tb_image_link" value="" />
-		</td>
-	  </tr>
-	  <tr>
-		<td colspan="2">&nbsp;</td>
-	  </tr>
-	<tr>
-	  <td colspan="2">Middle Block</td>
-	</tr>
-	  <tr>
-		<th><label for="mb_header">Label</label></th>
-		<td><input type="text" id="mb_header" name="mb_header" maxlength="40" /></td>
-	  </tr>
-	  <tr>
-		<th><label for="mb_image">Image</label></th>
-		
-		<td>
-		  <input type="file" id="mb_image" name="mb_image.jpg" data-max-width="330" />
-		</td>
-	  </tr>
-	  <tr>
-		<th><label for="mb_image_link">Link to URL:</label></th>
-		<td>
-		  <input type="text" id="mb_image_link" name="mb_image_link" value="" />
-		</td>
-	  </tr>
-	  <tr>
-		<td colspan="2">&nbsp;</td>
-	  </tr>
-	  <tr>
-		<td colspan="2">Bottom Block</td>
-	  </tr>
-	  <tr>
-		<th><label for="bb_header">Label</label></th>
-		<td><input type="text" id="bb_header" name="bb_header" maxlength="40" /></td>
-	  </tr>
-	  <tr>
-		<th><label for="bb_image">Image</label></th>
-		<td>
-		  <input type="file" id="bb_image" name="bb_image.jpg" data-max-width="330" />
-		</td>
-	  </tr>
-	  <tr>
-		<th><label for="bb_image_link">Link to URL:</label></th>
-		<td>
-		  <input type="text" id="bb_image_link" name="bb_image_link" value="" />
-		</td>
-	  </tr>
-	  <tr>
-		<td colspan="2">&nbsp;</td>
-	  </tr>
-	  <tr>
-		<td colspan="2">Mailing List</td>
-	  </tr>
-	  <tr>
-		<th><label for="mc_label">Label</label></th>
-		<td><input type="text" id="mc_label" name="mc_label" maxlength="65" /></td>
-	  </tr>
+		<tr>
+			<th>&nbsp;</th>
+			<td>
+				<h3>Slideshow Images</h3>
+				For best results, upload images that are 650px wide by 620px tall.
+			</td>
+		</tr>
+		<tr>
+			<th><label for="slideshow_1_active">Use Slideshow Image 1?</label></th>
+			<td><input type="checkbox" id="slideshow_1_active" name="slideshow_1_active" /></td>
+		</tr>
+		<tr>
+			<th><label for="slideshow_1">Slideshow Image 1</label></th>
+			<td><input type="file" id="slideshow_1" name="slideshow_1.jpg" data-max-width="650" /></td>
+		</tr>
+		<tr>
+			<th><label for="slideshow_image_1_link">Link Image 1 to URL:</label></th>
+			<td><input type="text" id="slideshow_image_1_link" name="slideshow_image_1_link" value="" /></td>
+		</tr>
+		<tr>
+			<th><label for="slideshow_1_alt">Slideshow Image 1 ALT text</label></th>
+			<td><input type="text" class="text" id="slideshow_1_alt" name="slideshow_1_alt" /></td>
+		</tr>
+
+		<tr>
+			<th><label for="slideshow_2_active">Use Slideshow Image 2?</label></th>
+			<td><input type="checkbox" id="slideshow_2_active" name="slideshow_2_active" /></td>
+		</tr>
+		<tr>
+			<th><label for="slideshow_2">Slideshow Image 2</label></th>
+			<td><input type="file" id="slideshow_2" name="slideshow_2.jpg" data-max-width="650" /></td>
+		</tr>
+		<tr>
+			<th><label for="slideshow_image_2_link">Link Image 2 to URL:</label></th>
+			<td><input type="text" id="slideshow_image_2_link" name="slideshow_image_2_link" value="" /></td>
+		</tr>
+		<tr>
+			<th><label for="slideshow_2_alt">Slideshow Image 2 ALT text</label></th>
+			<td><input type="text" class="text" id="slideshow_2_alt" name="slideshow_2_alt" /></td>
+		</tr>
+		<tr>
+			<th><label for="slideshow_3_active">Use Slideshow Image 3?</label></th>
+			<td><input type="checkbox" id="slideshow_3_active" name="slideshow_3_active" /></td>
+		</tr>
+		<tr>
+			<th><label for="slideshow_3">Slideshow Image 3</label></th>
+			<td><input type="file" id="slideshow_3" name="slideshow_3.jpg" data-max-width="650" /></td>
+		</tr>
+		<tr>
+			<th><label for="slideshow_image_3_link">Link Image 3 to URL:</label></th>
+			<td><input type="text" id="slideshow_image_3_link" name="slideshow_image_3_link" value="" /></td>
+		</tr>
+		<tr>
+			<th><label for="slideshow_3_alt">Slideshow Image 3 ALT text</label></th>
+			<td><input type="text" class="text" id="slideshow_3_alt" name="slideshow_3_alt" /></td>
+		</tr>
+		<tr>
+			<th><label for="slideshow_4_active">Use Slideshow Image 4?</label></th>
+			<td><input type="checkbox" id="slideshow_4_active" name="slideshow_4_active" /></td>
+		</tr>
+		<tr>
+			<th><label for="slideshow_4">Slideshow Image 4</label></th>
+			<td><input type="file" id="slideshow_4" name="slideshow_4.jpg" data-max-width="650" /></td>
+		</tr>
+		<tr>
+			<th><label for="slideshow_image_4_link">Link Image 4 to URL:</label></th>
+			<td><input type="text" id="slideshow_image_4_link" name="slideshow_image_4_link" value="" /></td>
+		</tr>
+		<tr>
+			<th><label for="slideshow_4_alt">Slideshow Image 4 ALT text</label></th>
+			<td><input type="text" class="text" id="slideshow_4_alt" name="slideshow_4_alt" /></td>
+		</tr>
+		<tr>
+			<th><label for="slideshow_5_active">Use Slideshow Image 5?</label></th>
+			<td><input type="checkbox" id="slideshow_5_active" name="slideshow_5_active" /></td>
+		</tr>
+		<tr>
+			<th><label for="slideshow_5">Slideshow Image 5</label></th>
+			<td><input type="file" id="slideshow_5" name="slideshow_5.jpg" data-max-width="650" /></td>
+		</tr>
+		<tr>
+			<th><label for="slideshow_image_5_link">Link Image 5 to URL:</label></th>
+			<td><input type="text" id="slideshow_image_5_link" name="slideshow_image_5_link" value="" /></td>
+		</tr>
+		<tr>
+			<th><label for="slideshow_5_alt">Slideshow Image 5 ALT text</label></th>
+			<td><input type="text" class="text" id="slideshow_5_alt" name="slideshow_5_alt" /></td>
+		</tr>
+		<tr>
+			<th><label for="slideshow_6_active">Use Slideshow Image 6?</label></th>
+			<td><input type="checkbox" id="slideshow_6_active" name="slideshow_6_active" /></td>
+		</tr>
+		<tr>
+			<th><label for="slideshow_6">Slideshow Image 6</label></th>
+			<td><input type="file" id="slideshow_6" name="slideshow_6.jpg" data-max-width="650" /></td>
+		</tr>
+		<tr>
+			<th><label for="slideshow_image_6_link">Link Image 6 to URL:</label></th>
+			<td><input type="text" id="slideshow_image_6_link" name="slideshow_image_6_link" value="" /></td>
+		</tr>
+		<tr>
+			<th><label for="slideshow_6_alt">Slideshow Image 6 ALT text</label></th>
+			<td><input type="text" class="text" id="slideshow_6_alt" name="slideshow_6_alt" /></td>
+		</tr>
+		<tr>
+			<th><label for="slideshow_7_active">Use Slideshow Image 7?</label></th>
+			<td><input type="checkbox" id="slideshow_7_active" name="slideshow_7_active" /></td>
+		</tr>
+		<tr>
+			<th><label for="slideshow_7">Slideshow Image 7</label></th>
+			<td><input type="file" id="slideshow_7" name="slideshow_7.jpg" data-max-width="650" /></td>
+		</tr>
+		<tr>
+			<th><label for="slideshow_image_7_link">Link Image 7 to URL:</label></th>
+			<td><input type="text" id="slideshow_image_7_link" name="slideshow_image_7_link" value="" /></td>
+		</tr>
+		<tr>
+			<th><label for="slideshow_7_alt">Slideshow Image 7 ALT text</label></th>
+			<td><input type="text" class="text" id="slideshow_7_alt" name="slideshow_7_alt" /></td>
+		</tr>
 	</table>
-  </table>
 </fieldset>
 
 <fieldset>
-  <legend>Home Page Slider</legend>
-  <table>
-	
-	 <tr>
-	  <th><label for="slideshow_speed">Show slideshow images for</label></th>
-	  <td>
-		<select name="slideshow_speed" id="slideshow_speed">
-		  <option value="8000">8 seconds</option>
-		  <option value="7000">7 seconds</option>
-		  <option value="6000">6 seconds</option>
-		  <option value="5000" selected="selected">5 seconds</option>
-		  <option value="4000">4 seconds</option>
-		  <option value="3000">3 seconds</option>
-		  <option value="2000">2 seconds</option>
-		</select>
-	  </td>
-	</tr>
-	<tr>
-	  <th>
-		&nbsp;
-	  </th>
-	  <td>
-		<h3>Slideshow Images</h3>
-		For best results, upload images that are 650px wide by 620px tall.
-	  </td>
-	</tr>
-
-	<tr>
-	  <th><label for="slideshow_1_active">Use Slideshow Image 1?</label></th>
-	  <td>
-		<input type="checkbox" id="slideshow_1_active" name="slideshow_1_active" />
-	  </td>
-	</tr>
-	<tr>
-	  <th><label for="slideshow_1">Slideshow Image 1</label></th>
-	  <td>
-		<input type="file" id="slideshow_1" name="slideshow_1.jpg" data-max-width="650" />
-	  </td>
-	</tr>
-	<tr>
-	  <th><label for="slideshow_image_1_link">Link Image 1 to URL:</label></th>
-	  <td>
-		<input type="text" id="slideshow_image_1_link" name="slideshow_image_1_link" value="" />
-	  </td>
-	</tr>
-	<tr>
-	  <th><label for="slideshow_1_alt">Slideshow Image 1 ALT text</label></th>
-	  <td>
-		<input type="text" class="text" id="slideshow_1_alt" name="slideshow_1_alt" />
-	  </td>
-	</tr>
-	
-	<tr>
-	  <th><label for="slideshow_2_active">Use Slideshow Image 2?</label></th>
-	  <td>
-		<input type="checkbox" id="slideshow_2_active" name="slideshow_2_active" />
-	  </td>
-	</tr>
-	<tr>
-	  <th><label for="slideshow_2">Slideshow Image 2</label></th>
-	  <td>
-		<input type="file" id="slideshow_2" name="slideshow_2.jpg" data-max-width="650" />
-	  </td>
-	</tr>
-	<tr>
-	  <th><label for="slideshow_image_2_link">Link Image 2 to URL:</label></th>
-	  <td>
-		<input type="text" id="slideshow_image_2_link" name="slideshow_image_2_link" value="" />
-	  </td>
-	</tr>
-	<tr>
-	  <th><label for="slideshow_2_alt">Slideshow Image 2 ALT text</label></th>
-	  <td>
-		<input type="text" class="text" id="slideshow_2_alt" name="slideshow_2_alt" />
-	  </td>
-	</tr>
-	
-	<tr>
-	  <th><label for="slideshow_3_active">Use Slideshow Image 3?</label></th>
-	  <td>
-		<input type="checkbox" id="slideshow_3_active" name="slideshow_3_active" />
-	  </td>
-	</tr>
-	<tr>
-	  <th><label for="slideshow_3">Slideshow Image 3</label></th>
-	  <td>
-		<input type="file" id="slideshow_3" name="slideshow_3.jpg" data-max-width="650" />
-	  </td>
-	</tr>
-	<tr>
-	  <th><label for="slideshow_image_3_link">Link Image 3 to URL:</label></th>
-	  <td>
-		<input type="text" id="slideshow_image_3_link" name="slideshow_image_3_link" value="" />
-	  </td>
-	</tr>
-	<tr>
-	  <th><label for="slideshow_3_alt">Slideshow Image 3 ALT text</label></th>
-	  <td>
-		<input type="text" class="text" id="slideshow_3_alt" name="slideshow_3_alt" />
-	  </td>
-	</tr>
-	
-	<tr>
-	  <th><label for="slideshow_4_active">Use Slideshow Image 4?</label></th>
-	  <td>
-		<input type="checkbox" id="slideshow_4_active" name="slideshow_4_active" />
-	  </td>
-	</tr>
-	<tr>
-	  <th><label for="slideshow_4">Slideshow Image 4</label></th>
-	  <td>
-		<input type="file" id="slideshow_4" name="slideshow_4.jpg" data-max-width="650" />
-	  </td>
-	</tr>
-	<tr>
-	  <th><label for="slideshow_image_4_link">Link Image 4 to URL:</label></th>
-	  <td>
-		<input type="text" id="slideshow_image_4_link" name="slideshow_image_4_link" value="" />
-	  </td>
-	</tr>
-	<tr>
-	  <th><label for="slideshow_4_alt">Slideshow Image 4 ALT text</label></th>
-	  <td>
-		<input type="text" class="text" id="slideshow_4_alt" name="slideshow_4_alt" />
-	  </td>
-	</tr>
-	
-	<tr>
-	  <th><label for="slideshow_5_active">Use Slideshow Image 5?</label></th>
-	  <td>
-		<input type="checkbox" id="slideshow_5_active" name="slideshow_5_active" />
-	  </td>
-	</tr>
-	<tr>
-	  <th><label for="slideshow_5">Slideshow Image 5</label></th>
-	  <td>
-		<input type="file" id="slideshow_5" name="slideshow_5.jpg" data-max-width="650" />
-	  </td>
-	</tr>
-	<tr>
-	  <th><label for="slideshow_image_5_link">Link Image 5 to URL:</label></th>
-	  <td>
-		<input type="text" id="slideshow_image_5_link" name="slideshow_image_5_link" value="" />
-	  </td>
-	</tr>
-	<tr>
-	  <th><label for="slideshow_5_alt">Slideshow Image 5 ALT text</label></th>
-	  <td>
-		<input type="text" class="text" id="slideshow_5_alt" name="slideshow_5_alt" />
-	  </td>
-	</tr>
-	
-	<tr>
-	  <th><label for="slideshow_6_active">Use Slideshow Image 6?</label></th>
-	  <td>
-		<input type="checkbox" id="slideshow_6_active" name="slideshow_6_active" />
-	  </td>
-	</tr>
-	<tr>
-	  <th><label for="slideshow_6">Slideshow Image 6</label></th>
-	  <td>
-		<input type="file" id="slideshow_6" name="slideshow_6.jpg" data-max-width="650" />
-	  </td>
-	</tr>
-	<tr>
-	  <th><label for="slideshow_image_6_link">Link Image 6 to URL:</label></th>
-	  <td>
-		<input type="text" id="slideshow_image_6_link" name="slideshow_image_6_link" value="" />
-	  </td>
-	</tr>
-	<tr>
-	  <th><label for="slideshow_6_alt">Slideshow Image 6 ALT text</label></th>
-	  <td>
-		<input type="text" class="text" id="slideshow_6_alt" name="slideshow_6_alt" />
-	  </td>
-	</tr>
-	
-	<tr>
-	  <th><label for="slideshow_7_active">Use Slideshow Image 7?</label></th>
-	  <td>
-		<input type="checkbox" id="slideshow_7_active" name="slideshow_7_active" />
-	  </td>
-	</tr>
-	<tr>
-	  <th><label for="slideshow_7">Slideshow Image 7</label></th>
-	  <td>
-		<input type="file" id="slideshow_7" name="slideshow_7.jpg" data-max-width="650" />
-	  </td>
-	</tr>
-	<tr>
-	  <th><label for="slideshow_image_7_link">Link Image 7 to URL:</label></th>
-	  <td>
-		<input type="text" id="slideshow_image_7_link" name="slideshow_image_7_link" value="" />
-	  </td>
-	</tr>
-	<tr>
-	  <th><label for="slideshow_7_alt">Slideshow Image 7 ALT text</label></th>
-	  <td>
-		<input type="text" class="text" id="slideshow_7_alt" name="slideshow_7_alt" />
-	  </td>
-	</tr>
-	
-  </table>
-</fieldset>
-
-<fieldset>
-  <legend>Footer</legend>
-  <table>
-	<tr>
-	  <td colspan="2">First Block</td>
-	</tr>
-	<tr>
-	  <th><label for="lb_header">Header</label></th>
-	  <td><input type="text" id="lb_header" name="lb_header" /></td>
-	</tr>
-	<tr>
-	  <th><label for="lb_content">Content</label></th>
-	  <td><textarea name="lb_content"></textarea></td>
-	</tr>
-  <tr>
-	<td colspan="2">Second Block</td>
-  </tr>
-	<tr>
-	  <th><label for="cb_header">Header</label></th>
-	  <td><input type="text" id="cb_header" name="cb_header" /></td>
-	</tr>
-	<tr>
-	  <th><label for="cb_content">Content</label></th>
-	  <td><textarea name="cb_content"></textarea></td>
-	</tr>
-	<tr>
-	  <td colspan="2">Third Block</td>
-	</tr>
-	<tr>
-	  <th><label for="rb_header">Header</label></th>
-	  <td><input type="text" id="rb_header" name="rb_header" />
-	  </td>
-	</tr>
-  </table>
-</fieldset>
-<fieldset>
-  <legend>Social Media Integration</legend>
-  <table>
-	<tr>
-	  <td><label for="enable_twittercards">Enable <a href="https://dev.twitter.com/docs/cards/types/product-card" title="About Twitter Product Cards">Twitter Cards</a></label></td>
-	  <td><input type="checkbox" id="enable_twittercards" name="enable_twittercards" /></td>
-	</tr>
-	<tr>
-	  <th><label for="twittercard_handle">Your site's Twitter Handle</label></th>
-	  <td>
-		<input type="text" id="twittercard_handle" name="twittercard_handle" value="" /><br />
-		<small>E.g. @zoe_rooney. Required if Twitter Cards are enabled.</small>
-	  </td>
-	</tr>
-	<tr>
-	  <th><label for="facebook">Facebook</label></th>
-	  <td>        
-		<input type="text" id="facebook" name="facebook" />
-	  </td>
-	</tr>
-	<tr>
-	  <th><label for="twitter">Twitter</label></th>
-	  <td>        
-		<input type="text" id="twitter" name="twitter" />
-	  </td>
-	</tr>
-	<tr>
-	  <th><label for="pinterest">Pinterest</label></th>
-	  <td>        
-		<input type="text" id="pinterest" name="pinterest" />
-	  </td>
-	</tr>
-	<tr>
-	  <th><label for="instagram">Instagram</label></th>
-	  <td>        
-		<input type="text" id="instagram" name="instagram" />
-	  </td>
-	</tr>
-	 <tr>
-	  <th><label for="atom">Blog feed</label></th>
-	  <td>        
-		<select id="atom" name="atom" class="blog">
-		  <option value="">None</option>
-		</select>
-	  </td>
-	</tr>
-  </table>
-</fieldset>
-
-<fieldset>
-  <legend>Blog Sidebar</legend>
-  <table>
+	<legend>Footer</legend>
 	<table>
 		<tr>
-		  <td colspan="2">Top Widget</td>
+			<td colspan="2">First Block</td>
 		</tr>
-	  <tr>
-		<th><label for="top_title">Title</label></th>
-		<td><input type="text" id="top_title" name="top_title" maxlength="40" /></td>
-	  </tr>
-	  <tr>
-		<th><label for="top_image">Image</label></th>
-		<td>
-		  <input type="file" id="top_image" name="top_image.jpg" data-max-width="170" />
-		</td>
-	  </tr>
-	  <tr>
-		<th><label for="top_content">Content</label></th>
-		<td><textarea name="top_content"></textarea></td>
-	  </tr>
-	  <tr>
-		<th><label for="top_button_text">Button Text</label></th>
-		<td>
-		  <input type="text" id="top_button_text" name="top_button_text" value="" />
-		</td>
-	  </tr>
-	  <tr>
-		<th><label for="top_button_link">Button URL</label></th>
-		<td>
-		  <input type="text" id="top_button_link" name="top_button_link" value="" />
-		</td>
-	  </tr>
-	  
+		<tr>
+			<th><label for="lb_header">Header</label></th>
+			<td><input type="text" id="lb_header" name="lb_header" /></td>
+		</tr>
+		<tr>
+			<th><label for="lb_content">Content</label></th>
+			<td><textarea name="lb_content"></textarea></td>
+		</tr>
+		<tr>
+			<td colspan="2">Second Block</td>
+		</tr>
+		<tr>
+			<th><label for="cb_header">Header</label></th>
+			<td><input type="text" id="cb_header" name="cb_header" /></td>
+		</tr>
+		<tr>
+			<th><label for="cb_content">Content</label></th>
+			<td><textarea name="cb_content"></textarea></td>
+		</tr>
+		<tr>
+			<td colspan="2">Third Block</td>
+		</tr>
+		<tr>
+			<th><label for="rb_header">Header</label></th>
+			<td><input type="text" id="rb_header" name="rb_header" /></td>
+		</tr>
 	</table>
-  </table>
+</fieldset>
+
+<fieldset>
+	<legend>Social Media Integration</legend>
+	<table>
+		<tr>
+			<td><label for="enable_twittercards">Enable <a href="https://dev.twitter.com/docs/cards/types/product-card" title="About Twitter Product Cards">Twitter Cards</a></label></td>
+			<td><input type="checkbox" id="enable_twittercards" name="enable_twittercards" /></td>
+		</tr>
+		<tr>
+			<th><label for="twittercard_handle">Your site's Twitter Handle</label></th>
+			<td><input type="text" id="twittercard_handle" name="twittercard_handle" value="" /><br />
+			<small>E.g. @zoe_rooney. Required if Twitter Cards are enabled.</small></td>
+		</tr>
+		<tr>
+			<th><label for="facebook">Facebook</label></th>
+			<td><input type="text" id="facebook" name="facebook" /></td>
+		</tr>
+		<tr>
+			<th><label for="twitter">Twitter</label></th>
+			<td><input type="text" id="twitter" name="twitter" /></td>
+		</tr>
+		<tr>
+			<th><label for="pinterest">Pinterest</label></th>
+			<td><input type="text" id="pinterest" name="pinterest" /></td>
+		</tr>
+		<tr>
+			<th><label for="instagram">Instagram</label></th>
+			<td><input type="text" id="instagram" name="instagram" /></td>
+		</tr>
+		<tr>
+			<th><label for="atom">Blog feed</label></th>
+			<td>        
+				<select id="atom" name="atom" class="blog">
+					<option value="">None</option>
+				</select>
+			</td>
+		</tr>
+	</table>
+</fieldset>
+
+<fieldset>
+	<legend>Blog Sidebar</legend>
+	<table>
+		<tr>
+			<td colspan="2">Top Widget</td>
+		</tr>
+		<tr>
+			<th><label for="top_title">Title</label></th>
+			<td><input type="text" id="top_title" name="top_title" maxlength="40" /></td>
+		</tr>
+		<tr>
+			<th><label for="top_image">Image</label></th>
+			<td><input type="file" id="top_image" name="top_image.jpg" data-max-width="170" /></td>
+		</tr>
+		<tr>
+			<th><label for="top_content">Content</label></th>
+			<td><textarea name="top_content"></textarea></td>
+		</tr>
+		<tr>
+			<th><label for="top_button_text">Button Text</label></th>
+			<td><input type="text" id="top_button_text" name="top_button_text" value="" /></td>
+		</tr>
+		<tr>
+			<th><label for="top_button_link">Button URL</label></th>
+			<td><input type="text" id="top_button_link" name="top_button_link" value="" /></td>
+		</tr>
+	</table>
 </fieldset>
