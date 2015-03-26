@@ -51,7 +51,7 @@
             {% else %}
                 <input type="hidden" name="id" value="{{ product.variants.first.id }}" />
             {% endif %}
-            <link itemprop="availability" href="http://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}">
+            <link itemprop="availability" href="{% if product.available %}InStock{% else %}OutOfStock{% endif %}">
             {% if product.available %}
                 <div class="quantity">
                     <label for="quantity">QUANTITY</label> 
