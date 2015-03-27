@@ -10,10 +10,8 @@
 	<meta property="og:title" content="{{ product.title | strip_html | escape }}">
 	<meta itemprop="price" property="og:price:amount" content="{{ product.price | money_without_currency }}">
 	<meta itemprop="currency" property="og:price:currency" content="{{ shop.currency }}">
-	{% for image in product.images limit:3 %}
-		<meta property="og:image" content="http:{{ image.src | product_img_url: 'master' }}">
-		<meta property="og:image:secure_url" content="https:{{ image.src | product_img_url: 'master' }}">
-	{% endfor %}
+	<meta property="og:image" content="http:{{ product.featured_image.src | product_img_url: 'master' }}">
+	<meta property="og:image:secure_url" content="https:{{ product.featured_image.src | product_img_url: 'master' }}">
 {% elsif template contains 'article' %}
 	<meta property="og:type" content="article">
 	<meta property="og:title" content="{{ article.title | strip_html | escape }}">
@@ -61,7 +59,7 @@
 	<meta name="twitter:card" content="product">
 	<meta name="twitter:title" content="{{ product.title }}">
 	<meta name="twitter:description" content="{{ product.description | strip_html | truncatewords: 140, '' | escape }}">
-	<meta name="twitter:image" content="https:{{ product.featured_image.src | product_img_url: 'medium' }}">
+	<meta name="twitter:image" content="https:{{ product.featured_image.src | product_img_url: 'master' }}">
 	<meta name="twitter:image:width" content="240">
 	<meta name="twitter:image:height" content="240">
 	<meta name="twitter:label1" content="Price">
