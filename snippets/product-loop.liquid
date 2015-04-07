@@ -1,14 +1,12 @@
-{% capture collection_handle %}{{ product-loop | handleize }}{% endcapture %}
-
 <div id="product-{{ forloop.index | plus:paginate.current_offset }}" class="grid-product col pull-left span_4">
 	<div class="image">
-		<a href="{% if collection_handle == "" %}{{ product.url }}{% else %}/collections/{{ product-loop }}{{ product.url }}{% endif %}">
+		<a href="{{{ product.url | within: collection }}">
 			<img src="{{ product.featured_image.src | product_img_url: 'large' }}" alt="{{ product.featured_image.alt | escape  }}" />
 		</a>
 	</div>
 
 	<div class="caption clearfix">
-		<a href="{% if collection_handle == "" %}{{ product.url }}{% else %}/collections/{{ product-loop }}{{ product.url }}{% endif %}">
+		<a href="{{ product.url | within: collection }}">
 			{% include 'product-caption' %}
 		</a>
 	</div>
